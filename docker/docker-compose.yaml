@@ -5,6 +5,9 @@ services:
     image: langgenius/dify-api:0.3.8
     restart: always
     environment:
+      # OPENAI_API_BASE: http://192.168.15.130:8000/v1
+      OPENAI_API_BASE: http://192.168.15.130:13090/v1
+      DISABLE_PROVIDER_CONFIG_VALIDATION: 'true'    
       # Startup mode, 'api' starts the API server.
       MODE: api
       # The log level for the application. Supported values are `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`
@@ -22,15 +25,15 @@ services:
       # The URL for Service API endpoints，refers to the base URL of the current API service if api domain is
       # different from console domain.
       # example: http://api.dify.ai
-      SERVICE_API_URL: ''
+      SERVICE_API_URL: 'http://192.168.15.130:8001'
       # The URL for Web APP api server, refers to the Web App base URL of WEB service if web app domain is different from
       # console or api domain.
       # example: http://udify.app
-      APP_API_URL: ''
+      APP_API_URL: 'http://192.168.15.130:8001'
       # The URL for Web APP frontend, refers to the Web App base URL of WEB service if web app domain is different from
       # console or api domain.
       # example: http://udify.app
-      APP_WEB_URL: ''
+      APP_WEB_URL: 'http://192.168.15.130:8001'
       # When enabled, migrations will be executed prior to application startup and the application will start after the migrations have completed.
       MIGRATION_ENABLED: 'true'
       # The configurations of postgres database connection.
@@ -127,6 +130,9 @@ services:
     image: langgenius/dify-api:0.3.8
     restart: always
     environment:
+      # OPENAI_API_BASE: http://192.168.15.130:8000/v1
+      OPENAI_API_BASE: http://192.168.15.130:13090/v1
+      DISABLE_PROVIDER_CONFIG_VALIDATION: 'true'      
       # Startup mode, 'worker' starts the Celery worker for processing the queue.
       MODE: worker
 
@@ -250,4 +256,4 @@ services:
       - api
       - web
     ports:
-      - "80:80"
+      - "8001:80"
