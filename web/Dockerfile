@@ -1,6 +1,6 @@
 FROM langgenius/base:1.0.0-bullseye-slim
 
-LABEL maintainer="takatost@gmail.com"
+LABEL maintainer="web123@gmail.com"
 
 ENV EDITION SELF_HOSTED
 ENV DEPLOY_ENV PRODUCTION
@@ -12,6 +12,10 @@ EXPOSE 3000
 WORKDIR /app/web
 
 COPY package.json /app/web/package.json
+
+# RUN ping -c 4 google.com
+RUN  npm config set registry https://registry.npm.taobao.org/
+RUN echo "${http_proxy}" && echo "${HTTP_PROXY}" 
 
 RUN npm install --only=prod
 
