@@ -130,21 +130,21 @@ const Welcome: FC<IWelcomeProps> = ({
     if (!inputs || !prompt_variables || prompt_variables?.length === 0)
       return true
 
-    let hasEmptyInput = false
+    let hasEmptyInput = ''
     const requiredVars = prompt_variables?.filter(({ key, name, required }) => {
       const res = (!key || !key.trim()) || (!name || !name.trim()) || (required || required === undefined || required === null)
       return res
     }) || [] // compatible with old version
-    requiredVars.forEach(({ key }) => {
+    requiredVars.forEach(({ key, name }) => {
       if (hasEmptyInput)
         return
 
       if (!inputs?.[key])
-        hasEmptyInput = true
+        hasEmptyInput = name
     })
 
     if (hasEmptyInput) {
-      logError(t('appDebug.errorMessage.valueOfVarRequired'))
+      logError(t('appDebug.errorMessage.valueOfVarRequired', { key: hasEmptyInput }))
       return false
     }
     return !hasEmptyInput
@@ -307,7 +307,7 @@ const Welcome: FC<IWelcomeProps> = ({
   }
 
   return (
-    <div className='relative mobile:min-h-[48px] tablet:min-h-[64px]'>
+    <div className='relative tablet:min-h-[64px]'>
       {/* {hasSetInputs && renderHeader()} */}
       <div className='mx-auto pc:w-[794px] max-w-full mobile:w-full px-3.5'>
         {/*  Has't set inputs  */}

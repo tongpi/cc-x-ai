@@ -116,22 +116,22 @@ const Debug: FC<IDebug> = ({
   }
 
   const checkCanSend = () => {
-    let hasEmptyInput = false
+    let hasEmptyInput = ''
     const requiredVars = modelConfig.configs.prompt_variables.filter(({ key, name, required }) => {
       const res = (!key || !key.trim()) || (!name || !name.trim()) || (required || required === undefined || required === null)
       return res
     }) // compatible with old version
     // debugger
-    requiredVars.forEach(({ key }) => {
+    requiredVars.forEach(({ key, name }) => {
       if (hasEmptyInput)
         return
 
       if (!inputs[key])
-        hasEmptyInput = true
+        hasEmptyInput = name
     })
 
     if (hasEmptyInput) {
-      logError(t('appDebug.errorMessage.valueOfVarRequired'))
+      logError(t('appDebug.errorMessage.valueOfVarRequired', { key: hasEmptyInput }))
       return false
     }
     return !hasEmptyInput
@@ -372,7 +372,7 @@ const Debug: FC<IDebug> = ({
         {/* Chat */}
         {mode === AppType.chat && (
           <div className="mt-[34px] h-full flex flex-col">
-            <div className={cn(doShowSuggestion ? 'pb-[140px]' : (isResponsing ? 'pb-[113px]' : 'pb-[66px]'), 'relative mt-1.5 grow h-[200px] overflow-hidden')}>
+            <div className={cn(doShowSuggestion ? 'pb-[140px]' : (isResponsing ? 'pb-[113px]' : 'pb-[76px]'), 'relative mt-1.5 grow h-[200px] overflow-hidden')}>
               <div className="h-full overflow-y-auto overflow-x-hidden" ref={chatListDomRef}>
                 <Chat
                   chatList={chatList}

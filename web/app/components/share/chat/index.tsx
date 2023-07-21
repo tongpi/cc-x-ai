@@ -395,21 +395,21 @@ const Main: FC<IMainProps> = ({
     if (!inputs || !prompt_variables || prompt_variables?.length === 0)
       return true
 
-    let hasEmptyInput = false
+    let hasEmptyInput = ''
     const requiredVars = prompt_variables?.filter(({ key, name, required }) => {
       const res = (!key || !key.trim()) || (!name || !name.trim()) || (required || required === undefined || required === null)
       return res
     }) || [] // compatible with old version
-    requiredVars.forEach(({ key }) => {
+    requiredVars.forEach(({ key, name }) => {
       if (hasEmptyInput)
         return
 
       if (!inputs?.[key])
-        hasEmptyInput = true
+        hasEmptyInput = name
     })
 
     if (hasEmptyInput) {
-      logError(t('appDebug.errorMessage.valueOfVarRequired'))
+      logError(t('appDebug.errorMessage.valueOfVarRequired', { key: hasEmptyInput }))
       return false
     }
     return !hasEmptyInput
@@ -620,7 +620,7 @@ const Main: FC<IMainProps> = ({
 
           {
             hasSetInputs && (
-              <div className={cn(doShowSuggestion ? 'pb-[140px]' : (isResponsing ? 'pb-[113px]' : 'pb-[66px]'), 'relative grow h-[200px] pc:w-[794px] max-w-full mobile:w-full mx-auto mb-3.5 overflow-hidden')}>
+              <div className={cn(doShowSuggestion ? 'pb-[140px]' : (isResponsing ? 'pb-[113px]' : 'pb-[76px]'), 'relative grow h-[200px] pc:w-[794px] max-w-full mobile:w-full mx-auto mb-3.5 overflow-hidden')}>
                 <div className='h-full overflow-y-auto' ref={chatListDomRef}>
                   <Chat
                     chatList={chatList}

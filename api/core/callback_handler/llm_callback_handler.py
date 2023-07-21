@@ -48,7 +48,7 @@ class LLMCallbackHandler(BaseCallbackHandler):
             })
 
         self.llm_message.prompt = real_prompts
-        self.llm_message.prompt_tokens = self.llm.get_messages_tokens(messages[0])
+        self.llm_message.prompt_tokens = self.llm.get_num_tokens_from_messages(messages[0])
 
     def on_llm_start(
         self, serialized: Dict[str, Any], prompts: List[str], **kwargs: Any
@@ -69,9 +69,8 @@ class LLMCallbackHandler(BaseCallbackHandler):
         if not self.conversation_message_task.streaming:
             self.conversation_message_task.append_message_text(response.generations[0][0].text)
             self.llm_message.completion = response.generations[0][0].text
-            self.llm_message.completion_tokens = response.llm_output['token_usage']['completion_tokens']
-        else:
-            self.llm_message.completion_tokens = self.llm.get_num_tokens(self.llm_message.completion)
+
+        self.llm_message.completion_tokens = self.llm.get_num_tokens(self.llm_message.completion)
 
         self.conversation_message_task.save_message(self.llm_message)
 
