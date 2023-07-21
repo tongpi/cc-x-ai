@@ -4,7 +4,6 @@ import AppNav from './app-nav'
 import DatasetNav from './dataset-nav'
 import EnvNav from './env-nav'
 import ExploreNav from './explore-nav'
-import GithubStar from './github-star'
 import s from './index.module.css'
 import { WorkspaceProvider } from '@/context/workspace-context'
 
@@ -21,8 +20,7 @@ const Header = () => {
         <Link href="/apps" className='flex items-center mr-4'>
           <div className={s.logo} />
         </Link>
-        {/* @ts-expect-error Async Server Component */}
-        <GithubStar />
+        {/* <GithubStar /> */}
       </div>
       <div className='flex items-center'>
         <ExploreNav className={navClassName} />
