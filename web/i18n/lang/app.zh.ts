@@ -11,8 +11,8 @@ const translation = {
     '删除应用将无法撤销。用户将不能访问你的应用，所有 Prompt 编排配置和日志均将一并被删除。',
   appDeleted: '应用已删除',
   appDeleteFailed: '应用删除失败',
-  join: '参与社区',
-  communityIntro: '与团队成员、贡献者和开发者在不同频道中交流',
+  join: '共建共享',
+  communityIntro: '激活学习潜能，与CC-Bots一起开启智慧教学新时代！',
   roadmap: '产品路线图',
   newApp: {
     startToCreate: '开始创建一个新应用',

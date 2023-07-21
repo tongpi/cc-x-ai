@@ -65,7 +65,7 @@ const translation = {
   },
   automatic: {
     title: 'Automated application orchestration',
-    description: 'Describe your scenario, Dify will orchestrate an application for you.',
+    description: 'Describe your scenario, CC-Bots will orchestrate an application for you.',
     intendedAudience: 'Who is the intended audience?',
     intendedAudiencePlaceHolder: 'e.g. Student',
     solveProblem: 'What problems do they hope AI can solve for them?',
@@ -100,7 +100,7 @@ const translation = {
     'Prompts guide AI responses with instructions and constraints. Insert variables like {{input}}. This prompt won\'t be visible to users.',
   formattingChangedTitle: 'Formatting changed',
   formattingChangedText:
-    'Modifying the formatting will reset the debug area, are you sure?',
+    'MoCC-Botsing the formatting will reset the debug area, are you sure?',
   variableTitle: 'Variables',
   variableTip:
     'Users fill variables in a form, automatically replacing variables in the prompt.',

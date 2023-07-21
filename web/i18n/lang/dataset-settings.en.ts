@@ -1,11 +1,11 @@
 const translation = {
   title: 'Dataset settings',
-  desc: 'Here you can modify the properties and working methods of the dataset.',
+  desc: 'Here you can moCC-Bots the properties and working methods of the dataset.',
   form: {
     name: 'Dataset Name',
     nameError: 'Name cannot be empty',
     desc: 'Dataset description',
-    descPlaceholder: 'Describe what is in this data set. A detailed description allows AI to access the content of the data set in a timely manner. If empty, Dify will use the default hit strategy.',
+    descPlaceholder: 'Describe what is in this data set. A detailed description allows AI to access the content of the data set in a timely manner. If empty, CC-Bots will use the default hit strategy.',
     descWrite: 'Learn how to write a good dataset description.',
     permissions: 'Permissions',
     permissionsOnlyMe: 'Only me',
