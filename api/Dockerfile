@@ -15,9 +15,9 @@ EXPOSE 5001
 
 WORKDIR /app/api
 
-COPY requirements.txt /app/api/requirements.txt
+COPY requirements.txt /app/api/requirements.txt 
 
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt -i https://mirror.baidu.com/pypi/simple 
 
 COPY . /app/api/
 
