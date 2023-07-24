@@ -13,9 +13,7 @@ WORKDIR /app/web
 
 COPY package.json /app/web/package.json
 
-# RUN ping -c 4 google.com
 RUN  npm config set registry https://registry.npm.taobao.org/
-RUN echo "${http_proxy}" && echo "${HTTP_PROXY}" 
 
 RUN npm install --only=prod
 
