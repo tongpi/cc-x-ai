@@ -14,7 +14,7 @@ const translation = {
     },
   },
   apps: {
-    title: 'Explore Apps by Dify',
+    title: 'Explore Apps by CC-Bots',
     description: 'Use these template apps instantly or customize your own apps based on the templates.',
     allCategories: 'All Categories',
   },

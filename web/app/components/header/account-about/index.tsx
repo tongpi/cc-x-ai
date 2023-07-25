@@ -1,13 +1,10 @@
 'use client'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
-import Link from 'next/link'
 import s from './index.module.css'
 import Modal from '@/app/components/base/modal'
 import { XClose } from '@/app/components/base/icons/src/vender/line/general'
-import { Dify } from '@/app/components/base/icons/src/public/common'
 import type { LangGeniusVersionResponse } from '@/models/common'
-import { IS_CE_EDITION } from '@/config'
 
 type IAccountSettingProps = {
   langeniusVersionInfo: LangGeniusVersionResponse
@@ -39,19 +36,20 @@ export default function AccountAbout({
             s['logo-icon'],
             'mx-auto mb-3 w-12 h-12 bg-white rounded-xl border-[0.5px] border-gray-200',
           )} />
-          <Dify className='mx-auto mb-2' />
-          <div className='mb-3 text-center text-xs font-normal text-gray-500'>Version {langeniusVersionInfo?.current_version}</div>
+          {/* <Dify className='mx-auto mb-2' /> */}
+          <div className='mb-3 text-center text-xg font-normal text-gray-500'>CC-Bots</div>
+          <div className='mb-3 text-center text-xs font-normal text-gray-500'>版本 {langeniusVersionInfo?.current_version}</div>
           <div className='mb-4 text-center text-xs font-normal text-gray-700'>
-            <div>© 2023 LangGenius, Inc., Contributors.</div>
+            <div>© 2023 西安长城数字软件有限公司.</div>
             <div className='text-[#1C64F2]'>
-              {
+              {/* {
                 IS_CE_EDITION
                   ? <Link href={'https://github.com/langgenius/dify/blob/main/LICENSE'} target='_blank'>Open Source License</Link>
                   : <>
                     <Link href={'https://docs.dify.ai/user-agreement/privacy-policy'} target='_blank'>Privacy Policy</Link>,
                     <Link href={'https://docs.dify.ai/user-agreement/terms-of-service'} target='_blank'>Terms of Service</Link>
                   </>
-              }
+              } */}
             </div>
           </div>
         </div>
@@ -64,7 +62,7 @@ export default function AccountAbout({
                 : t('common.about.nowAvailable', { version: langeniusVersionInfo.latest_version })
             }
           </div>
-          <div className='flex items-center'>
+          {/* <div className='flex items-center'>
             <Link
               className={classNames(buttonClassName, 'mr-2')}
               href={'https://github.com/langgenius/dify/releases'}
@@ -83,7 +81,7 @@ export default function AccountAbout({
                 </Link>
               )
             }
-          </div>
+          </div> */}
         </div>
       </div>
     </Modal>
