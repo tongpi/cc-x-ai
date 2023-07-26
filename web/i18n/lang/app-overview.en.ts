@@ -33,7 +33,7 @@ const translation = {
           copyRightPlaceholder: 'Enter the name of the author or organization',
           privacyPolicy: 'Privacy Policy',
           privacyPolicyPlaceholder: 'Enter the privacy policy',
-          privacyPolicyTip: 'Helps visitors understand the data the application collects, see Dify\'s <privacyPolicyLink>Privacy Policy</privacyPolicyLink>.',
+          privacyPolicyTip: 'Helps visitors understand the data the application collects, see CC-Bots <privacyPolicyLink>Privacy Policy</privacyPolicyLink>.',
         },
       },
       embedded: {
