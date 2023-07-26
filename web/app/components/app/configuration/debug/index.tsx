@@ -261,7 +261,11 @@ const Debug: FC<IDebug> = ({
         }
         if (suggestedQuestionsAfterAnswerConfig.enabled && !getHasStopResponded()) {
           const { data }: any = await fetchSuggestedQuestions(appId, responseItem.id)
-          setSuggestQuestions(data)
+          if (Array.isArray(data))
+            setSuggestQuestions(data)
+          else if (data instanceof Object)
+            setSuggestQuestions(Object.values(data))
+
           setIsShowSuggestion(true)
         }
       },

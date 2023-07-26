@@ -501,7 +501,11 @@ const Main: FC<IMainProps> = ({
         setCurrConversationId(tempNewConversationId, appId, true)
         if (suggestedQuestionsAfterAnswerConfig?.enabled && !getHasStopResponded()) {
           const { data }: any = await fetchSuggestedQuestions(responseItem.id, isInstalledApp, installedAppInfo?.id)
-          setSuggestQuestions(data)
+          if (Array.isArray(data))
+            setSuggestQuestions(data)
+          else if (data instanceof Object)
+            setSuggestQuestions(Object.values(data))
+
           setIsShowSuggestion(true)
         }
       },
