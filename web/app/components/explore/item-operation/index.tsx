@@ -14,12 +14,19 @@ const PinIcon = (
   </svg>
 )
 
+const EditIcon: FC<{ className?: string }> = ({ className }) => {
+  return <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+    <path d="M14 11.9998L13.3332 12.7292C12.9796 13.1159 12.5001 13.3332 12.0001 13.3332C11.5001 13.3332 11.0205 13.1159 10.6669 12.7292C10.3128 12.3432 9.83332 12.1265 9.33345 12.1265C8.83359 12.1265 8.35409 12.3432 7.99998 12.7292M2 13.3332H3.11636C3.44248 13.3332 3.60554 13.3332 3.75899 13.2963C3.89504 13.2637 4.0251 13.2098 4.1444 13.1367C4.27895 13.0542 4.39425 12.9389 4.62486 12.7083L13 4.33316C13.5523 3.78087 13.5523 2.88544 13 2.33316C12.4477 1.78087 11.5523 1.78087 11 2.33316L2.62484 10.7083C2.39424 10.9389 2.27894 11.0542 2.19648 11.1888C2.12338 11.3081 2.0695 11.4381 2.03684 11.5742C2 11.7276 2 11.8907 2 12.2168V13.3332Z" stroke="#6B7280" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+}
+
 export type IItemOperationProps = {
   className?: string
   isPinned: boolean
   isShowDelete: boolean
   togglePin: () => void
   onDelete: () => void
+  onRename: () => void
 }
 
 const ItemOperation: FC<IItemOperationProps> = ({
@@ -28,6 +35,7 @@ const ItemOperation: FC<IItemOperationProps> = ({
   isShowDelete,
   togglePin,
   onDelete,
+  onRename,
 }) => {
   const { t } = useTranslation()
 
@@ -37,6 +45,10 @@ const ItemOperation: FC<IItemOperationProps> = ({
         <div className='w-full py-1' onClick={(e) => {
           e.stopPropagation()
         }}>
+          <div className={cn(s.actionItem, s.deleteActionItem, 'hover:bg-gray-50 group')} onClick={onRename} >
+            <EditIcon className={cn(s.deleteActionItemChild, 'shrink-0 w-4 h-4 stroke-current text-gray-500 stroke-2')} />
+            <span className={cn(s.actionName, s.deleteActionItemChild)}>{t('explore.sidebar.action.rename')}</span>
+          </div>
           <div className={cn(s.actionItem, 'hover:bg-gray-50 group')} onClick={togglePin}>
             {PinIcon}
             <span className={s.actionName}>{isPinned ? t('explore.sidebar.action.unpin') : t('explore.sidebar.action.pin')}</span>

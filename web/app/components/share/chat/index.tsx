@@ -10,6 +10,7 @@ import { useBoolean, useGetState } from 'ahooks'
 import AppUnavailable from '../../base/app-unavailable'
 import { checkOrSetAccessToken } from '../utils'
 import useConversation from './hooks/use-conversation'
+import RenameModal from './sidebar/rename-model'
 import s from './style.module.css'
 import { ToastContext } from '@/app/components/base/toast'
 import Sidebar from '@/app/components/share/chat/sidebar'
@@ -23,6 +24,7 @@ import {
   fetchConversations,
   fetchSuggestedQuestions,
   pinConversation,
+  renameConversation,
   sendChatMessage,
   stopChatMessageResponding,
   unpinConversation,
@@ -144,11 +146,16 @@ const Main: FC<IMainProps> = ({
     noticeUpdateList()
   }
   const [isShowConfirm, { setTrue: showConfirm, setFalse: hideConfirm }] = useBoolean(false)
+  const [isShowRename, { setTrue: showRename, setFalse: hideRename }] = useBoolean(false)
   const [toDeleteConversationId, setToDeleteConversationId] = useState('')
   const handleDelete = (id: string) => {
     setToDeleteConversationId(id)
     hideSidebar() // mobile
     showConfirm()
+  }
+  const handleRename = (id: string, newName: string) => {
+    hideSidebar() // mobile
+    showRename()
   }
 
   const didDelete = async () => {
@@ -158,6 +165,13 @@ const Main: FC<IMainProps> = ({
     if (currConversationId === toDeleteConversationId)
       handleConversationIdChange('-1')
 
+    noticeUpdateList()
+  }
+  const didRename = async (newName: string) => {
+    await renameConversation(isInstalledApp, installedAppInfo?.id, currConversationId, newName)
+    notify({ type: 'success', message: t('common.api.success') })
+    hideRename()
+    setExistConversationInfo({ name: newName, introduction: currConversationInfo?.introduction || '' })
     noticeUpdateList()
   }
 
@@ -557,6 +571,7 @@ const Main: FC<IMainProps> = ({
         onUnpin={handleUnpin}
         controlUpdateList={controlUpdateConversationList}
         onDelete={handleDelete}
+        onRename={handleRename}
       />
     )
   }
@@ -656,6 +671,16 @@ const Main: FC<IMainProps> = ({
               onClose={hideConfirm}
               onConfirm={didDelete}
               onCancel={hideConfirm}
+            />
+          )}
+          {isShowRename && (
+            <RenameModal
+              // title={t('share.chat.deleteConversation.title')}
+              // content={t('share.chat.deleteConversation.content')}
+              oldName={currConversationInfo?.name}
+              isShow={isShowRename}
+              onClose={hideRename}
+              onRename={didRename}
             />
           )}
         </div>

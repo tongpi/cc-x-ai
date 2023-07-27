@@ -4,6 +4,7 @@ const translation = {
     discovery: '发现',
     workspace: '工作区',
     action: {
+      rename: '重命名',
       pin: '置顶',
       unpin: '取消置顶',
       delete: '删除',

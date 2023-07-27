@@ -4,6 +4,7 @@ const translation = {
     discovery: 'Discovery',
     workspace: 'Workspace',
     action: {
+      rename: 'Rename',
       pin: 'Pin',
       unpin: 'Unpin',
       delete: 'Delete',

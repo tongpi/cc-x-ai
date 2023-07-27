@@ -69,6 +69,10 @@ export const unpinConversation = async (isInstalledApp: boolean, installedAppId 
   return getAction('patch', isInstalledApp)(getUrl(`conversations/${id}/unpin`, isInstalledApp, installedAppId))
 }
 
+export const renameConversation = async (isInstalledApp: boolean, installedAppId = '', id: string, newName: string) => {
+  return getAction('post', isInstalledApp)(getUrl(`conversations/${id}/name`, isInstalledApp, installedAppId), { body: { name: newName } })
+}
+
 export const delConversation = async (isInstalledApp: boolean, installedAppId = '', id: string) => {
   return getAction('del', isInstalledApp)(getUrl(`conversations/${id}`, isInstalledApp, installedAppId))
 }
