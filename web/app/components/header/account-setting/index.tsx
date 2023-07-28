@@ -2,7 +2,7 @@
 import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, useState } from 'react'
 import cn from 'classnames'
-import { AtSymbolIcon, CubeTransparentIcon, GlobeAltIcon, UserIcon, UsersIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { AtSymbolIcon, GlobeAltIcon, UserIcon, UsersIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { GlobeAltIcon as GlobalAltIconSolid, UserIcon as UserIconSolid, UsersIcon as UsersIconSolid } from '@heroicons/react/24/solid'
 import AccountPage from './account-page'
 import MembersPage from './members-page'
@@ -12,8 +12,6 @@ import ProviderPage from './provider-page'
 import DataSourcePage from './data-source-page'
 import s from './index.module.css'
 import Modal from '@/app/components/base/modal'
-import { Database03 } from '@/app/components/base/icons/src/vender/line/development'
-import { Database03 as Database03Solid } from '@/app/components/base/icons/src/vender/solid/development'
 
 const iconClassName = `
   w-4 h-4 ml-3 mr-2
@@ -68,18 +66,18 @@ export default function AccountSetting({
           icon: <UsersIcon className={iconClassName} />,
           activeIcon: <UsersIconSolid className={iconClassName} />,
         },
-        {
-          key: 'provider',
-          name: t('common.settings.provider'),
-          icon: <CubeTransparentIcon className={iconClassName} />,
-          activeIcon: <CubeTransparentIcon className={iconClassName} />,
-        },
-        {
-          key: 'data-source',
-          name: t('common.settings.dataSource'),
-          icon: <Database03 className={iconClassName} />,
-          activeIcon: <Database03Solid className={iconClassName} />,
-        },
+        // {
+        //   key: 'provider',
+        //   name: t('common.settings.provider'),
+        //   icon: <CubeTransparentIcon className={iconClassName} />,
+        //   activeIcon: <CubeTransparentIcon className={iconClassName} />,
+        // },
+        // {
+        //   key: 'data-source',
+        //   name: t('common.settings.dataSource'),
+        //   icon: <Database03 className={iconClassName} />,
+        //   activeIcon: <Database03Solid className={iconClassName} />,
+        // },
       ],
     },
   ]

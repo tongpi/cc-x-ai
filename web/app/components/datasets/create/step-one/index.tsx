@@ -123,7 +123,7 @@ const StepOne = ({
                   <span className={cn(s.datasetIcon)} />
                   {t('datasetCreation.stepOne.dataSourceType.file')}
                 </div>
-                <div
+                {/* <div
                   className={cn(
                     s.dataSourceItem,
                     dataSourceType === DataSourceType.NOTION && s.active,
@@ -139,7 +139,7 @@ const StepOne = ({
                 >
                   <span className={cn(s.datasetIcon, s.notion)} />
                   {t('datasetCreation.stepOne.dataSourceType.notion')}
-                </div>
+                </div> */}
                 <div
                   className={cn(s.dataSourceItem, s.disabled, dataSourceType === DataSourceType.WEB && s.active)}
                 // onClick={() => changeType(DataSourceType.WEB)}
