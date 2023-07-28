@@ -24,6 +24,7 @@ export type IItemOperationProps = {
   className?: string
   isPinned: boolean
   isShowDelete: boolean
+  isShowRename: boolean
   togglePin: () => void
   onDelete: () => void
   onRename: () => void
@@ -33,6 +34,7 @@ const ItemOperation: FC<IItemOperationProps> = ({
   className,
   isPinned,
   isShowDelete,
+  isShowRename,
   togglePin,
   onDelete,
   onRename,
@@ -45,10 +47,12 @@ const ItemOperation: FC<IItemOperationProps> = ({
         <div className='w-full py-1' onClick={(e) => {
           e.stopPropagation()
         }}>
-          <div className={cn(s.actionItem, s.deleteActionItem, 'hover:bg-gray-50 group')} onClick={onRename} >
-            <EditIcon className={cn(s.deleteActionItemChild, 'shrink-0 w-4 h-4 stroke-current text-gray-500 stroke-2')} />
-            <span className={cn(s.actionName, s.deleteActionItemChild)}>{t('explore.sidebar.action.rename')}</span>
-          </div>
+          {isShowRename && (
+            <div className={cn(s.actionItem, s.deleteActionItem, 'hover:bg-gray-50 group')} onClick={onRename} >
+              <EditIcon className={cn(s.deleteActionItemChild, 'shrink-0 w-4 h-4 stroke-current text-gray-500 stroke-2')} />
+              <span className={cn(s.actionName, s.deleteActionItemChild)}>{t('explore.sidebar.action.rename')}</span>
+            </div>
+          )}
           <div className={cn(s.actionItem, 'hover:bg-gray-50 group')} onClick={togglePin}>
             {PinIcon}
             <span className={s.actionName}>{isPinned ? t('explore.sidebar.action.unpin') : t('explore.sidebar.action.pin')}</span>

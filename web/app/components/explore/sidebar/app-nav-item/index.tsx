@@ -15,6 +15,7 @@ export type IAppNavItemProps = {
   togglePin: () => void
   uninstallable: boolean
   onDelete: (id: string) => void
+  onRename: (id: string) => void
 }
 
 export default function AppNavItem({
@@ -27,6 +28,7 @@ export default function AppNavItem({
   togglePin,
   uninstallable,
   onDelete,
+  onRename,
 }: IAppNavItemProps) {
   const router = useRouter()
   const url = `/explore/installed/${id}`
@@ -61,7 +63,9 @@ export default function AppNavItem({
             isPinned={isPinned}
             togglePin={togglePin}
             isShowDelete={!uninstallable && !isSelected}
+            isShowRename={false}
             onDelete={() => onDelete(id)}
+            onRename={() => onRename(id)}
           />
         </div>
       }

@@ -101,6 +101,7 @@ const List: FC<IListProps> = ({
                   isPinned={isPinned}
                   togglePin={() => onPinChanged(item.id)}
                   isShowDelete
+                  isShowRename
                   onDelete={() => onDelete(item.id)}
                 />
               </div>
