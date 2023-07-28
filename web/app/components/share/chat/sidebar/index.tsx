@@ -31,7 +31,7 @@ export type ISidebarProps = {
   onUnpin: (id: string) => void
   controlUpdateList: number
   onDelete: (id: string) => void
-  onRename: (id: string, newName: string) => void
+  onRename: (id: string) => void
 }
 
 const Sidebar: FC<ISidebarProps> = ({
@@ -140,7 +140,7 @@ const Sidebar: FC<ISidebarProps> = ({
             onPinChanged={id => onPin(id)}
             controlUpdate={controlUpdateList + 1}
             onDelete={onDelete}
-            onRename={(id, newName) => onRename(id, newName)}
+            onRename={id => onRename(id)}
           />
         </div>
 
