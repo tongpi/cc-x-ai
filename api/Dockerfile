@@ -17,7 +17,8 @@ WORKDIR /app/api
 
 COPY requirements.txt /app/api/requirements.txt 
 
-RUN pip install -r requirements.txt -i https://mirror.baidu.com/pypi/simple 
+RUN pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install -r requirements.txt  -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 COPY . /app/api/
 
