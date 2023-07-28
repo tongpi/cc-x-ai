@@ -148,14 +148,12 @@ const Main: FC<IMainProps> = ({
   const [isShowConfirm, { setTrue: showConfirm, setFalse: hideConfirm }] = useBoolean(false)
   const [isShowRename, { setTrue: showRename, setFalse: hideRename }] = useBoolean(false)
   const [toDeleteConversationId, setToDeleteConversationId] = useState('')
+  const [toRenameConversation, setToRenameConversation] = useState<ConversationItem>()
+
   const handleDelete = (id: string) => {
     setToDeleteConversationId(id)
     hideSidebar() // mobile
     showConfirm()
-  }
-  const handleRename = (id: string, newName: string) => {
-    hideSidebar() // mobile
-    showRename()
   }
 
   const didDelete = async () => {
@@ -167,11 +165,23 @@ const Main: FC<IMainProps> = ({
 
     noticeUpdateList()
   }
+
+  const handleRename = (id: string) => {
+    const item = conversationList.filter((item) => { return item.id === id })[0]
+    setToRenameConversation(item)
+    hideSidebar() // mobile
+    showRename()
+  }
+
   const didRename = async (newName: string) => {
-    await renameConversation(isInstalledApp, installedAppInfo?.id, currConversationId, newName)
+    await renameConversation(isInstalledApp, installedAppInfo?.id, toRenameConversation?.id || '', newName)
     notify({ type: 'success', message: t('common.api.success') })
     hideRename()
-    setExistConversationInfo({ name: newName, introduction: currConversationInfo?.introduction || '' })
+    if (toRenameConversation?.id === currConversationId)
+      setExistConversationInfo({ name: newName, introduction: currConversationInfo?.introduction || '' })
+
+    // @ts-expect-error hhhhhhhhhh
+    setToRenameConversation({ ...toRenameConversation, name: newName })
     noticeUpdateList()
   }
 
@@ -391,7 +401,7 @@ const Main: FC<IMainProps> = ({
         }
       }
     })()
-  }, [])
+  }, [toRenameConversation])
 
   const [isResponsing, { setTrue: setResponsingTrue, setFalse: setResponsingFalse }] = useBoolean(false)
   const [abortController, setAbortController] = useState<AbortController | null>(null)
@@ -677,7 +687,7 @@ const Main: FC<IMainProps> = ({
             <RenameModal
               // title={t('share.chat.deleteConversation.title')}
               // content={t('share.chat.deleteConversation.content')}
-              oldName={currConversationInfo?.name}
+              oldName={toRenameConversation?.name}
               isShow={isShowRename}
               onClose={hideRename}
               onRename={didRename}
