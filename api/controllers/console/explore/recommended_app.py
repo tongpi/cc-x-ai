@@ -43,7 +43,7 @@ class RecommendedAppListApi(Resource):
     @account_initialization_required
     @marshal_with(recommended_app_list_fields)
     def get(self):
-        language_prefix = current_user.interface_language if current_user.interface_language else 'en-US'
+        language_prefix = current_user.interface_language if current_user.interface_language else 'zh-Hans'
 
         recommended_apps = db.session.query(RecommendedApp).filter(
             RecommendedApp.is_listed == True,

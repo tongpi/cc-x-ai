@@ -40,7 +40,7 @@ const ActivateForm = () => {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const [timezone, setTimezone] = useState('Asia/Shanghai')
-  const [language, setLanguage] = useState('en-US')
+  const [language, setLanguage] = useState('zh-Hans')
   const [showSuccess, setShowSuccess] = useState(false)
 
   const showErrorMessage = (message: string) => {
