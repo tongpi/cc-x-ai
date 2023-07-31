@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import cn from 'classnames'
 import { useTranslation } from 'react-i18next'
 import { useBoolean, useClickAway } from 'ahooks'
-import { ChevronDownIcon, Cog8ToothIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
+import { Cog8ToothIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
 import ParamItem from './param-item'
 import Radio from '@/app/components/base/radio'
 import Panel from '@/app/components/base/panel'
@@ -227,8 +227,10 @@ const ConifgModel: FC<IConifgModelProps> = ({
         className={cn('flex items-center border h-8 px-2.5 space-x-2 rounded-lg', disabled ? diabledStyle : ableStyle)}
         onClick={() => !disabled && toogleShowConfig()}
       >
+        {/* // 不准备在应用层支持模型选择
         <ModelIcon provider={currModel?.provider} />
-        <div className='text-[13px] text-gray-900 font-medium'>{selectedModel.name}</div>
+        <div className='text-[13px] text-gray-900 font-medium'>{selectedModel.name}</div> */}
+        <div className='text-[13px] text-gray-900 font-medium'>模型设置</div>
         {disabled ? <InformationCircleIcon className='w-3.5 h-3.5 text-[#F79009]' /> : <Cog8ToothIcon className='w-3.5 h-3.5 text-gray-500' />}
       </div>
       {isShowConfig && (
@@ -249,9 +251,9 @@ const ConifgModel: FC<IConifgModelProps> = ({
           title={t('appDebug.modelConfig.title')}
         >
           <div className='py-3 pl-10 pr-6 text-sm'>
+            {/* // 不准备在应用层支持模型选择
             <div className="flex items-center justify-between my-5 h-9">
               <div>{t('appDebug.modelConfig.model')}</div>
-              {/* model selector */}
               <div className="relative" style={{ zIndex: 30 }}>
                 <div ref={triggerRef} onClick={() => !selectModelDisabled && toogleOption()} className={cn(selectModelDisabled ? 'cursor-not-allowed' : 'cursor-pointer', 'flex items-center h-9 px-3 space-x-2 rounded-lg bg-gray-50 ')}>
                   <ModelIcon provider={currModel?.provider} />
@@ -269,12 +271,12 @@ const ConifgModel: FC<IConifgModelProps> = ({
                   </div>
                 )}
               </div>
-            </div>
+            </div> */}
             <div className="border-b border-gray-100"></div>
 
             {/* Response type */}
             <div className="mt-5 mb-4">
-              <div className="mb-4 text-sm text-gray-900">{t('appDebug.modelConfig.setTone')}</div>
+              {/* <div className="mb-4 text-sm text-gray-900">{t('appDebug.modelConfig.setTone')}</div> */}
               <Radio.Group value={toneId} onChange={handleToneChange}>
                 <>
                   {TONE_LIST.slice(0, 3).map(tone => (
