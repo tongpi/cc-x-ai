@@ -176,7 +176,8 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
                   </div>
                   <div className={style.listItemDescription}>{t('app.newApp.chatAppIntro')}</div>
                   <div className={classNames(style.listItemFooter, 'justify-end')}>
-                    <a className={style.listItemLink} href='https://udify.app/chat/7CQBa5yyvYLSkZtx' target='_blank'>{t('app.newApp.previewDemo')}<span className={classNames(style.linkIcon, style.grayLinkIcon)} /></a>
+                    {/* <a className={style.listItemLink} href='https://udify.app/chat/7CQBa5yyvYLSkZtx' target='_blank'>{t('app.newApp.previewDemo')}<span className={classNames(style.linkIcon, style.grayLinkIcon)} /></a> */}
+                    <a className={style.listItemLink} href='/chat/3nsYccun5Bma7AQt' target='_blank'>{t('app.newApp.previewDemo')}<span className={classNames(style.linkIcon, style.grayLinkIcon)} /></a>
                   </div>
                 </li>
                 <li
@@ -193,7 +194,8 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
                   </div>
                   <div className={style.listItemDescription}>{t('app.newApp.completeAppIntro')}</div>
                   <div className={classNames(style.listItemFooter, 'justify-end')}>
-                    <a className={style.listItemLink} href='https://udify.app/completion/aeFTj0VCb3Ok3TUE' target='_blank'>{t('app.newApp.previewDemo')}<span className={classNames(style.linkIcon, style.grayLinkIcon)} /></a>
+                    {/* <a className={style.listItemLink} href='https://udify.app/completion/aeFTj0VCb3Ok3TUE' target='_blank'>{t('app.newApp.previewDemo')}<span className={classNames(style.linkIcon, style.grayLinkIcon)} /></a> */}
+                    <a className={style.listItemLink} href='/completion/lThsxotKiRex5LGg' target='_blank'>{t('app.newApp.previewDemo')}<span className={classNames(style.linkIcon, style.grayLinkIcon)} /></a>
                   </div>
                 </li>
               </ul>
