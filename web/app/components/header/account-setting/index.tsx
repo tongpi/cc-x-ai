@@ -2,7 +2,7 @@
 import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, useState } from 'react'
 import cn from 'classnames'
-import { AtSymbolIcon, GlobeAltIcon, UserIcon, UsersIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { GlobeAltIcon, UserIcon, UsersIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { GlobeAltIcon as GlobalAltIconSolid, UserIcon as UserIconSolid, UsersIcon as UsersIconSolid } from '@heroicons/react/24/solid'
 import AccountPage from './account-page'
 import MembersPage from './members-page'
@@ -42,12 +42,12 @@ export default function AccountSetting({
           icon: <UserIcon className={iconClassName} />,
           activeIcon: <UserIconSolid className={iconClassName} />,
         },
-        {
-          key: 'integrations',
-          name: t('common.settings.integrations'),
-          icon: <AtSymbolIcon className={iconClassName} />,
-          activeIcon: <AtSymbolIcon className={iconClassName} />,
-        },
+        // {
+        //   key: 'integrations',
+        //   name: t('common.settings.integrations'),
+        //   icon: <AtSymbolIcon className={iconClassName} />,
+        //   activeIcon: <AtSymbolIcon className={iconClassName} />,
+        // },
         {
           key: 'language',
           name: t('common.settings.language'),
