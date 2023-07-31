@@ -2,7 +2,8 @@ version: '3.1'
 services:
   # API service
   api:
-    image: langgenius/dify-api:0.3.10
+    # image: langgenius/dify-api:0.3.10
+    image: cc-aigc/cc-bots-api:latest
     restart: always
     environment:
       # OPENAI_API_BASE: http://192.168.15.130:8000/v1
@@ -127,7 +128,8 @@ services:
   # worker service
   # The Celery worker for processing the queue.
   worker:
-    image: langgenius/dify-api:0.3.10
+    # image: langgenius/dify-api:0.3.10
+    image: cc-aigc/cc-bots-api:latest
     restart: always
     environment:
       # OPENAI_API_BASE: http://192.168.15.130:8000/v1
@@ -182,7 +184,8 @@ services:
 
   # Frontend web application.
   web:
-    image: langgenius/dify-web:0.3.10
+    # image: langgenius/dify-web:0.3.10
+    image: cc-aigc/cc-bots-web:latest
     restart: always
     environment:
       EDITION: SELF_HOSTED
@@ -197,6 +200,24 @@ services:
       # The DSN for Sentry error reporting. If not set, Sentry error reporting will be disabled.
       SENTRY_DSN: ''
 
+  # Frontend web application 2.
+  dify:
+    image: langgenius/dify-web:0.3.10
+    restart: always
+    environment:
+      EDITION: SELF_HOSTED
+      # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
+      # different from api or web app domain.
+      # example: http://cloud.dify.ai
+      CONSOLE_API_URL: 'http://192.168.15.130:8001'
+      # The URL for Web APP api server, refers to the Web App base URL of WEB service if web app domain is different from
+      # console or api domain.
+      # example: http://udify.app
+      APP_API_URL: 'http://192.168.15.130:8001'
+      # The DSN for Sentry error reporting. If not set, Sentry error reporting will be disabled.
+      SENTRY_DSN: ''
+    ports:
+      - "8002:3000"      
   # The postgres database.
   db:
     image: postgres:15-alpine
@@ -255,5 +276,6 @@ services:
     depends_on:
       - api
       - web
+      - dify
     ports:
       - "8001:80"
