@@ -8,6 +8,7 @@ import { HandThumbDownIcon, HandThumbUpIcon } from '@heroicons/react/24/outline'
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import { useTranslation } from 'react-i18next'
 import { randomString } from '../../app-sidebar/basic'
+import MarkmapHooks from '../markmap'
 import s from './style.module.css'
 import LoadingAnim from './loading-anim'
 import CopyBtn from './copy-btn'
@@ -137,6 +138,15 @@ const EditIcon: FC<{ className?: string }> = ({ className }) => {
     <path d="M14 11.9998L13.3332 12.7292C12.9796 13.1159 12.5001 13.3332 12.0001 13.3332C11.5001 13.3332 11.0205 13.1159 10.6669 12.7292C10.3128 12.3432 9.83332 12.1265 9.33345 12.1265C8.83359 12.1265 8.35409 12.3432 7.99998 12.7292M2 13.3332H3.11636C3.44248 13.3332 3.60554 13.3332 3.75899 13.2963C3.89504 13.2637 4.0251 13.2098 4.1444 13.1367C4.27895 13.0542 4.39425 12.9389 4.62486 12.7083L13 4.33316C13.5523 3.78087 13.5523 2.88544 13 2.33316C12.4477 1.78087 11.5523 1.78087 11 2.33316L2.62484 10.7083C2.39424 10.9389 2.27894 11.0542 2.19648 11.1888C2.12338 11.3081 2.0695 11.4381 2.03684 11.5742C2 11.7276 2 11.8907 2 12.2168V13.3332Z" stroke="#6B7280" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 }
+const MindmapIcon: FC<{ showMindmap: boolean; className?: string }> = ({ showMindmap, className }) => {
+  return <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <g>
+      <path fill="none" d="M0 0H24V24H0z"/>
+      {showMindmap && <path d="M5.88889 0.683718C5.827 0.522805 5.67241 0.416626 5.5 0.416626C5.3276 0.416626 5.173 0.522805 5.11111 0.683718L4.27279 2.86334C4.14762 3.18877 4.10829 3.28255 4.05449 3.35821C4.00051 3.43413 3.93418 3.50047 3.85826 3.55445C3.78259 3.60825 3.68881 3.64758 3.36338 3.77275L1.18376 4.61106C1.02285 4.67295 0.916668 4.82755 0.916668 4.99996C0.916668 5.17236 1.02285 5.32696 1.18376 5.38885L3.36338 6.22717C3.68881 6.35234 3.78259 6.39167 3.85826 6.44547C3.93418 6.49945 4.00051 6.56578 4.05449 6.6417C4.10829 6.71737 4.14762 6.81115 4.27279 7.13658L5.11111 9.3162C5.173 9.47711 5.3276 9.58329 5.5 9.58329C5.67241 9.58329 5.82701 9.47711 5.8889 9.3162L6.72721 7.13658C6.85238 6.81115 6.89171 6.71737 6.94551 6.6417C6.99949 6.56578 7.06583 6.49945 7.14175 6.44547C7.21741 6.39167 7.31119 6.35234 7.63662 6.22717L9.81624 5.38885C9.97715 5.32696 10.0833 5.17236 10.0833 4.99996C10.0833 4.82755 9.97715 4.67295 9.81624 4.61106L7.63662 3.77275C7.31119 3.64758 7.21741 3.60825 7.14175 3.55445C7.06583 3.50047 6.99949 3.43413 6.94551 3.35821C6.89171 3.28255 6.85238 3.18877 6.72721 2.86334L5.88889 0.683718Z" fill="#667085" />}
+      <path fill="#999" d="M18 3c1.657 0 3 1.343 3 3s-1.343 3-3 3h-3c-1.306 0-2.417-.834-2.829-2H11c-1.1 0-2 .9-2 2v.171c1.166.412 2 1.523 2 2.829 0 1.306-.834 2.417-2 2.829V15c0 1.1.9 2 2 2h1.17c.412-1.165 1.524-2 2.83-2h3c1.657 0 3 1.343 3 3s-1.343 3-3 3h-3c-1.306 0-2.417-.834-2.829-2H11c-2.21 0-4-1.79-4-4H5c-1.657 0-3-1.343-3-3s1.343-3 3-3h2c0-2.21 1.79-4 4-4h1.17c.412-1.165 1.524-2 2.83-2h3zm0 14h-3c-.552 0-1 .448-1 1s.448 1 1 1h3c.552 0 1-.448 1-1s-.448-1-1-1zM8 11H5c-.552 0-1 .448-1 1s.448 1 1 1h3c.552 0 1-.448 1-1s-.448-1-1-1zm10-6h-3c-.552 0-1 .448-1 1s.448 1 1 1h3c.552 0 1-.448 1-1s-.448-1-1-1z"/>
+    </g>
+  </svg>
+}
 
 export const EditIconSolid: FC<{ className?: string }> = ({ className }) => {
   return <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
@@ -182,6 +192,7 @@ type IAnswerProps = {
 const Answer: FC<IAnswerProps> = ({ item, feedbackDisabled = false, isHideFeedbackEdit = false, onFeedback, onSubmitAnnotation, displayScene = 'web', isResponsing, answerIconClassName }) => {
   const { id, content, more, feedback, adminFeedback, annotation: initAnnotation } = item
   const [showEdit, setShowEdit] = useState(false)
+  const [showMindmap, setShowMindmap] = useState(false)
   const [loading, setLoading] = useState(false)
   const [annotation, setAnnotation] = useState<Annotation | undefined | null>(initAnnotation)
   const [inputValue, setInputValue] = useState<string>(initAnnotation?.content ?? '')
@@ -242,6 +253,13 @@ const Answer: FC<IAnswerProps> = ({ item, feedbackDisabled = false, isHideFeedba
       return feedback?.rating
         ? null
         : <div className='flex gap-1'>
+          <Tooltip selector={`user-mindmap-${randomString(16)}`} content="显示隐藏思维导图">
+            {!item.isOpeningStatement && OperationBtn({
+              innerContent: <IconWrapper><MindmapIcon showMindmap={showMindmap} className='hover:text-gray-800' /></IconWrapper>,
+
+              onClick: () => setShowMindmap(!showMindmap),
+            })}
+          </Tooltip>
           <Tooltip selector={`user-feedback-${randomString(16)}`} content={t('appLog.detail.operation.like') as string}>
             {OperationBtn({ innerContent: <IconWrapper><RatingIcon isLike={true} /></IconWrapper>, onClick: () => onFeedback?.(id, { rating: 'like' }) })}
           </Tooltip>
@@ -311,6 +329,7 @@ const Answer: FC<IAnswerProps> = ({ item, feedbackDisabled = false, isHideFeedba
                     <div className='text-xs text-gray-500'>{t('appDebug.openingStatement.title')}</div>
                   </div>
                 )}
+                {showMindmap && <MarkmapHooks key={item.id} value={item.content} />}
                 {(isResponsing && !content)
                   ? (
                     <div className='flex items-center justify-center w-6 h-5'>
@@ -514,17 +533,19 @@ const Chat: FC<IChatProps> = ({
         {chatList.map((item) => {
           if (item.isAnswer) {
             const isLast = item.id === chatList[chatList.length - 1].id
-            return <Answer
-              key={item.id}
-              item={item}
-              feedbackDisabled={feedbackDisabled}
-              isHideFeedbackEdit={isHideFeedbackEdit}
-              onFeedback={onFeedback}
-              onSubmitAnnotation={onSubmitAnnotation}
-              displayScene={displayScene ?? 'web'}
-              isResponsing={isResponsing && isLast}
-              answerIconClassName={answerIconClassName}
-            />
+            return <>
+              <Answer
+                key={item.id}
+                item={item}
+                feedbackDisabled={feedbackDisabled}
+                isHideFeedbackEdit={isHideFeedbackEdit}
+                onFeedback={onFeedback}
+                onSubmitAnnotation={onSubmitAnnotation}
+                displayScene={displayScene ?? 'web'}
+                isResponsing={isResponsing && isLast}
+                answerIconClassName={answerIconClassName}
+              />
+            </>
           }
           return <Question key={item.id} id={item.id} content={item.content} more={item.more} useCurrentUserAvatar={useCurrentUserAvatar} />
         })}
