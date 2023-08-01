@@ -139,7 +139,7 @@ const InstallForm = () => {
             <Link
               className='text-primary-600'
               target={'_blank'}
-              href='https://docs.dify.ai/community/open-source'
+              href='https://cc.ai/community/open-source'
             >{t('login.license.link')}</Link>
           </div>
         </div>
