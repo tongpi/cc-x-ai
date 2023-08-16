@@ -183,6 +183,7 @@ class Config:
 
         self.SQLALCHEMY_DATABASE_URI = f"postgresql://{db_credentials['DB_USERNAME']}:{db_credentials['DB_PASSWORD']}@{db_credentials['DB_HOST']}:{db_credentials['DB_PORT']}/{db_credentials['DB_DATABASE']}"
         self.SQLALCHEMY_ENGINE_OPTIONS = {'pool_size': int(get_env('SQLALCHEMY_POOL_SIZE'))}
+        self.SQLALCHEMY_ENGINE_OPTIONS = {'max_overflow': int(get_env('SQLALCHEMY_MAX_OVERFLOW'))}
 
         self.SQLALCHEMY_ECHO = get_bool_env('SQLALCHEMY_ECHO')
 

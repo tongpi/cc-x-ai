@@ -44,6 +44,8 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       DB_DATABASE: dify
+      SQLALCHEMY_POOL_SIZE: 200
+      SQLALCHEMY_MAX_OVERFLOW: 100
       # The configurations of redis connection.
       # It is consistent with the configuration in the 'redis' service below.
       REDIS_HOST: redis
