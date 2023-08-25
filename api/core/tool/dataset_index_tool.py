@@ -46,7 +46,7 @@ class DatasetTool(BaseTool):
 
             documents = vector_index.search(
                 tool_input,
-                search_type='similarity',
+                search_type='similarity_score_threshold',
                 search_kwargs={
                     'k': self.k
                 }
