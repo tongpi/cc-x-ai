@@ -7,7 +7,7 @@ import requests
 from flask import request, redirect, current_app, session
 from flask_restful import Resource
 
-from libs.oauth import OAuthUserInfo, GitHubOAuth, GoogleOAuth
+from libs.oauth import OAuthUserInfo, GitHubOAuth, GoogleOAuth, CCTalkOAuth
 from extensions.ext_database import db
 from models.account import Account, AccountStatus
 from services.account_service import AccountService, RegisterService
@@ -16,6 +16,11 @@ from .. import api
 
 def get_oauth_providers():
     with current_app.app_context():
+        cctalk_oauth = CCTalkOAuth(client_id=current_app.config.get('CCTALK_CLIENT_ID'),
+                                   client_secret=current_app.config.get(
+                                       'CCTALK_CLIENT_SECRET'),
+                                   redirect_uri=current_app.config.get(
+                                       'CONSOLE_API_URL') + '/console/api/oauth/authorize/cctalk')
         github_oauth = GitHubOAuth(client_id=current_app.config.get('GITHUB_CLIENT_ID'),
                                    client_secret=current_app.config.get(
                                        'GITHUB_CLIENT_SECRET'),
@@ -29,6 +34,7 @@ def get_oauth_providers():
                                        'CONSOLE_API_URL') + '/console/api/oauth/authorize/google')
 
         OAUTH_PROVIDERS = {
+            'cctalk': cctalk_oauth,
             'github': github_oauth,
             'google': google_oauth
         }

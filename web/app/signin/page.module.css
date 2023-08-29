@@ -6,6 +6,10 @@
   background: center/contain url('./assets/google.svg');
 }
 
+.ccTalkIcon {
+  background: center/contain url('./assets/ccTalk.svg');
+}
+
 .logo {
   width: 96px;
   height: 40px;
