@@ -87,6 +87,7 @@ class AccountProfileApi(Resource):
     @account_initialization_required
     @marshal_with(account_fields)
     def get(self):
+        print(">>>>>>>>>>>",current_user)
         return current_user
 
 
@@ -222,13 +223,15 @@ class AccountIntegrateApi(Resource):
     @marshal_with(integrate_list_fields)
     def get(self):
         account = current_user
-
+        print(">>>>>>>>>>>",account,provider)
         account_integrates = db.session.query(AccountIntegrate).filter(
             AccountIntegrate.account_id == account.id).all()
 
         base_url = request.url_root.rstrip('/')
         oauth_base_path = "/console/api/oauth/login"
-        providers = ["github", "google"]
+        providers = ["cctalk", "github", "google"]
+        
+        print(">>>>>>>>>>>",account,provider)
 
         integrate_data = []
         for provider in providers:

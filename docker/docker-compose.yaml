@@ -45,7 +45,7 @@ services:
       DB_PORT: 5432
       DB_DATABASE: dify
       SQLALCHEMY_POOL_SIZE: 200
-      SQLALCHEMY_MAX_OVERFLOW: 100
+      SQLALCHEMY_MAX_OVERFLOW: '100'
       # The configurations of redis connection.
       # It is consistent with the configuration in the 'redis' service below.
       REDIS_HOST: redis
@@ -120,6 +120,8 @@ services:
       SENTRY_TRACES_SAMPLE_RATE: 1.0
       # The sample rate for Sentry profiles. Default: `1.0`
       SENTRY_PROFILES_SAMPLE_RATE: 1.0
+      CCTALK_CLIENT_ID: tc_64d429508bd8da2e827c6a61
+      CCTALK_CLIENT_SECRET: LbKIFbkU3a8cG5vIe5-NuI8YyFtlIzHL      
     depends_on:
       - db
       - redis

@@ -33,15 +33,20 @@ function reducer(state: IState, action: { type: string; payload: any }) {
         ...state,
         formValid: true,
       }
-    case 'github_login':
-      return {
-        ...state,
-        github: true,
-      }
     case 'cctalk_login':
       return {
         ...state,
         cctalk: true,
+      }
+    case 'cctalk_login_failed':
+      return {
+        ...state,
+        cctalk: false,
+      }
+    case 'github_login':
+      return {
+        ...state,
+        github: true,
       }
     case 'github_login_failed':
       return {
@@ -108,7 +113,7 @@ const NormalForm = () => {
     ? ({
       url: '/oauth/login/cctalk',
       // params: {
-      //   provider: 'ccTalk',
+      //   provider: 'cctalk',
       // },
     })
     : null, oauth)
@@ -132,7 +137,7 @@ const NormalForm = () => {
     : null, oauth)
 
   useEffect(() => {
-    if (github_error !== undefined)
+    if (cctalk_error !== undefined)
       dispatch({ type: 'cctalk_login_failed', payload: null })
     if (cctalk)
       window.location.href = cctalk.redirect_url
@@ -224,7 +229,7 @@ const NormalForm = () => {
           )}
 
           {
-            !IS_CE_EDITION && <>
+            IS_CE_EDITION && <>
               {/* <div className="relative mt-6">
                 <div className="absolute inset-0 flex items-center" aria-hidden="true">
                   <div className="w-full border-t border-gray-300" />

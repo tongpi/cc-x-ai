@@ -44,13 +44,20 @@ def get_oauth_providers():
 class OAuthLogin(Resource):
     def get(self, provider: str):
         OAUTH_PROVIDERS = get_oauth_providers()
+        print("=========1==============")
+        print(provider)
+        print(OAUTH_PROVIDERS)
+        print("==========2=============")
         with current_app.app_context():
             oauth_provider = OAUTH_PROVIDERS.get(provider)
+            print("==========3=============")
             print(vars(oauth_provider))
         if not oauth_provider:
             return {'error': 'Invalid provider'}, 400
 
         auth_url = oauth_provider.get_authorization_url()
+        print("==========4=============")
+        print(auth_url)        
         return redirect(auth_url)
 
 
@@ -66,6 +73,7 @@ class OAuthCallback(Resource):
         try:
             token = oauth_provider.get_access_token(code)
             user_info = oauth_provider.get_user_info(token)
+            print("-------------------",code, user_info)
         except requests.exceptions.HTTPError as e:
             logging.exception(
                 f"An error occurred during the OAuth process with {provider}: {e.response.text}")
@@ -84,6 +92,7 @@ class OAuthCallback(Resource):
         # login user
         session.clear()
         flask_login.login_user(account, remember=True)
+        print("<<<<<<<<<<<<<<<<<<<<", account)
         AccountService.update_last_login(account, request)
 
         return redirect(f'{current_app.config.get("CONSOLE_WEB_URL")}?oauth_login=success')
