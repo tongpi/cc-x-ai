@@ -84,8 +84,7 @@ services:
       #
       # For **production** purposes, please set `SameSite=Lax, Secure=true, HttpOnly=true`.
       COOKIE_HTTPONLY: 'true'
-      # COOKIE_SAMESITE: 'Lax'
-      COOKIE_SAMESITE: 'None'
+      COOKIE_SAMESITE: 'Lax'
       COOKIE_SECURE: 'false'
       # The type of storage to use for storing user files. Supported values are `local` and `s3`, Default: `local`
       STORAGE_TYPE: local
