@@ -182,12 +182,12 @@ const NormalForm = () => {
                           'w-5 h-5 mr-2',
                         )
                       } />
-                      <span className="truncate text-gray-800">使用 CC-Talk 登录</span>
+                      <span className="truncate text-gray-800">使用 韬云(CC-TalkCloud) 登录</span>
                     </>
                   </Button>
                 </a>
               </div>
-              <div className='w-full'>
+              {/* <div className='w-full'>
                 <a href={`${apiPrefix}/oauth/login/github`}>
                   <Button
                     type='default'
@@ -224,12 +224,12 @@ const NormalForm = () => {
                     </>
                   </Button>
                 </a>
-              </div>
+              </div> */}
             </div>
           )}
 
           {
-            IS_CE_EDITION && <>
+            !IS_CE_EDITION && <>
               {/* <div className="relative mt-6">
                 <div className="absolute inset-0 flex items-center" aria-hidden="true">
                   <div className="w-full border-t border-gray-300" />
