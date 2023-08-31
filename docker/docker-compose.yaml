@@ -242,6 +242,8 @@ services:
   redis:
     image: redis:6-alpine
     restart: always
+    ports:
+      - "6379:6379"      
     volumes:
       # Mount the redis data directory to the container.
       - ./volumes/redis/data:/data
@@ -252,6 +254,8 @@ services:
   weaviate:
     image: semitechnologies/weaviate:1.18.4
     restart: always
+    ports:
+      - "8080:8080"    
     volumes:
       # Mount the Weaviate data directory to the container.
       - ./volumes/weaviate:/var/lib/weaviate
