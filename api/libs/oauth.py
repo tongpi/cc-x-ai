@@ -70,7 +70,7 @@ class CCTalkOAuth(OAuth):
 
         response_json = response.json()
         access_token = response_json.get('access_token')
-
+        
         if not access_token:
             raise ValueError(f"Error in CCtalk OAuth: {response_json}")
 
@@ -89,18 +89,12 @@ class CCTalkOAuth(OAuth):
         # primary_email = next((email for email in email_info if email['primary'] == True), None)
 
         # return {**user_info, 'email': primary_email['email']}
-        print(">>>>>>>>>>>>>>>>>>",user_info)
         return {**user_info}
 
     def _transform_user_info(self, raw_info: dict) -> OAuthUserInfo:
-        print("-----------------------------",raw_info)
         email = raw_info.get('email')
         if not email:
             email = f"{raw_info['sub']}+{raw_info['discriminator']}@users.noreply.e-u.cn"
-        print(str(raw_info['sub']))
-        print(email)
-        print(raw_info['nickname'])
-        print("-----------------------------")
         return OAuthUserInfo(
             id=str(raw_info['sub']),
             name=raw_info['nickname'],

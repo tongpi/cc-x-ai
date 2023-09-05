@@ -182,7 +182,7 @@ const NormalForm = () => {
                           'w-5 h-5 mr-2',
                         )
                       } />
-                      <span className="truncate text-gray-800">使用 韬云(CC-TalkCloud) 登录</span>
+                      <span className="truncate text-gray-800">使用 拓思(CC-Talks) 登录</span>
                     </>
                   </Button>
                 </a>

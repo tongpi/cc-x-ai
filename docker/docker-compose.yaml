@@ -203,25 +203,9 @@ services:
       APP_API_URL: ''
       # The DSN for Sentry error reporting. If not set, Sentry error reporting will be disabled.
       SENTRY_DSN: ''
+      # CC-TALKS OAUTH　Server的服务器地址
+      NEXT_PUBLIC_CC_TALKS_API_BASE_URL: 'http://192.168.15.130:11000'
 
-  # Frontend web application 2.
-  dify:
-    image: langgenius/dify-web:0.3.16
-    restart: always
-    environment:
-      EDITION: SELF_HOSTED
-      # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
-      # different from api or web app domain.
-      # example: http://cloud.dify.ai
-      CONSOLE_API_URL: 'http://192.168.15.130:8001'
-      # The URL for Web APP api server, refers to the Web App base URL of WEB service if web app domain is different from
-      # console or api domain.
-      # example: http://udify.app
-      APP_API_URL: 'http://192.168.15.130:8001'
-      # The DSN for Sentry error reporting. If not set, Sentry error reporting will be disabled.
-      SENTRY_DSN: ''
-    ports:
-      - "8002:3000"      
   # The postgres database.
   db:
     image: postgres:15-alpine
@@ -284,6 +268,5 @@ services:
     depends_on:
       - api
       - web
-      - dify
     ports:
       - "8001:80"
