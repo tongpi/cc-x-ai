@@ -4,7 +4,9 @@ from typing import Optional
 import tiktoken
 
 from core.constant import llm_constant
-
+import os
+tiktoken_cache_dir = os.path.join(os.getcwd(),"tiktoken_cache")
+os.environ["TIKTOKEN_CACHE_DIR"] = tiktoken_cache_dir
 
 class TokenCalculator:
     @classmethod
@@ -13,6 +15,9 @@ class TokenCalculator:
             return 0
 
         enc = tiktoken.encoding_for_model(model_name)
+        print("-------------111--------")
+        print(model_name,enc)
+        print("-------------111--------")
 
         tokenized_text = enc.encode(text)
 
