@@ -69,7 +69,7 @@ class AccountService:
 
     @staticmethod
     def create_account(email: str, name: str, password: str = None,
-                       interface_language: str = 'en-US', interface_theme: str = 'light',
+                       interface_language: str = 'zh-Hans', interface_theme: str = 'light',
                        timezone: str = 'America/New_York', ) -> Account:
         """create account"""
         account = Account()

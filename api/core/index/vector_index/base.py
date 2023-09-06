@@ -46,14 +46,14 @@ class BaseVectorIndex(BaseIndex):
     ) -> List[Document]:
         vector_store = self._get_vector_store()
         vector_store = cast(self._get_vector_store_class(), vector_store)
-
-        search_type = kwargs.get('search_type') if kwargs.get('search_type') else 'similarity'
+        
+        search_type = kwargs.get('search_type') if kwargs.get('search_type') else 'similarity_score_threshold'
         search_kwargs = kwargs.get('search_kwargs') if kwargs.get('search_kwargs') else {}
 
         if search_type == 'similarity_score_threshold':
             score_threshold = search_kwargs.get("score_threshold")
             if (score_threshold is None) or (not isinstance(score_threshold, float)):
-                search_kwargs['score_threshold'] = .0
+                search_kwargs['score_threshold'] = .67
 
             docs_with_similarity = vector_store.similarity_search_with_relevance_scores(
                 query, **search_kwargs
@@ -63,12 +63,15 @@ class BaseVectorIndex(BaseIndex):
             for doc, similarity in docs_with_similarity:
                 doc.metadata['score'] = similarity
                 docs.append(doc)
-
+                logging.info(f"base.py 66行 >>>>>>>>>>>> {doc.metadata['score']}")
+            # logging.info(docs ,search_kwargs['score_threshold'])
+            logging.info(f"base.py 67行 >>>>>>>>>>>> {search_kwargs['score_threshold']}")
             return docs
 
         # similarity k
         # mmr k, fetch_k, lambda_mult
         # similarity_score_threshold k
+        logging.info(f"base.py 74行 >>>>>>>>>>>> {search_type}")
         return vector_store.as_retriever(
             search_type=search_type,
             search_kwargs=search_kwargs
