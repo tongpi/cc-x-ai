@@ -307,8 +307,9 @@ const Welcome: FC<IWelcomeProps> = ({
   }
 
   return (
-    <div className='relative mobile:min-h-[48px] tablet:min-h-[64px]'>
-      {hasSetInputs && renderHeader()}
+    <div className='relative mobile:min-h-[48px] tablet:min-h-[10px]'>
+      {/* 屏蔽对话最上面的一行提示，用于演示。author:huye */}
+      {/* {hasSetInputs && renderHeader()} */}
       <div className='mx-auto pc:w-[794px] max-w-full mobile:w-full px-3.5'>
         {/*  Has't set inputs  */}
         {

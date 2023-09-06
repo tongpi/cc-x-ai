@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  PencilSquareIcon,
-} from '@heroicons/react/24/outline'
+
 import cn from 'classnames'
+import { Icon } from '@iconify/react'
 import Button from '../../../base/button'
 import List from './list'
 import AppInfo from '@/app/components/share/chat/sidebar/app-info'
 // import Card from './card'
 import type { ConversationItem, SiteInfo } from '@/models/share'
 import { fetchConversations } from '@/service/share'
+/* 添加第三方图标Icon插件。author：huye */
 
 export type ISidebarProps = {
   copyRight: string
@@ -95,7 +95,9 @@ const Sidebar: FC<ISidebarProps> = ({
         <Button
           onClick={() => { onCurrentIdChange('-1') }}
           className="group block w-full flex-shrink-0 !justify-start !h-9 text-primary-600 items-center text-sm">
-          <PencilSquareIcon className="mr-2 h-4 w-4" /> {t('share.chat.newChat')}
+          {/* <PencilSquareIcon className="mr-2 h-4 w-4" /> */}
+          {/* describe：引用其他图标。author：huye */}
+          <Icon icon="fluent:add-12-filled" color="#ffffff"/>&nbsp;{t('share.chat.newChat')}
         </Button>
       </div>
       <div className={'flex-grow flex flex-col h-0 overflow-y-auto overflow-x-hidden'}>
@@ -145,9 +147,9 @@ const Sidebar: FC<ISidebarProps> = ({
         </div>
 
       </div>
-      <div className="flex flex-shrink-0 pr-4 pb-4 pl-4">
+      {/* <div className="flex flex-shrink-0 pr-4 pb-4 pl-4">
         <div className="text-gray-400 font-normal text-xs">© {copyRight} {(new Date()).getFullYear()}</div>
-      </div>
+      </div> */}
     </div>
   )
 }

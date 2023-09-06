@@ -15,16 +15,17 @@ const SignIn = () => {
         'justify-center lg:justify-start',
       )}>
         <div className={
-          cn(
+          cn(style.content_box,
             'flex w-full flex-col bg-white shadow rounded-2xl shrink-0',
             'space-between',
           )
         }>
           <Header />
           <Forms />
-          <div className='px-8 py-6 text-sm font-normal text-gray-500'>
+          {/* 版权去除。author：huye */}
+          {/* <div className='px-8 py-6 text-sm font-normal text-gray-500'>
             © {new Date().getFullYear()} CCSZ, Inc. All rights reserved.
-          </div>
+          </div> */}
         </div>
 
       </div>

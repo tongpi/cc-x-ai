@@ -146,3 +146,54 @@ button:focus-within {
   top: 0;
   bottom: 0;
 }
+
+
+/*新加样式*/
+.w-screen>.bg-gray-100>.rounded-t-2xl>.shrink-0{
+    border-right: none;
+}
+.w-screen>.bg-gray-100>.rounded-t-2xl>.shrink-0>.flex-shrink-0>.cursor-pointer{
+    border-radius: 30px;
+    background: #1c64f2;
+    border: none;
+    color: #ffffff;
+    justify-content: center !important;
+    font-weight: bold;
+}
+.w-screen>.bg-gray-100>.rounded-t-2xl>.shrink-0>.flex-shrink-0>.cursor-pointer:hover{
+    color: #ffffff;
+    box-shadow: none;
+    background: #175adf;
+}
+.w-screen>.bg-gray-100>.rounded-t-2xl>.flex-grow{
+    background: #f3f6fc;
+    margin: 15px 15px 15px 0px;
+    border-radius: 15px;
+    padding-bottom:15px;
+}
+.w-screen>.bg-gray-100>.rounded-t-2xl>.flex-grow>.antialiased>.relative>.bg-white{
+    background: transparent;
+    border-bottom: none;
+}
+.w-screen>.bg-gray-100>.rounded-t-2xl>.flex-grow>.antialiased+.relative>.h-full>.h-full>.h-full>div>.flex>.style_answerWrapWrap__3wmlx>.style_answerWrap__JP_Yc>.style_answer__ngqU1>.bg-gray-100{
+    background: #ffffff;
+}
+.w-screen>.bg-gray-100>.rounded-t-2xl>.flex-grow>.antialiased+.relative>.h-full>.h-full>.h-full+.absolute>.relative>.relative>.w-full{
+    width:91%;
+    border-radius: 40px;
+    border-color: #1c64f2;
+}
+.w-screen>.bg-gray-100>.rounded-t-2xl>.flex-grow>.antialiased+.relative>.h-full>.h-full>.h-full+.absolute>.relative>.relative+.absolute{
+    position: absolute;
+    right: 0px;
+}
+.w-screen>.bg-gray-100>.rounded-t-2xl>.flex-grow>.antialiased+.relative>.h-full>.h-full>.h-full+.absolute>.relative>.relative+.absolute>.style_count__cJr90{
+    position: absolute;
+    right: 70px;
+}
+.w-screen>.bg-gray-100>.rounded-t-2xl>.flex-grow>.antialiased+.relative>.h-full>.h-full>.h-full+.absolute>.relative>.relative+.absolute>.opacity-5{
+    display: none;
+}
+
+
+

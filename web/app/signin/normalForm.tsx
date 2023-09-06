@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/navigation'
 import classNames from 'classnames'
 import useSWR from 'swr'
-import Link from 'next/link'
+import cn from 'classnames'
 import Toast from '../components/base/toast'
 import style from './page.module.css'
 // import Tooltip from '@/app/components/base/tooltip/index'
@@ -158,10 +158,11 @@ const NormalForm = () => {
   }, [google, google])
 
   return (
-    <>
-      <div className="w-full mx-auto">
-        <h2 className="text-[32px] font-bold text-gray-900">{t('login.pageTitle')}</h2>
-        <p className='mt-1 text-sm text-gray-600'>{t('login.welcome')}</p>
+    <div className={cn(
+      style.cont_box)}>
+      <div className="w-full mx-auto ">
+        <div className={cn(
+          style.cont_box_header)}></div>
       </div>
 
       <div className="w-full mx-auto mt-8">
@@ -241,9 +242,6 @@ const NormalForm = () => {
 
               <form onSubmit={() => { }}>
                 <div className='mb-5'>
-                  <label htmlFor="email" className="my-2 block text-sm font-medium text-gray-900">
-                    {t('login.email')}
-                  </label>
                   <div className="mt-1">
                     <input
                       value={email}
@@ -258,24 +256,7 @@ const NormalForm = () => {
                 </div>
 
                 <div className='mb-4'>
-                  <label htmlFor="password" className="my-2 flex items-center justify-between text-sm font-medium text-gray-900">
-                    <span>{t('login.password')}</span>
-                    {/* <Tooltip
-                      selector='forget-password'
-                      htmlContent={
-                        <div>
-                          <div className='font-medium'>{t('login.forget')}</div>
-                          <div className='font-medium text-gray-500'>
-                            <code>
-                              sudo rm -rf /
-                            </code>
-                          </div>
-                        </div>
-                      }
-                    >
-                      <span className='cursor-pointer text-primary-600'>{t('login.forget')}</span>
-                    </Tooltip> */}
-                  </label>
+
                   <div className="relative mt-1 rounded-md shadow-sm">
                     <input
                       id="password"
@@ -303,32 +284,19 @@ const NormalForm = () => {
                     type='primary'
                     onClick={handleEmailPasswordLogin}
                     disabled={isLoading}
-                    className="w-full !fone-medium !text-sm"
+                    className={cn(style.btn_login, 'w-full   !fone-medium !text-sm')}
                   >{t('login.signBtn')}</Button>
                 </div>
               </form>
             </>
           }
           {/*  agree to our Terms and Privacy Policy. */}
-          <div className="w-hull text-center block mt-2 text-xs text-gray-600">
-            {t('login.tosDesc')}
-            &nbsp;
-            <Link
-              className='text-primary-600'
-              target={'_blank'}
-              href='https://cc.ai/user-agreement/terms-of-service'
-            >{t('login.tos')}</Link>
-            &nbsp;&&nbsp;
-            <Link
-              className='text-primary-600'
-              target={'_blank'}
-              href='https://cc.ai/user-agreement/privacy-policy'
-            >{t('login.pp')}</Link>
+          <div className="w-hull text-left block mt-2 text-xs text-gray-600">
+            <span className={cn(style.fontBold)}>{t('login.tosDesc_mz')}</span>{t('login.tosDesc')}
           </div>
-
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

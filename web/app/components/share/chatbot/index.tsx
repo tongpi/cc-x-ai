@@ -159,7 +159,8 @@ const Main: FC<IMainProps> = ({
   const [speechToTextConfig, setSpeechToTextConfig] = useState<SuggestedQuestionsAfterAnswerConfig | null>(null)
 
   const [conversationIdChangeBecauseOfNew, setConversationIdChangeBecauseOfNew, getConversationIdChangeBecauseOfNew] = useGetState(false)
-  const [isChatStarted, { setTrue: setChatStarted, setFalse: setChatNotStarted }] = useBoolean(false)
+  /* describe：初始化对话框，将useBoolean(false)改成useBoolean(true)。author：huye */
+  const [isChatStarted, { setTrue: setChatStarted, setFalse: setChatNotStarted }] = useBoolean(true)
   const handleStartChat = (inputs: Record<string, any>) => {
     createNewChat()
     setConversationIdChangeBecauseOfNew(true)
