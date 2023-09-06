@@ -17,11 +17,12 @@ class VersionApi(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('current_version', type=str, required=True, location='args')
         args = parser.parse_args()
-        check_update_url = current_app.config['CHECK_UPDATE_URL']
+        # check_update_url = current_app.config['CHECK_UPDATE_URL']
+        check_update_url = None
 
         if not check_update_url:
             return {
-                'version': '0.0.0',
+                'version': '3.10.0',
                 'release_date': '',
                 'release_notes': '',
                 'can_auto_update': False
