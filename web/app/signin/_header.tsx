@@ -15,7 +15,7 @@ const Header = () => {
         setLocaleOnClient(value as Locale)
       }}
     /> */}
-    <a href={`${process.env.NEXT_PUBLIC_CC_TALKS_API_BASE_URL}/open/session/end?ui_locales=zh-CN&client_id=tc_6&post_logout_redirect_uri=${encodeURIComponent(window.location.origin)}`} >注销拓思(CC-TALKS)会话</a>
+    {/* <a href={`${process.env.NEXT_PUBLIC_CC_TALKS_API_BASE_URL}/open/session/end?ui_locales=zh-CN&client_id=tc_6&post_logout_redirect_uri=${encodeURIComponent(window.location.origin)}`} >注销拓思(CC-TALKS)会话</a> */}
   </div>
 }
 

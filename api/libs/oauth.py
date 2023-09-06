@@ -40,9 +40,9 @@ class OAuth:
 
 
 class CCTalkOAuth(OAuth):
-    _AUTH_URL = 'http://192.168.15.130:11000/open/auth'
-    _TOKEN_URL = 'http://192.168.15.130:11000/open/token'
-    _USER_INFO_URL = 'http://192.168.15.130:11000/open/me'
+    _AUTH_URL = 'http://talks.hjqtxy.net:11000/open/auth'
+    _TOKEN_URL = 'http://talks.hjqtxy.net:11000/open/token'
+    _USER_INFO_URL = 'http://talks.hjqtxy.net:11000/open/me'
     # _EMAIL_INFO_URL = 'https://api.github.com/user/emails'
 
     def get_authorization_url(self):
@@ -94,7 +94,7 @@ class CCTalkOAuth(OAuth):
     def _transform_user_info(self, raw_info: dict) -> OAuthUserInfo:
         email = raw_info.get('email')
         if not email:
-            email = f"{raw_info['sub']}+{raw_info['discriminator']}@users.noreply.e-u.cn"
+            email = f"{raw_info['sub']}+cas@e-u.cn"
         return OAuthUserInfo(
             id=str(raw_info['sub']),
             name=raw_info['nickname'],
