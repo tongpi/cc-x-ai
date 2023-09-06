@@ -45,7 +45,7 @@ services:
       DB_PORT: 5432
       DB_DATABASE: dify
       SQLALCHEMY_POOL_SIZE: 200
-      SQLALCHEMY_MAX_OVERFLOW: 100
+      SQLALCHEMY_MAX_OVERFLOW: '100'
       # The configurations of redis connection.
       # It is consistent with the configuration in the 'redis' service below.
       REDIS_HOST: redis
@@ -119,6 +119,8 @@ services:
       SENTRY_TRACES_SAMPLE_RATE: 1.0
       # The sample rate for Sentry profiles. Default: `1.0`
       SENTRY_PROFILES_SAMPLE_RATE: 1.0
+      CCTALK_CLIENT_ID: tc_64d429508bd8da2e827c6a61
+      CCTALK_CLIENT_SECRET: LbKIFbkU3a8cG5vIe5-NuI8YyFtlIzHL      
     depends_on:
       - db
       - redis
@@ -201,25 +203,9 @@ services:
       APP_API_URL: ''
       # The DSN for Sentry error reporting. If not set, Sentry error reporting will be disabled.
       SENTRY_DSN: ''
+      # CC-TALKS OAUTH　Server的服务器地址
+      NEXT_PUBLIC_CC_TALKS_API_BASE_URL: 'http://192.168.15.130:11000'
 
-  # Frontend web application 2.
-  dify:
-    image: langgenius/dify-web:0.3.16
-    restart: always
-    environment:
-      EDITION: SELF_HOSTED
-      # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
-      # different from api or web app domain.
-      # example: http://cloud.dify.ai
-      CONSOLE_API_URL: 'http://192.168.15.130:8001'
-      # The URL for Web APP api server, refers to the Web App base URL of WEB service if web app domain is different from
-      # console or api domain.
-      # example: http://udify.app
-      APP_API_URL: 'http://192.168.15.130:8001'
-      # The DSN for Sentry error reporting. If not set, Sentry error reporting will be disabled.
-      SENTRY_DSN: ''
-    ports:
-      - "8002:3000"      
   # The postgres database.
   db:
     image: postgres:15-alpine
@@ -240,6 +226,8 @@ services:
   redis:
     image: redis:6-alpine
     restart: always
+    ports:
+      - "6379:6379"      
     volumes:
       # Mount the redis data directory to the container.
       - ./volumes/redis/data:/data
@@ -250,6 +238,8 @@ services:
   weaviate:
     image: semitechnologies/weaviate:1.18.4
     restart: always
+    ports:
+      - "8080:8080"    
     volumes:
       # Mount the Weaviate data directory to the container.
       - ./volumes/weaviate:/var/lib/weaviate
@@ -278,6 +268,5 @@ services:
     depends_on:
       - api
       - web
-      - dify
     ports:
       - "8001:80"

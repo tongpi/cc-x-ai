@@ -90,7 +90,7 @@ class Config:
         self.CONSOLE_URL = get_env('CONSOLE_URL')
         self.API_URL = get_env('API_URL')
         self.APP_URL = get_env('APP_URL')
-        self.CURRENT_VERSION = "0.3.10"
+        self.CURRENT_VERSION = "3.10.0"
         self.COMMIT_SHA = get_env('COMMIT_SHA')
         self.EDITION = "SELF_HOSTED"
         self.DEPLOY_ENV = get_env('DEPLOY_ENV')
@@ -183,7 +183,6 @@ class Config:
 
         self.SQLALCHEMY_DATABASE_URI = f"postgresql://{db_credentials['DB_USERNAME']}:{db_credentials['DB_PASSWORD']}@{db_credentials['DB_HOST']}:{db_credentials['DB_PORT']}/{db_credentials['DB_DATABASE']}"
         self.SQLALCHEMY_ENGINE_OPTIONS = {'pool_size': int(get_env('SQLALCHEMY_POOL_SIZE'))}
-        self.SQLALCHEMY_ENGINE_OPTIONS = {'max_overflow': int(get_env('SQLALCHEMY_MAX_OVERFLOW'))}
 
         self.SQLALCHEMY_ECHO = get_bool_env('SQLALCHEMY_ECHO')
 
@@ -218,6 +217,8 @@ class Config:
 
         self.TENANT_DOCUMENT_COUNT = get_env('TENANT_DOCUMENT_COUNT')
         self.CLEAN_DAY_SETTING = get_env('CLEAN_DAY_SETTING')
+        self.CCTALK_CLIENT_ID = get_env('CCTALK_CLIENT_ID')
+        self.CCTALK_CLIENT_SECRET = get_env('CCTALK_CLIENT_SECRET')
 
 
 class CloudEditionConfig(Config):
@@ -227,6 +228,8 @@ class CloudEditionConfig(Config):
 
         self.EDITION = "CLOUD"
 
+        self.CCTALK_CLIENT_ID = get_env('CCTALK_CLIENT_ID')
+        self.CCTALK_CLIENT_SECRET = get_env('CCTALK_CLIENT_SECRET')
         self.GITHUB_CLIENT_ID = get_env('GITHUB_CLIENT_ID')
         self.GITHUB_CLIENT_SECRET = get_env('GITHUB_CLIENT_SECRET')
         self.GOOGLE_CLIENT_ID = get_env('GOOGLE_CLIENT_ID')
@@ -240,6 +243,13 @@ class TestConfig(Config):
         super().__init__()
 
         self.EDITION = "SELF_HOSTED"
+        self.CCTALK_CLIENT_ID = get_env('CCTALK_CLIENT_ID')
+        self.CCTALK_CLIENT_SECRET = get_env('CCTALK_CLIENT_SECRET')
+        self.GITHUB_CLIENT_ID = get_env('GITHUB_CLIENT_ID')
+        self.GITHUB_CLIENT_SECRET = get_env('GITHUB_CLIENT_SECRET')
+        self.GOOGLE_CLIENT_ID = get_env('GOOGLE_CLIENT_ID')
+        self.GOOGLE_CLIENT_SECRET = get_env('GOOGLE_CLIENT_SECRET')
+        self.OAUTH_REDIRECT_PATH = get_env('OAUTH_REDIRECT_PATH')        
         self.TESTING = True
 
         db_credentials = {

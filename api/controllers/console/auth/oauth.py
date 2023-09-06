@@ -7,7 +7,7 @@ import requests
 from flask import request, redirect, current_app, session
 from flask_restful import Resource
 
-from libs.oauth import OAuthUserInfo, GitHubOAuth, GoogleOAuth
+from libs.oauth import OAuthUserInfo, GitHubOAuth, GoogleOAuth, CCTalkOAuth
 from extensions.ext_database import db
 from models.account import Account, AccountStatus
 from services.account_service import AccountService, RegisterService
@@ -16,6 +16,11 @@ from .. import api
 
 def get_oauth_providers():
     with current_app.app_context():
+        cctalk_oauth = CCTalkOAuth(client_id=current_app.config.get('CCTALK_CLIENT_ID'),
+                                   client_secret=current_app.config.get(
+                                       'CCTALK_CLIENT_SECRET'),
+                                   redirect_uri=current_app.config.get(
+                                       'CONSOLE_API_URL') + '/console/api/oauth/authorize/cctalk')
         github_oauth = GitHubOAuth(client_id=current_app.config.get('GITHUB_CLIENT_ID'),
                                    client_secret=current_app.config.get(
                                        'GITHUB_CLIENT_SECRET'),
@@ -29,6 +34,7 @@ def get_oauth_providers():
                                        'CONSOLE_API_URL') + '/console/api/oauth/authorize/google')
 
         OAUTH_PROVIDERS = {
+            'cctalk': cctalk_oauth,
             'github': github_oauth,
             'google': google_oauth
         }
@@ -38,13 +44,20 @@ def get_oauth_providers():
 class OAuthLogin(Resource):
     def get(self, provider: str):
         OAUTH_PROVIDERS = get_oauth_providers()
+        print("=========1==============")
+        print(provider)
+        print(OAUTH_PROVIDERS)
+        print("==========2=============")
         with current_app.app_context():
             oauth_provider = OAUTH_PROVIDERS.get(provider)
+            print("==========3=============")
             print(vars(oauth_provider))
         if not oauth_provider:
             return {'error': 'Invalid provider'}, 400
 
         auth_url = oauth_provider.get_authorization_url()
+        print("==========4=============")
+        print(auth_url)        
         return redirect(auth_url)
 
 
@@ -60,6 +73,7 @@ class OAuthCallback(Resource):
         try:
             token = oauth_provider.get_access_token(code)
             user_info = oauth_provider.get_user_info(token)
+            print("-------------------",code, user_info)
         except requests.exceptions.HTTPError as e:
             logging.exception(
                 f"An error occurred during the OAuth process with {provider}: {e.response.text}")
@@ -78,6 +92,7 @@ class OAuthCallback(Resource):
         # login user
         session.clear()
         flask_login.login_user(account, remember=True)
+        print("<<<<<<<<<<<<<<<<<<<<", account)
         AccountService.update_last_login(account, request)
 
         return redirect(f'{current_app.config.get("CONSOLE_WEB_URL")}?oauth_login=success')

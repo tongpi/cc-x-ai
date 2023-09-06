@@ -18,6 +18,7 @@ type IState = {
   formValid: boolean
   github: boolean
   google: boolean
+  cctalk: boolean
 }
 
 function reducer(state: IState, action: { type: string; payload: any }) {
@@ -31,6 +32,16 @@ function reducer(state: IState, action: { type: string; payload: any }) {
       return {
         ...state,
         formValid: true,
+      }
+    case 'cctalk_login':
+      return {
+        ...state,
+        cctalk: true,
+      }
+    case 'cctalk_login_failed':
+      return {
+        ...state,
+        cctalk: false,
       }
     case 'github_login':
       return {
@@ -65,6 +76,7 @@ const NormalForm = () => {
     formValid: false,
     github: false,
     google: false,
+    cctalk: false,
   })
 
   const [showPassword, setShowPassword] = useState(false)
@@ -97,6 +109,15 @@ const NormalForm = () => {
     }
   }
 
+  const { data: cctalk, error: cctalk_error } = useSWR(state.cctalk
+    ? ({
+      url: '/oauth/login/cctalk',
+      // params: {
+      //   provider: 'cctalk',
+      // },
+    })
+    : null, oauth)
+
   const { data: github, error: github_error } = useSWR(state.github
     ? ({
       url: '/oauth/login/github',
@@ -114,6 +135,13 @@ const NormalForm = () => {
       // },
     })
     : null, oauth)
+
+  useEffect(() => {
+    if (cctalk_error !== undefined)
+      dispatch({ type: 'cctalk_login_failed', payload: null })
+    if (cctalk)
+      window.location.href = cctalk.redirect_url
+  }, [cctalk, cctalk_error])
 
   useEffect(() => {
     if (github_error !== undefined)
@@ -141,6 +169,25 @@ const NormalForm = () => {
           {!IS_CE_EDITION && (
             <div className="flex flex-col gap-3 mt-6">
               <div className='w-full'>
+                <a href={`${apiPrefix}/oauth/login/cctalk`}>
+                  <Button
+                    type='default'
+                    disabled={isLoading}
+                    className='w-full hover:!bg-gray-50 !text-sm !font-medium'
+                  >
+                    <>
+                      <span className={
+                        classNames(
+                          style.githubIcon,
+                          'w-5 h-5 mr-2',
+                        )
+                      } />
+                      <span className="truncate text-gray-800">使用 拓思(CC-Talks) 登录</span>
+                    </>
+                  </Button>
+                </a>
+              </div>
+              {/* <div className='w-full'>
                 <a href={`${apiPrefix}/oauth/login/github`}>
                   <Button
                     type='default'
@@ -177,12 +224,12 @@ const NormalForm = () => {
                     </>
                   </Button>
                 </a>
-              </div>
+              </div> */}
             </div>
           )}
 
           {
-            IS_CE_EDITION && <>
+            !IS_CE_EDITION && <>
               {/* <div className="relative mt-6">
                 <div className="absolute inset-0 flex items-center" aria-hidden="true">
                   <div className="w-full border-t border-gray-300" />
