@@ -602,6 +602,7 @@ const Chat: FC<IChatProps> = ({
                 minHeight={48}
                 autoFocus
                 controlFocus={controlFocus}
+                placeholder='在这里输入你的问题'
                 className={`${cn(s.textArea)} resize-none block w-full pl-3 bg-gray-50 border border-blue-300 rounded-md  focus:outline-none sm:text-sm text-gray-700`}
               />
               <div className="absolute top-0 right-2 flex items-center h-[48px]">

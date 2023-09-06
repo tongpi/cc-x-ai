@@ -14,6 +14,39 @@
 }
 
 .background {
-  background-image: url('./assets/background.png');
+  background-image: url('./img/bg.jpg');
   background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.background .content_box{
+  width:1132px !important;
+  height:577px !important;
+  background: url('./img/box_bg.png') !important;
+  position: relative;
+  box-shadow: none;
+}
+.cont_box_header{
+  margin:0px auto;
+  width:278px !important;
+  height:130px !important;
+  background: url('./img/top_title_sm.png') !important;
+}
+.cont_box{
+  position: absolute;
+  right: 97px;
+  width: 320px;
+  top: 90px;
+}
+.btn_login{
+  background: #045398;
+  height:40px;
+  margin-bottom: 20px;
+}
+.btn_login:hover{
+  background: #034681;
+}
+.fontBold{
+  font-weight: bold;
 }
