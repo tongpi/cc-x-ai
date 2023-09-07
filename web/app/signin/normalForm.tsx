@@ -179,7 +179,7 @@ const NormalForm = () => {
                     <>
                       <span className={
                         classNames(
-                          style.githubIcon,
+                          style.ccTalkIcon,
                           'w-5 h-5 mr-2',
                         )
                       } />
