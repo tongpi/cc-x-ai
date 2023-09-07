@@ -29,7 +29,7 @@ export default function AppSelector() {
   const { t } = useTranslation()
   const { userProfile, langeniusVersionInfo } = useAppContext()
   const cc_talk_api_base_url = process.env.NEXT_PUBLIC_CC_TALKS_API_BASE_URL
-  const oauth_logout_url = `${cc_talk_api_base_url}/open/session/end?ui_locales=zh-CN&client_id=tc_6&post_logout_redirect_uri=${encodeURIComponent(window.location.origin)}`
+  const oauth_logout_url = `${cc_talk_api_base_url}/open/session/end?client_id=${process.env.NEXT_PUBLIC_CCTALK_CLIENT_ID}&post_logout_redirect_uri=${encodeURIComponent(window.location.origin)}`
   const handleLogout = async () => {
     await logout({
       url: '/logout',
