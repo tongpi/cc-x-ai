@@ -122,7 +122,7 @@ class LLMBuilder:
     def get_default_provider(cls, tenant_id: str, model_name: str) -> str:
         provider_name = llm_constant.models[model_name]
 
-        if provider_name == 'openai':
+        if provider_name == 'openai------------':  # 本地部署，不处理，直接返回
             # get the default provider (openai / azure_openai) for the tenant
             openai_provider = BaseProvider.get_valid_provider(tenant_id, ProviderName.OPENAI.value)
             azure_openai_provider = BaseProvider.get_valid_provider(tenant_id, ProviderName.AZURE_OPENAI.value)
