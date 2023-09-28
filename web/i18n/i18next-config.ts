@@ -33,6 +33,8 @@ import datasetCreationEn from './lang/dataset-creation.en'
 import datasetCreationZh from './lang/dataset-creation.zh'
 import exploreEn from './lang/explore.en'
 import exploreZh from './lang/explore.zh'
+import aiChatEn from './lang/ai-chat.en'
+import aiChatZh from './lang/ai-chat.zh'
 import { getLocaleOnClient } from '@/i18n/client'
 
 const localLng = getLocaleOnClient()
@@ -58,6 +60,7 @@ const resources = {
       datasetSettings: datasetSettingsEn,
       datasetCreation: datasetCreationEn,
       explore: exploreEn,
+      aiChat: aiChatEn,
     },
   },
   'zh-Hans': {
@@ -80,6 +83,7 @@ const resources = {
       datasetSettings: datasetSettingsZh,
       datasetCreation: datasetCreationZh,
       explore: exploreZh,
+      aiChat: aiChatZh,
     },
   },
 }
