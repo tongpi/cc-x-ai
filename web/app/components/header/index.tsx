@@ -6,7 +6,8 @@ import AppNav from './app-nav'
 import DatasetNav from './dataset-nav'
 import EnvNav from './env-nav'
 import ExploreNav from './explore-nav'
-import PluginNav from './plugin-nav'
+import HomeNav from './home-nav'
+// import PluginNav from './plugin-nav'
 import s from './index.module.css'
 import { WorkspaceProvider } from '@/context/workspace-context'
 import { useAppContext } from '@/context/app-context'
@@ -27,9 +28,11 @@ const Header = () => {
         </Link>
       </div>
       <div className='flex items-center'>
+        <HomeNav className={navClassName} />
         <ExploreNav className={navClassName} />
         <AppNav />
-        <PluginNav className={navClassName} />
+        {/* [Hekaiji]{2023/09/28:屏蔽导航栏菜单中的 "插件<PluginNav />", 增加 "首页<HomeNav />"} */}
+        {/* <PluginNav className={navClassName} /> */}
         {isCurrentWorkspaceManager && <DatasetNav />}
       </div>
       <div className='flex items-center flex-shrink-0'>
