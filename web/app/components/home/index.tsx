@@ -29,7 +29,7 @@ const AppHome = () => {
         <p className="text-[18px] text-center w-[50rem] mt-[2.5rem] inline-block">
           <span className="text-color-[#32354e] h-[36px] leading-[36px]" >用AI问答模型可以进行AI对话、AI创作，内置智能对话机器人、图片设计、文案生成、方案创作、营销内容创作等数十项功能，并且包含海量提示词和AI模型库</span>
         </p>
-        <Link href='/' className={style.start_button}>
+        <Link href='/ai-chat/chat' className={style.start_button}>
           <b>开始 AI 对话 </b>
         </Link>
       </div>
