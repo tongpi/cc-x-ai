@@ -76,6 +76,8 @@ const translation = {
   },
   menus: {
     status: 'beta',
+    // [Hekaiji]{2023/09/28:导航栏菜单增加首页}
+    home: '首页',
     explore: '探索',
     apps: '构建应用',
     plugins: '插件',
