@@ -98,7 +98,7 @@ const NormalForm = () => {
         },
       })
       localStorage.setItem('console_token', res.data)
-      router.replace('/apps')
+      router.replace('/home')
     }
     finally {
       setIsLoading(false)
