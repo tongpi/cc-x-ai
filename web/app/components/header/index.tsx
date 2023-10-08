@@ -24,7 +24,7 @@ const Header = () => {
   return (
     <>
       <div className='flex items-center'>
-        <Link href="/apps" className='flex items-center mr-4'>
+        <Link href="/home" className='flex items-center mr-4'>
           <div className={s.logo} />
         </Link>
       </div>
