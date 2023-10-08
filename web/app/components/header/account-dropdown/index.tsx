@@ -35,7 +35,7 @@ export default function AppSelector() {
       url: '/logout',
       params: {},
     })
-    router.replace(`${process.env.NEXT_PUBLIC_CAS_URL}/logout?service=${window.location.origin}/signin`)
+    router.replace(`${process.env.NEXT_PUBLIC_CAS_SERVICE_URL}/logout?service=${window.location.origin}/signin`)
     // router.push('/signin')
   }
 

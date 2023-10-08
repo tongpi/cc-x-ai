@@ -33,7 +33,7 @@ def get_oauth_providers():
                                    redirect_uri=current_app.config.get(
                                        'CONSOLE_API_URL') + '/console/api/oauth/authorize/gdscas'
                                    ).set_extra_config({
-                                       "url_origin": current_app.config.get('CAS_URL'),
+                                       "url_origin": current_app.config.get('CAS_SERVICE_URL'),
                                        "email_domain": current_app.config.get('CAS_EMAIL_DOMAIN'),
                                    })
 
