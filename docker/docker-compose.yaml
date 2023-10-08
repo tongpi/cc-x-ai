@@ -34,7 +34,7 @@ services:
       # cas 登录配置
       CAS_CLIENT_ID: gdsCas
       CAS_CLIENT_SECRET: a1b2c3d4
-      CAS_URL: https://cas.gds.mtn
+      CAS_SERVER_URL: https://cas.gds.mtn
       CAS_EMAIL_DOMAIN: e-u.cn
       # When enabled, migrations will be executed prior to application startup and the application will start after the migrations have completed.
       MIGRATION_ENABLED: 'true'
@@ -181,7 +181,7 @@ services:
       # example: http://udify.app
       APP_API_URL: ''
       # CAS地址
-      CAS_URL: 'https://sfrz.hjqtxy.net'
+      CAS_SERVER_URL: 'https://cas.gds.mtn'
       # The DSN for Sentry error reporting. If not set, Sentry error reporting will be disabled.
       SENTRY_DSN: ''
 
