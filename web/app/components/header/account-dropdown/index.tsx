@@ -16,6 +16,7 @@ import { logout } from '@/service/common'
 import { useAppContext } from '@/context/app-context'
 import { ArrowUpRight, ChevronDown } from '@/app/components/base/icons/src/vender/line/arrows'
 import { LogOut01 } from '@/app/components/base/icons/src/vender/line/general'
+import { CAS_SERVER_URL } from '@/config'
 
 export default function AppSelector() {
   const itemClassName = `
@@ -35,7 +36,7 @@ export default function AppSelector() {
       url: '/logout',
       params: {},
     })
-    router.replace(`${process.env.NEXT_PUBLIC_CAS_SERVER_URL}/logout?service=${window.location.origin}/signin`)
+    router.replace(`${CAS_SERVER_URL}/logout?service=${window.location.origin}/signin`)
     // router.push('/signin')
   }
 
