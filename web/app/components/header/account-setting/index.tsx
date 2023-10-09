@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import cn from 'classnames'
 import AccountPage from './account-page'
 import MembersPage from './members-page'
-import IntegrationsPage from './Integrations-page'
+// import IntegrationsPage from './Integrations-page'
 import LanguagePage from './language-page'
 import PluginPage from './plugin-page'
 import DataSourcePage from './data-source-page'
@@ -16,7 +16,7 @@ import { Database03 as Database03Solid, PuzzlePiece01 as PuzzlePiece01Solid } fr
 import { User01, Users01 } from '@/app/components/base/icons/src/vender/line/users'
 import { User01 as User01Solid, Users01 as Users01Solid } from '@/app/components/base/icons/src/vender/solid/users'
 import { Globe01 } from '@/app/components/base/icons/src/vender/line/mapsAndTravel'
-import { AtSign, XClose } from '@/app/components/base/icons/src/vender/line/general'
+import { /* AtSign, */ XClose } from '@/app/components/base/icons/src/vender/line/general'
 import { CubeOutline } from '@/app/components/base/icons/src/vender/line/shapes'
 
 const iconClassName = `
@@ -78,12 +78,13 @@ export default function AccountSetting({
           icon: <User01 className={iconClassName} />,
           activeIcon: <User01Solid className={iconClassName} />,
         },
-        {
-          key: 'integrations',
-          name: t('common.settings.integrations'),
-          icon: <AtSign className={iconClassName} />,
-          activeIcon: <AtSign className={iconClassName} />,
-        },
+        // [Hekaiji]{2023/10/09: 屏蔽 "设置>集成" 功能}
+        // {
+        //   key: 'integrations',
+        //   name: t('common.settings.integrations'),
+        //   icon: <AtSign className={iconClassName} />,
+        //   activeIcon: <AtSign className={iconClassName} />,
+        // },
         {
           key: 'language',
           name: t('common.settings.language'),
@@ -157,7 +158,7 @@ export default function AccountSetting({
           <div className='px-8 pt-2'>
             {activeMenu === 'account' && <AccountPage />}
             {activeMenu === 'members' && <MembersPage />}
-            {activeMenu === 'integrations' && <IntegrationsPage />}
+            {/* {activeMenu === 'integrations' && <IntegrationsPage />} */}
             {activeMenu === 'language' && <LanguagePage />}
             {activeMenu === 'provider' && <ModelPage />}
             {activeMenu === 'data-source' && <DataSourcePage />}
