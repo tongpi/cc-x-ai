@@ -223,7 +223,7 @@ class Config:
         # [Hekaiji]{2023/10/08:集成CAS登录, 提取配置项}
         self.CAS_CLIENT_ID = get_env('CAS_CLIENT_ID')
         self.CAS_CLIENT_SECRET = get_env('CAS_CLIENT_SECRET')
-        self.CAS_URL = get_env('CAS_URL')
+        self.CAS_SERVER_URL = get_env('CAS_SERVER_URL')
         self.CAS_EMAIL_DOMAIN = get_env('CAS_EMAIL_DOMAIN')
 
 
@@ -237,7 +237,7 @@ class CloudEditionConfig(Config):
         # [Hekaiji]{2023/10/08:集成CAS登录, 提取配置项}
         self.CAS_CLIENT_ID = get_env('CAS_CLIENT_ID')
         self.CAS_CLIENT_SECRET = get_env('CAS_CLIENT_SECRET')
-        self.CAS_URL = get_env('CAS_URL')
+        self.CAS_SERVER_URL = get_env('CAS_SERVER_URL')
         self.CAS_EMAIL_DOMAIN = get_env('CAS_EMAIL_DOMAIN')
         self.GITHUB_CLIENT_ID = get_env('GITHUB_CLIENT_ID')
         self.GITHUB_CLIENT_SECRET = get_env('GITHUB_CLIENT_SECRET')
