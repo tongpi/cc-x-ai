@@ -98,7 +98,7 @@ class GdsCasOAuth(OAuth):
         email = f"{raw_info['attributes']['userAccount']}@{self.email_domain}"
         return OAuthUserInfo(
             id=str(raw_info['attributes']['userAccount']),
-            name=raw_info['attributes']['userAccount'],
+            name=raw_info['attributes']['realName'],
             email=email
         )
 

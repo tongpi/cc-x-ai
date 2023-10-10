@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import Loading from '../components/base/loading'
+import Loading from '@/app/components/base/loading'
 import { apiPrefix } from '@/config'
 const CasLoginForm = () => {
   // 清理登录状态
