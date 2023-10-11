@@ -2,19 +2,19 @@
 import { useTranslation } from 'react-i18next'
 import { Fragment, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useContext } from 'use-context-selector'
-import classNames from 'classnames'
-import Link from 'next/link'
+// import { useContext } from 'use-context-selector'
+// import classNames from 'classnames'
+// import Link from 'next/link'
 import { Menu, Transition } from '@headlessui/react'
-import Indicator from '../indicator'
+// import Indicator from '../indicator'
 import AccountSetting from '../account-setting'
 import AccountAbout from '../account-about'
 import WorkplaceSelector from './workplace-selector'
-import I18n from '@/context/i18n'
+// import I18n from '@/context/i18n'
 import Avatar from '@/app/components/base/avatar'
 import { logout } from '@/service/common'
 import { useAppContext } from '@/context/app-context'
-import { ArrowUpRight, ChevronDown } from '@/app/components/base/icons/src/vender/line/arrows'
+import { ChevronDown } from '@/app/components/base/icons/src/vender/line/arrows'
 import { LogOut01 } from '@/app/components/base/icons/src/vender/line/general'
 import { CAS_SERVER_URL } from '@/config'
 
@@ -27,7 +27,7 @@ export default function AppSelector() {
   const [settingVisible, setSettingVisible] = useState(false)
   const [aboutVisible, setAboutVisible] = useState(false)
 
-  const { locale } = useContext(I18n)
+  // const { locale } = useContext(I18n)
   const { t } = useTranslation()
   const { userProfile, langeniusVersionInfo } = useAppContext()
 
@@ -95,7 +95,7 @@ export default function AppSelector() {
                         <div>{t('common.userProfile.settings')}</div>
                       </div>
                     </Menu.Item>
-                    <Menu.Item>
+                    {/* <Menu.Item>
                       <Link
                         className={classNames(itemClassName, 'group justify-between')}
                         href={
@@ -114,7 +114,7 @@ export default function AppSelector() {
                           <Indicator color={langeniusVersionInfo.current_version === langeniusVersionInfo.latest_version ? 'green' : 'orange'} />
                         </div>
                       </div>
-                    </Menu.Item>
+                    </Menu.Item> */}
                   </div>
                   <Menu.Item>
                     <div className='p-1' onClick={() => handleLogout()}>

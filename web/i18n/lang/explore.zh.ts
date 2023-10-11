@@ -16,7 +16,7 @@ const translation = {
     },
   },
   apps: {
-    title: '探索 Dify 的应用',
+    title: '探索 CC-Bots 的应用',
     description: '使用这些模板应用程序，或根据模板自定义您自己的应用程序。',
     allCategories: '所有类别',
   },
@@ -37,7 +37,7 @@ const translation = {
     HR: '人力资源',
   },
   universalChat: {
-    welcome: '开始和 Dify 聊天吧',
+    welcome: '开始和 CC-Bots 聊天吧',
     welcomeDescribe: '您的 AI 对话伴侣，为您提供个性化的帮助',
     model: '模型',
     plugins: {
