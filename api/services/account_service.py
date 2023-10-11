@@ -25,7 +25,7 @@ from models.account import *
 from tasks.mail_invite_member_task import send_invite_member_mail_task
 
 def _create_tenant_for_account(account):
-    tenant = TenantService.create_tenant(f"{account.name}'s Workspace")
+    tenant = TenantService.create_tenant(f"{account.name}' 的工作空间")
 
     TenantService.create_tenant_member(tenant, account, role='owner')
     account.current_tenant = tenant
@@ -430,7 +430,7 @@ class RegisterService:
             if open_id is not None or provider is not None:
                 AccountService.link_account_integrate(provider, open_id, account)
 
-            tenant = TenantService.create_tenant(f"{account.name}'s Workspace")
+            tenant = TenantService.create_tenant(f"{account.name}' 的工作空间")
 
             TenantService.create_tenant_member(tenant, account, role='owner')
             account.current_tenant = tenant

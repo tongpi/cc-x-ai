@@ -28,7 +28,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
 }
 
 export const metadata = {
-  title: 'Dify',
+  title: 'CC-Bots',
 }
 
 export default Layout
