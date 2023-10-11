@@ -6,11 +6,16 @@ import { useContext } from 'use-context-selector'
 import cn from 'classnames'
 import { useSelectedLayoutSegments } from 'next/navigation'
 import Link from 'next/link'
+// import { PlusIcon } from '@heroicons/react/20/solid'
+// import Button from '../../base/button'
 import Item from './category-nav-item'
+import AppItem from './app-nav-item'
 import { fetchAppList as doFetchAppList, fetchInstalledAppList as doFetchInstalledAppList } from '@/service/explore'
+import { fetchAppList as doFetchMyAppList } from '@/service/apps'
 import AIChatContext from '@/context/ai-chat-context'
 import aiChatI18n from '@/i18n/lang/ai-chat.en'
 import type { AppCategory, AppCategoryDetail } from '@/models/ai-chat'
+// import NewAppDialog from '@/app/(commonLayout)/apps/NewAppDialog'
 
 const SelectedChatIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,6 +39,8 @@ const SideBar: FC<{
   const lastSegment = segments.slice(-1)[0]
   const isChatSelected = lastSegment === 'chat'
   const { setInstalledApps, categoryDetails, setCategoryDetails, setApps } = useContext(AIChatContext)
+  const [myAppList, setMyAppList] = React.useState<any[]>([])
+  const [showNewAppDialog, setShowNewAppDialog] = React.useState(false)
 
   const fetchInstalledAppList = async () => {
     const { installed_apps }: any = await doFetchInstalledAppList()
@@ -57,10 +64,15 @@ const SideBar: FC<{
     setCategoryDetails(categoryDetails)
     setApps(recommended_apps)
   }
+  const fetchMyAppList = async () => {
+    const myApps: any = await doFetchMyAppList({ url: 'apps' })
+    setMyAppList(myApps.data)
+  }
 
   useEffect(() => {
     fetchInstalledAppList()
     fetchAppList()
+    fetchMyAppList()
   }, [])
 
   useEffect(() => {
@@ -69,7 +81,7 @@ const SideBar: FC<{
   }, [controlUpdateInstalledApps])
 
   return (
-    <div className='w-[216px] shrink-0 pt-6 px-4 border-gray-200 cursor-pointer'>
+    <div className='w-[216px] shrink-0 pt-6 px-4 border-gray-200'>
       <div>
         <Link
           href='/ai-chat/chat'
@@ -83,11 +95,7 @@ const SideBar: FC<{
       {categoryDetails.length > 0 && (
         <div className='mt-10'>
           <div className='pl-2 text-xs text-gray-500 font-medium uppercase'>{t('aiChat.sidebar.category')}</div>
-          <div className='mt-3 space-y-1 overflow-y-auto overflow-x-hidden'
-            style={{
-              height: 'calc(100vh - 250px)',
-            }}
-          >
+          <div className='mt-3 space-y-1 overflow-y-auto overflow-x-hidden'>
             <Item
               categoryDetail={allAppCategory}
               isSelected = {lastSegment === allAppCategory.key}
@@ -104,6 +112,28 @@ const SideBar: FC<{
           </div>
         </div>
       )}
+      <div className='mt-10'>
+        <div className='pl-2 text-xs text-gray-500 font-medium uppercase'>{t('aiChat.sidebar.myApp')}</div>
+        <div className='mt-3 space-y-1 overflow-y-auto overflow-x-hidden'>
+          {myAppList.map((app, index) => {
+            return (
+              <AppItem
+                key= {index}
+                app= {app}
+                isSelected = {lastSegment === app.id}
+              />
+            )
+          })}
+          {/* TODO: 创建应用按钮 */}
+          {/* <div className='flex items-center justify-between px-2 rounded-lg '>
+            <Button type='primary' className='grow flex items-center !h-7' onClick={() => setShowNewAppDialog(true)}>
+              <PlusIcon className='w-4 h-4 mr-1' />
+              <span className='text-xs'>{t('aiChat.sidebar.createApp')}</span>
+            </Button>
+          </div>
+          <NewAppDialog show={showNewAppDialog} onClose={() => setShowNewAppDialog(false)}/> */}
+        </div>
+      </div>
     </div>
   )
 }

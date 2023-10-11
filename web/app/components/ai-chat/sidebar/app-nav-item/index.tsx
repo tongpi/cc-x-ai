@@ -3,19 +3,19 @@ import { useRouter } from 'next/navigation'
 import React, { useRef } from 'react'
 import cn from 'classnames'
 import s from './style.module.css'
-import type { AppCategoryDetail } from '@/models/ai-chat'
+// import type { AppCategoryDetail } from '@/models/ai-chat'
 
 export type IAppNavItemProps = {
-  categoryDetail: AppCategoryDetail
+  app: any
   isSelected: boolean
 }
 
 export default function AppNavItem({
-  categoryDetail,
+  app,
   isSelected,
 }: IAppNavItemProps) {
   const router = useRouter()
-  const url = `/ai-chat/category/${categoryDetail.key}`
+  const url = `/ai-chat/app/${app.id}`
   const ref = useRef(null)
 
   return (
@@ -31,7 +31,7 @@ export default function AppNavItem({
       }}
     >
       <div className='flex items-center space-x-2 w-0 grow'>
-        <div className='overflow-hidden text-ellipsis whitespace-nowrap'>{categoryDetail.name}</div>
+        <div className='overflow-hidden text-ellipsis whitespace-nowrap'>{app.name}</div>
       </div>
     </div>
   )
