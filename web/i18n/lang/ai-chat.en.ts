@@ -5,6 +5,8 @@ const translation = {
     chat: 'Chat',
     workspace: 'Workspace',
     category: 'App Category',
+    myApp: 'My Apps',
+    createApp: 'Create App',
   },
   category: {
     All: 'All Apps',

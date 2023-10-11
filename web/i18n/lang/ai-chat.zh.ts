@@ -5,6 +5,8 @@ const translation = {
     chat: '智聊',
     workspace: '工作区',
     category: '应用分类',
+    myApp: '我的应用',
+    createApp: '创建应用',
   },
   category: {
     All: '全部应用',
