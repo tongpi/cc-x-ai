@@ -24,11 +24,10 @@ from libs.passport import PassportService
 from models.account import *
 from tasks.mail_invite_member_task import send_invite_member_mail_task
 
-
 def _create_tenant_for_account(account):
-    tenant = TenantService.create_default_tenant(f"{account.name}' 的工作空间")
+    tenant = TenantService.create_tenant(f"{account.name}' 的工作空间")
 
-    TenantService.create_tenant_member(tenant, account, role='normal')
+    TenantService.create_tenant_member(tenant, account, role='owner')
     account.current_tenant = tenant
 
     return tenant
@@ -85,7 +84,7 @@ class AccountService:
                 db.session.commit()
 
         return account
-
+    
     @staticmethod
     def get_account_jwt_token(account):
         payload = {
@@ -237,31 +236,6 @@ class TenantService:
         return tenant
 
     @staticmethod
-    def create_default_tenant(name: str) -> Tenant:
-        """
-        [Hekaiji 2023-10-13]: 根据配置文件创建一个默认团队, 所有普通用户自动加入该团队
-        """
-        tenant = Tenant(name=name)
-
-        # 设置默认团队的Id和名称
-        tenant_id = current_app.config.get('DEFAULT_TENANT_ID')
-        tenant_name = current_app.config.get('DEFAULT_TENANT_NAME')
-        if (tenant_name):
-            tenant.name = tenant_name
-
-        if (tenant_id):
-            tenant.id = tenant_id
-            if (db.session.query(Tenant).filter(Tenant.id == tenant_id).one_or_none() is not None):
-                return tenant
-
-        db.session.add(tenant)
-        db.session.commit()
-
-        tenant.encrypt_public_key = generate_key_pair(tenant.id)
-        db.session.commit()
-        return tenant
-
-    @staticmethod
     def create_tenant_member(tenant: Tenant, account: Account, role: str = 'normal') -> TenantAccountJoin:
         """Create tenant member"""
         if role == TenantAccountJoinRole.OWNER.value:
@@ -371,7 +345,7 @@ class TenantService:
         }
         if action not in ['add', 'remove', 'update']:
             raise InvalidActionError("Invalid action.")
-
+        
         if member:
             if operator.id == member.id:
                 raise CannotOperateSelfError("Cannot operate self.")
@@ -453,15 +427,12 @@ class RegisterService:
             account.status = AccountStatus.ACTIVE.value
             account.initialized_at = datetime.utcnow()
 
-            # 第三方注册时将团队权限设置为普通成员, 否则为创建者
-            tenant_role = TenantAccountJoinRole.OWNER.value
             if open_id is not None or provider is not None:
                 AccountService.link_account_integrate(provider, open_id, account)
-                tenant_role = TenantAccountJoinRole.NORMAL.value
 
-            tenant = TenantService.create_default_tenant(f"{account.name}' 的工作空间")
+            tenant = TenantService.create_tenant(f"{account.name}' 的工作空间")
 
-            TenantService.create_tenant_member(tenant, account, role=tenant_role)
+            TenantService.create_tenant_member(tenant, account, role='owner')
             account.current_tenant = tenant
 
             db.session.commit()
@@ -562,10 +533,10 @@ class RegisterService:
             return None
 
         return {
-            'account': account,
-            'data': invitation_data,
-            'tenant': tenant,
-        }
+                'account': account,
+                'data': invitation_data,
+                'tenant': tenant,
+                }
 
     @classmethod
     def _get_invitation_by_token(cls, token: str, workspace_id: str, email: str) -> Optional[str]:

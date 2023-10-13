@@ -65,14 +65,7 @@ const SideBar: FC<{
     setApps(recommended_apps)
   }
   const fetchMyAppList = async () => {
-    const myApps: any = await doFetchMyAppList({
-      url: 'apps',
-      params: {
-        // 是否是当前用户创建的应用
-        is_current_user: true,
-      },
-    })
-    console.log('myApps', myApps)
+    const myApps: any = await doFetchMyAppList({ url: 'apps' })
     setMyAppList(myApps.data)
   }
 
@@ -119,30 +112,28 @@ const SideBar: FC<{
           </div>
         </div>
       )}
-      {myAppList.length > 0 && (
-        <div className='mt-10'>
-          <div className='pl-2 text-xs text-gray-500 font-medium uppercase'>{t('aiChat.sidebar.myApp')}</div>
-          <div className='mt-3 space-y-1 overflow-y-auto overflow-x-hidden'>
-            {myAppList.map((app, index) => {
-              return (
-                <AppItem
-                  key= {index}
-                  app= {app}
-                  isSelected = {lastSegment === app.id}
-                />
-              )
-            })}
-            {/* TODO: 创建应用按钮 */}
-            {/* <div className='flex items-center justify-between px-2 rounded-lg '>
-              <Button type='primary' className='grow flex items-center !h-7' onClick={() => setShowNewAppDialog(true)}>
-                <PlusIcon className='w-4 h-4 mr-1' />
-                <span className='text-xs'>{t('aiChat.sidebar.createApp')}</span>
-              </Button>
-            </div>
-            <NewAppDialog show={showNewAppDialog} onClose={() => setShowNewAppDialog(false)}/> */}
+      <div className='mt-10'>
+        <div className='pl-2 text-xs text-gray-500 font-medium uppercase'>{t('aiChat.sidebar.myApp')}</div>
+        <div className='mt-3 space-y-1 overflow-y-auto overflow-x-hidden'>
+          {myAppList.map((app, index) => {
+            return (
+              <AppItem
+                key= {index}
+                app= {app}
+                isSelected = {lastSegment === app.id}
+              />
+            )
+          })}
+          {/* TODO: 创建应用按钮 */}
+          {/* <div className='flex items-center justify-between px-2 rounded-lg '>
+            <Button type='primary' className='grow flex items-center !h-7' onClick={() => setShowNewAppDialog(true)}>
+              <PlusIcon className='w-4 h-4 mr-1' />
+              <span className='text-xs'>{t('aiChat.sidebar.createApp')}</span>
+            </Button>
           </div>
+          <NewAppDialog show={showNewAppDialog} onClose={() => setShowNewAppDialog(false)}/> */}
         </div>
-      )}
+      </div>
     </div>
   )
 }
