@@ -115,6 +115,7 @@ def upgrade():
     op.create_table('apps',
     sa.Column('id', postgresql.UUID(), server_default=sa.text('uuid_generate_v4()'), nullable=False),
     sa.Column('tenant_id', postgresql.UUID(), nullable=False),
+    sa.Column('account_id', postgresql.UUID(), nullable=False),
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('mode', sa.String(length=255), nullable=False),
     sa.Column('icon', sa.String(length=255), nullable=True),
@@ -133,6 +134,7 @@ def upgrade():
     )
     with op.batch_alter_table('apps', schema=None) as batch_op:
         batch_op.create_index('app_tenant_id_idx', ['tenant_id'], unique=False)
+        batch_op.create_index('app_account_id_idx', ['account_id'], unique=False)
 
     op.execute('CREATE SEQUENCE task_id_sequence;')
     op.execute('CREATE SEQUENCE taskset_id_sequence;')
