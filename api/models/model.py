@@ -24,13 +24,11 @@ class App(db.Model):
     __tablename__ = 'apps'
     __table_args__ = (
         db.PrimaryKeyConstraint('id', name='app_pkey'),
-        db.Index('app_account_id_idx', 'account_id'),
         db.Index('app_tenant_id_idx', 'tenant_id')
     )
 
     id = db.Column(UUID, server_default=db.text('uuid_generate_v4()'))
     tenant_id = db.Column(UUID, nullable=False)
-    account_id = db.Column(UUID, nullable=False)
     name = db.Column(db.String(255), nullable=False)
     mode = db.Column(db.String(255), nullable=False)
     icon = db.Column(db.String(255))
@@ -800,3 +798,4 @@ class DatasetRetrieverResource(db.Model):
     retriever_from = db.Column(db.Text, nullable=False)
     created_by = db.Column(UUID, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.current_timestamp())
+
