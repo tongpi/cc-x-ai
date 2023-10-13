@@ -3,12 +3,8 @@ import cn from 'classnames'
 import Forms from './forms'
 import Header from './_header'
 import style from './page.module.css'
-import CasLoginForm from './casLoginForm'
 
 const SignIn = () => {
-  // [Hekaiji]{2023/10/08:集成CAS登录, 并作为默认登录方式}
-  // TODO: 通过配置开关来控制
-  return (<CasLoginForm/>)
   return (
     <>
       <div className={cn(

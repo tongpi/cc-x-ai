@@ -142,7 +142,6 @@ class Config:
         self.MILVUS_PASSWORD = get_env('MILVUS_PASSWORD')
         self.MILVUS_SECURE = get_env('MILVUS_SECURE')
 
-
         # cors settings
         self.CONSOLE_CORS_ALLOW_ORIGINS = get_cors_allow_origins(
             'CONSOLE_CORS_ALLOW_ORIGINS', self.CONSOLE_WEB_URL)
@@ -234,6 +233,9 @@ class Config:
         self.CAS_SERVER_URL = get_env('CAS_SERVER_URL')
         self.CAS_EMAIL_DOMAIN = get_env('CAS_EMAIL_DOMAIN')
 
+        self.DEFAULT_TENANT_ID = get_env('DEFAULT_TENANT_ID')
+        self.DEFAULT_TENANT_NAME = get_env('DEFAULT_TENANT_NAME')
+
 
 class CloudEditionConfig(Config):
 
@@ -252,6 +254,9 @@ class CloudEditionConfig(Config):
         self.GOOGLE_CLIENT_ID = get_env('GOOGLE_CLIENT_ID')
         self.GOOGLE_CLIENT_SECRET = get_env('GOOGLE_CLIENT_SECRET')
         self.OAUTH_REDIRECT_PATH = get_env('OAUTH_REDIRECT_PATH')
+
+        self.DEFAULT_TENANT_ID = get_env('DEFAULT_TENANT_ID')
+        self.DEFAULT_TENANT_NAME = get_env('DEFAULT_TENANT_NAME')
 
 
 class TestConfig(Config):
