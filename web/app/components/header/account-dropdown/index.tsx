@@ -12,7 +12,7 @@ import AccountAbout from '../account-about'
 import WorkplaceSelector from './workplace-selector'
 // import I18n from '@/context/i18n'
 import Avatar from '@/app/components/base/avatar'
-import { logout } from '@/service/common'
+import { fetchAccountIntegrates, logout } from '@/service/common'
 import { useAppContext } from '@/context/app-context'
 import { ChevronDown } from '@/app/components/base/icons/src/vender/line/arrows'
 import { LogOut01 } from '@/app/components/base/icons/src/vender/line/general'
@@ -32,12 +32,20 @@ export default function AppSelector() {
   const { userProfile, langeniusVersionInfo } = useAppContext()
 
   const handleLogout = async () => {
+    const integrates = await fetchAccountIntegrates({
+      url: '/account/integrates',
+      params: {},
+    })
     await logout({
       url: '/logout',
       params: {},
     })
-    router.replace(`${CAS_SERVER_URL}/logout?service=${window.location.origin}/signin`)
-    // router.push('/signin')
+    console.log('登出', integrates)
+    // 如果有绑定的第三方账号, 则跳转到CAS登出页面
+    // 否则调整到原登录页面
+    integrates?.data?.find(integrate => integrate.is_bound)
+      ? router.push(`${CAS_SERVER_URL}/logout?service=${window.location.origin}/signin`)
+      : router.push('/signin/admin')
   }
 
   return (

@@ -37,6 +37,12 @@ const nextConfig = {
         destination: '/home',
         permanent: false,
       },
+      {
+        source: '/signin',
+        // [Hekaiji]{2023/10/12: 调整登录地址, 默认使用cas登录}
+        destination: '/signin/gdscas',
+        permanent: false,
+      },
     ]
   },
   output: 'standalone',
