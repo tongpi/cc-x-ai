@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next'
 import { Fragment, useState } from 'react'
 import { useRouter } from 'next/navigation'
 // import { useContext } from 'use-context-selector'
-// import classNames from 'classnames'
+import classNames from 'classnames'
 // import Link from 'next/link'
 import { Menu, Transition } from '@headlessui/react'
-// import Indicator from '../indicator'
+import Indicator from '../indicator'
 import AccountSetting from '../account-setting'
 import AccountAbout from '../account-about'
 import WorkplaceSelector from './workplace-selector'
@@ -29,7 +29,7 @@ export default function AppSelector() {
 
   // const { locale } = useContext(I18n)
   const { t } = useTranslation()
-  const { userProfile, langeniusVersionInfo } = useAppContext()
+  const { userProfile, langeniusVersionInfo, isCurrentWorkspaceManager } = useAppContext()
 
   const handleLogout = async () => {
     const integrates = await fetchAccountIntegrates({
@@ -92,10 +92,11 @@ export default function AppSelector() {
                       </div>
                     </div>
                   </Menu.Item>
-                  <div className='px-1 py-1'>
+                  {/* [Hekaiji 2023-10-16]: 对非空间管理员的普通用户, 屏蔽所在空间信息展示 */}
+                  {isCurrentWorkspaceManager && (<div className='px-1 py-1'>
                     <div className='mt-2 px-3 text-xs font-medium text-gray-500'>{t('common.userProfile.workspace')}</div>
                     <WorkplaceSelector />
-                  </div>
+                  </div>)}
                   <div className="px-1 py-1">
                     <Menu.Item>
                       <div className={itemClassName} onClick={() => setSettingVisible(true)}>
@@ -112,7 +113,7 @@ export default function AppSelector() {
                         <div>{t('common.userProfile.helpCenter')}</div>
                         <ArrowUpRight className='hidden w-[14px] h-[14px] text-gray-500 group-hover:flex' />
                       </Link>
-                    </Menu.Item>*/}
+                    </Menu.Item> */}
                     {
                       document?.body?.getAttribute('data-public-site-about') !== 'hide' && (
                         <Menu.Item>
