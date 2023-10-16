@@ -19,5 +19,6 @@ else
 fi
 
 export NEXT_PUBLIC_SENTRY_DSN=${SENTRY_DSN}
+export NEXT_PUBLIC_SITE_ABOUT=${SITE_ABOUT}
 
 node ./server.js
