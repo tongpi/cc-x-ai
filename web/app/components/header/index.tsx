@@ -5,7 +5,7 @@ import AccountDropdown from './account-dropdown'
 import AppNav from './app-nav'
 import DatasetNav from './dataset-nav'
 import EnvNav from './env-nav'
-import ExploreNav from './explore-nav'
+// import ExploreNav from './explore-nav'
 import HomeNav from './home-nav'
 import AIChatNav from './chat-nav'
 // import PluginNav from './plugin-nav'
@@ -31,8 +31,9 @@ const Header = () => {
       <div className='flex items-center'>
         <HomeNav className={navClassName} />
         <AIChatNav className={navClassName} />
-        <ExploreNav className={navClassName} />
-        <AppNav />
+        {/* [Hekaiji 2023-10-16]: 屏蔽头部菜单的 "探索", 为 "构建应用" 增加权限控制(仅空间管理员可查看) */}
+        {/* <ExploreNav className={navClassName} /> */}
+        {isCurrentWorkspaceManager && <AppNav />}
         {/* [Hekaiji]{2023/09/28:屏蔽导航栏菜单中的 "插件<PluginNav />", 增加 "首页<HomeNav />"} */}
         {/* <PluginNav className={navClassName} /> */}
         {isCurrentWorkspaceManager && <DatasetNav />}
