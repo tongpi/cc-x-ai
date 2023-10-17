@@ -212,6 +212,8 @@ services:
       # console or api domain.
       # example: http://udify.app
       APP_API_URL: ''
+      # 是否显示 "账号 > 关于"
+      SITE_ABOUT: 'hide'
       # CAS地址
       CAS_SERVER_URL: 'https://cas.gds.mtn'
       # The DSN for Sentry error reporting. If not set, Sentry error reporting will be disabled.

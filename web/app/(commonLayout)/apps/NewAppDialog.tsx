@@ -44,7 +44,7 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
   const { data: templates, mutate } = useSWR({ url: '/app-templates' }, fetchAppTemplates)
   const mutateTemplates = useCallback(
     () => mutate(),
-    [],
+    [mutate],
   )
 
   useEffect(() => {
@@ -92,7 +92,7 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
       notify({ type: 'error', message: t('app.newApp.appCreateFailed') })
     }
     isCreatingRef.current = false
-  }, [isWithTemplate, newAppMode, notify, router, templates, selectedTemplateIndex, emoji])
+  }, [templates, isWithTemplate, selectedTemplateIndex, newAppMode, notify, t, emoji.icon, emoji.icon_background, onSuccess, onClose, mutateApps, router])
 
   return <>
     {showEmojiPicker && <EmojiPicker
@@ -176,7 +176,8 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
                   </div>
                   <div className={style.listItemDescription}>{t('app.newApp.chatAppIntro')}</div>
                   <div className={classNames(style.listItemFooter, 'justify-end')}>
-                    <a className={style.listItemLink} href='https://udify.app/chat/7CQBa5yyvYLSkZtx' target='_blank'>{t('app.newApp.previewDemo')}<span className={classNames(style.linkIcon, style.grayLinkIcon)} /></a>
+                    {/* [Hekaiji 2023-10-17]: 屏蔽创建应用时的 "预览 demo" 按钮 */}
+                    {/* <a className={style.listItemLink} href='https://udify.app/chat/7CQBa5yyvYLSkZtx' target='_blank'>{t('app.newApp.previewDemo')}<span className={classNames(style.linkIcon, style.grayLinkIcon)} /></a> */}
                   </div>
                 </li>
                 <li
@@ -193,7 +194,8 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
                   </div>
                   <div className={style.listItemDescription}>{t('app.newApp.completeAppIntro')}</div>
                   <div className={classNames(style.listItemFooter, 'justify-end')}>
-                    <a className={style.listItemLink} href='https://udify.app/completion/aeFTj0VCb3Ok3TUE' target='_blank'>{t('app.newApp.previewDemo')}<span className={classNames(style.linkIcon, style.grayLinkIcon)} /></a>
+                    {/* [Hekaiji 2023-10-17]: 屏蔽创建应用时的 "预览 demo" 按钮 */}
+                    {/* <a className={style.listItemLink} href='https://udify.app/completion/aeFTj0VCb3Ok3TUE' target='_blank'>{t('app.newApp.previewDemo')}<span className={classNames(style.linkIcon, style.grayLinkIcon)} /></a> */}
                   </div>
                 </li>
               </ul>
