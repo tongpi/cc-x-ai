@@ -44,7 +44,7 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
   const { data: templates, mutate } = useSWR({ url: '/app-templates' }, fetchAppTemplates)
   const mutateTemplates = useCallback(
     () => mutate(),
-    [],
+    [mutate],
   )
 
   useEffect(() => {
@@ -92,7 +92,7 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
       notify({ type: 'error', message: t('app.newApp.appCreateFailed') })
     }
     isCreatingRef.current = false
-  }, [isWithTemplate, newAppMode, notify, router, templates, selectedTemplateIndex, emoji])
+  }, [templates, isWithTemplate, selectedTemplateIndex, newAppMode, notify, t, emoji.icon, emoji.icon_background, onSuccess, onClose, mutateApps, router])
 
   return <>
     {showEmojiPicker && <EmojiPicker

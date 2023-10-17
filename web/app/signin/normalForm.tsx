@@ -135,7 +135,7 @@ const NormalForm = () => {
       dispatch({ type: 'google_login_failed' })
     if (google)
       window.location.href = google.redirect_url
-  }, [google, google])
+  }, [google, google_error])
 
   return (
     <>
