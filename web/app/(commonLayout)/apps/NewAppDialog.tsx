@@ -176,7 +176,8 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
                   </div>
                   <div className={style.listItemDescription}>{t('app.newApp.chatAppIntro')}</div>
                   <div className={classNames(style.listItemFooter, 'justify-end')}>
-                    <a className={style.listItemLink} href='https://udify.app/chat/7CQBa5yyvYLSkZtx' target='_blank'>{t('app.newApp.previewDemo')}<span className={classNames(style.linkIcon, style.grayLinkIcon)} /></a>
+                    {/* [Hekaiji 2023-10-17]: 屏蔽创建应用时的 "预览 demo" 按钮 */}
+                    {/* <a className={style.listItemLink} href='https://udify.app/chat/7CQBa5yyvYLSkZtx' target='_blank'>{t('app.newApp.previewDemo')}<span className={classNames(style.linkIcon, style.grayLinkIcon)} /></a> */}
                   </div>
                 </li>
                 <li
@@ -193,7 +194,8 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
                   </div>
                   <div className={style.listItemDescription}>{t('app.newApp.completeAppIntro')}</div>
                   <div className={classNames(style.listItemFooter, 'justify-end')}>
-                    <a className={style.listItemLink} href='https://udify.app/completion/aeFTj0VCb3Ok3TUE' target='_blank'>{t('app.newApp.previewDemo')}<span className={classNames(style.linkIcon, style.grayLinkIcon)} /></a>
+                    {/* [Hekaiji 2023-10-17]: 屏蔽创建应用时的 "预览 demo" 按钮 */}
+                    {/* <a className={style.listItemLink} href='https://udify.app/completion/aeFTj0VCb3Ok3TUE' target='_blank'>{t('app.newApp.previewDemo')}<span className={classNames(style.linkIcon, style.grayLinkIcon)} /></a> */}
                   </div>
                 </li>
               </ul>
