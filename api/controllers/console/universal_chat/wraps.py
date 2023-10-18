@@ -24,6 +24,7 @@ def universal_chat_app_required(view=None):
                 # create universal app if not exists
                 universal_app = App(
                     tenant_id=current_user.current_tenant_id,
+                    account_id=None,
                     name='Universal Chat',
                     mode='chat',
                     is_universal=True,
