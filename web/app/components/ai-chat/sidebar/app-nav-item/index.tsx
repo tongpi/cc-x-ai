@@ -1,37 +1,46 @@
 'use client'
-import { useRouter } from 'next/navigation'
 import React, { useRef } from 'react'
 import cn from 'classnames'
-import s from './style.module.css'
-// import type { AppCategoryDetail } from '@/models/ai-chat'
+import style from './style.module.css'
+import AppIcon from '@/app/components/base/app-icon'
 
 export type IAppNavItemProps = {
-  app: any
-  isSelected: boolean
+  isSelected?: boolean
+  onClick?: () => void
+  icon?: string | React.ReactNode
+  icon_background?: string
+  icon_rounded?: boolean
+  label?: string
 }
 
 export default function AppNavItem({
-  app,
-  isSelected,
+  isSelected = false,
+  onClick,
+  icon = '',
+  icon_background = 'transparent',
+  icon_rounded = false,
+  label = '',
 }: IAppNavItemProps) {
-  const router = useRouter()
-  const url = `/ai-chat/app/${app.id}`
   const ref = useRef(null)
 
   return (
     <div
       ref={ref}
       className={cn(
-        s.item,
-        isSelected ? s.active : 'hover:bg-gray-200',
-        'flex h-8 items-center justify-between px-2 rounded-lg text-sm font-normal cursor-pointer',
+        style.item,
+        isSelected ? style.active : 'hover:bg-gray-200',
+        'flex h-8 items-center justify-between px-2 text-sm font-normal cursor-pointer',
       )}
-      onClick={() => {
-        router.push(url)
-      }}
+      onClick={onClick}
     >
       <div className='flex items-center space-x-2 w-0 grow'>
-        <div className='overflow-hidden text-ellipsis whitespace-nowrap'>{app.name}</div>
+        <AppIcon size='tiny'
+          icon={typeof icon === 'string' ? icon : undefined}
+          innerIcon={typeof icon === 'string' ? undefined : icon}
+          background={icon_background}
+          rounded={icon_rounded}
+          className='ml-2'/>
+        <div className='overflow-hidden text-ellipsis whitespace-nowrap'>{label}</div>
       </div>
     </div>
   )
