@@ -4,5 +4,5 @@ export type AppCategory = 'All' | 'Writing' | 'Translate' | 'HR' | 'Programming'
 
 export type AppCategoryDetail = {
   key: AppCategory
-  name: String
+  name: string
 }

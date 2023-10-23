@@ -4,12 +4,11 @@ import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useContext } from 'use-context-selector'
 import cn from 'classnames'
-import { useSelectedLayoutSegments } from 'next/navigation'
-import Link from 'next/link'
+import { useRouter, useSelectedLayoutSegments } from 'next/navigation'
 // import { PlusIcon } from '@heroicons/react/20/solid'
 // import Button from '../../base/button'
-import Item from './category-nav-item'
-import AppItem from './app-nav-item'
+import CategoryIcon from '../category-icon'
+import NavItem from './app-nav-item'
 import { fetchAppList as doFetchAppList, fetchInstalledAppList as doFetchInstalledAppList } from '@/service/explore'
 import { fetchAppList as doFetchMyAppList } from '@/service/apps'
 import AIChatContext from '@/context/ai-chat-context'
@@ -40,7 +39,7 @@ const SideBar: FC<{
   const isChatSelected = lastSegment === 'chat'
   const { setInstalledApps, categoryDetails, setCategoryDetails, setApps } = useContext(AIChatContext)
   const [myAppList, setMyAppList] = React.useState<any[]>([])
-  const [showNewAppDialog, setShowNewAppDialog] = React.useState(false)
+  const router = useRouter()
 
   const fetchInstalledAppList = async () => {
     const { installed_apps }: any = await doFetchInstalledAppList()
@@ -87,61 +86,64 @@ const SideBar: FC<{
   }, [controlUpdateInstalledApps])
 
   return (
-    <div className='w-[216px] shrink-0 pt-6 px-4 border-gray-200'>
-      <div>
-        <Link
-          href='/ai-chat/chat'
-          className={cn(isChatSelected ? 'text-primary-600 bg-white font-semibold' : 'text-gray-700 font-medium', 'flex items-center h-9 pl-3 space-x-2 rounded-lg')}
-          style={isChatSelected ? { boxShadow: '0px 1px 2px rgba(16, 24, 40, 0.05)' } : {}}
-        >
-          {isChatSelected ? <SelectedChatIcon /> : <ChatIcon />}
-          <div className='text-sm'>{t('aiChat.sidebar.chat')}</div>
-        </Link>
-      </div>
-      {categoryDetails.length > 0 && (
-        <div className='mt-10'>
-          <div className='pl-2 text-xs text-gray-500 font-medium uppercase'>{t('aiChat.sidebar.category')}</div>
-          <div className='mt-3 space-y-1 overflow-y-auto overflow-x-hidden'>
-            <Item
-              categoryDetail={allAppCategory}
-              isSelected = {lastSegment === allAppCategory.key}
-            />
-            {categoryDetails.map((categoryDetail, index) => {
-              return (
-                <Item
-                  key={index}
-                  categoryDetail={categoryDetail}
-                  isSelected = {lastSegment === categoryDetail.key}
-                />
-              )
-            })}
-          </div>
+    <div className='w-[216px] shrink-0 border-gray-200 bg-white relative'>
+      <div className='absolute pt-6 top-0 bottom-0 left-0 right-0 overflow-auto'>
+        <div>
+          <NavItem
+            isSelected = {isChatSelected}
+            icon = {isChatSelected ? <SelectedChatIcon/> : <ChatIcon />}
+            label = {t('aiChat.sidebar.chat') as string}
+            onClick = {() => router.push('/ai-chat/chat')}
+          />
         </div>
-      )}
-      {myAppList.length > 0 && (
-        <div className='mt-10'>
-          <div className='pl-2 text-xs text-gray-500 font-medium uppercase'>{t('aiChat.sidebar.myApp')}</div>
-          <div className='mt-3 space-y-1 overflow-y-auto overflow-x-hidden'>
-            {myAppList.map((app, index) => {
-              return (
-                <AppItem
-                  key= {index}
-                  app= {app}
-                  isSelected = {lastSegment === app.id}
-                />
-              )
-            })}
-            {/* TODO: 创建应用按钮 */}
-            {/* <div className='flex items-center justify-between px-2 rounded-lg '>
+        <div className='overflow-auto '>
+          {categoryDetails.length > 0 && (
+            <div className='mt-10'>
+              <div className='pl-4 text-xs text-gray-500 font-medium uppercase'>{t('aiChat.sidebar.category')}</div>
+              <div className={cn('mt-3 space-y-1 overflow-y-auto overflow-x-hidden')}>
+                {[allAppCategory, ...categoryDetails].map((categoryDetail, index) => (
+                  <NavItem
+                    key={index}
+                    isSelected = {lastSegment === categoryDetail.key}
+                    icon={<CategoryIcon category={categoryDetail.key}/>}
+                    icon_background='#e1effe'
+                    icon_rounded={true}
+                    label={categoryDetail.name}
+                    onClick = {() => router.push(`/ai-chat/category/${categoryDetail.key}`)}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+          {myAppList.length > 0 && (
+            <div className='mt-10'>
+              <div className='pl-4 text-xs text-gray-500 font-medium uppercase'>{t('aiChat.sidebar.myApp')}</div>
+              <div className='mt-3 space-y-1 overflow-y-auto overflow-x-hidden'>
+                {myAppList.map((app, index) => {
+                  return (
+                    <NavItem
+                      key= {index}
+                      isSelected = {lastSegment === app.id}
+                      icon={app.icon}
+                      icon_background={app.icon_background}
+                      label = {app.name}
+                      onClick = {() => router.push(`/ai-chat/app/${app.id}`)}
+                    />
+                  )
+                })}
+                {/* TODO: 创建应用按钮 */}
+                {/* <div className='flex items-center justify-between px-2 rounded-lg '>
               <Button type='primary' className='grow flex items-center !h-7' onClick={() => setShowNewAppDialog(true)}>
                 <PlusIcon className='w-4 h-4 mr-1' />
                 <span className='text-xs'>{t('aiChat.sidebar.createApp')}</span>
               </Button>
             </div>
             <NewAppDialog show={showNewAppDialog} onClose={() => setShowNewAppDialog(false)}/> */}
-          </div>
+              </div>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   )
 }
