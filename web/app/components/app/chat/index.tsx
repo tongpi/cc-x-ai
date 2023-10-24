@@ -160,7 +160,7 @@ const Chat: FC<IChatProps> = ({
   }
 
   return (
-    <div className={cn('px-3.5', 'h-full')}>
+    <div className={cn('px-3.5', 'h-full', 'flex flex-col justify-center')}>
       {isShowConfigElem && (configElem || null)}
       {/* Chat List */}
       <div className={cn((isShowConfigElem && configElem) ? 'h-0' : 'h-full', 'space-y-[30px]')}>
@@ -204,7 +204,7 @@ const Chat: FC<IChatProps> = ({
       </div>
       {
         !isHideSendInput && (
-          <div className={cn(!feedbackDisabled && '!left-3.5 !right-3.5', 'absolute z-10 bottom-0 left-0 right-0')}>
+          <div className={cn(!feedbackDisabled && '!left-3.5 !right-3.5', isShowConfigElem ? 'relative mt-10' : 'absolute', 'z-10 bottom-0 left-0 right-0')}>
             {/* Thinking is sync and can not be stopped */}
             {(isResponsing && canStopResponsing && !!chatList[chatList.length - 1]?.content) && (
               <div className='flex justify-center mb-4'>

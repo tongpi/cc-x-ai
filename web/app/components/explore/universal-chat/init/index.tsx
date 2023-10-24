@@ -26,7 +26,7 @@ const Init: FC<IConfigProps> = ({
   const { t } = useTranslation()
 
   return (
-    <div className='h-full flex items-center'>
+    <div className='flex items-center overflow-y-auto'>
       <div>
         <div className='w-[480px] mx-auto text-center'>
           <div className={cn(s.textGradient, 'mb-2 leading-[32px] font-semibold text-[24px]')}>{t('explore.universalChat.welcome')}</div>
