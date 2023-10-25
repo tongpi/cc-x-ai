@@ -26,7 +26,8 @@ def handle(sender, **kwargs):
 
                 conversation.name = name
             except:
-                conversation.name = 'New conversation'
+                conversation.name = '新的对话'
+                # conversation.name = 'New conversation'
 
             db.session.add(conversation)
             db.session.commit()
