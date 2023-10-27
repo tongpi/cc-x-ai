@@ -20,6 +20,8 @@
     "@formatjs/intl-localematcher": "^0.2.32",
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.16",
+    "@iconify-json/fluent-emoji-flat": "^1.1.13",
+    "@iconify/react": "^4.1.1",
     "@lexical/react": "^0.12.2",
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
