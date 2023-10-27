@@ -17,7 +17,7 @@ import { createApp, fetchAppTemplates } from '@/service/apps'
 import AppIcon from '@/app/components/base/app-icon'
 import AppsContext from '@/context/app-context'
 
-import EmojiPicker from '@/app/components/base/emoji-picker'
+import AppIconPicker, { defaultIcon } from '@/app/components/base/app-icon-picker'
 
 type NewAppDialogProps = {
   show: boolean
@@ -37,7 +37,7 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
 
   // Emoji Picker
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
-  const [emoji, setEmoji] = useState({ icon: '🤖', icon_background: '#FFEAD5' })
+  const [emoji, setEmoji] = useState(defaultIcon)
 
   const mutateApps = useContextSelector(AppsContext, state => state.mutateApps)
 
@@ -94,14 +94,15 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
     isCreatingRef.current = false
   }, [templates, isWithTemplate, selectedTemplateIndex, newAppMode, notify, t, emoji.icon, emoji.icon_background, onSuccess, onClose, mutateApps, router])
 
+  // [Hekaiji 2023-10-27]: 将 emoji 选择框改为图标选择框
   return <>
-    {showEmojiPicker && <EmojiPicker
+    {showEmojiPicker && <AppIconPicker
       onSelect={(icon, icon_background) => {
         setEmoji({ icon, icon_background })
         setShowEmojiPicker(false)
       }}
       onClose={() => {
-        setEmoji({ icon: '🤖', icon_background: '#FFEAD5' })
+        setEmoji(defaultIcon)
         setShowEmojiPicker(false)
       }}
     />}
