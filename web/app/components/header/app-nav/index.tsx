@@ -23,7 +23,9 @@ const AppNav = () => {
   const { t } = useTranslation()
   const [showNewAppDialog, setShowNewAppDialog] = useState(false)
   const { appId } = useParams()
-  const isAppDetailPage = usePathname().split('/').includes('app')
+  // bug: 访问聊天页时, 被判定成应用详情页导致样式异常
+  const pathname = usePathname()
+  const isAppDetailPage = !pathname.includes('ai-chat') && pathname.split('/').includes('app')
   const { data: currentApp } = useSWR((appId && isAppDetailPage) ? { url: '/apps', id: appId } : null, fetchAppDetail)
   const { data: appsData, setSize } = useSWRInfinite(appId ? getKey : () => null, fetchAppList, { revalidateFirstPage: false })
   const appItems = flatten(appsData?.map(appData => appData.data))
