@@ -20,7 +20,7 @@ const AIChat: FC<IAIChatProps> = ({
   const [apps, setApps] = useState<App[]>([])
 
   useEffect(() => {
-    document.title = `${t('aiChat.title')} -  Dify`
+    document.title = `${t('aiChat.title')}`
   }, [])
 
   return (
