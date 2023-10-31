@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useContext } from 'use-context-selector'
 import TemplateVarPanel, { PanelTitle, VarOpBtnGroup } from '../value-panel'
 import s from './style.module.css'
-import { AppInfo, ChatBtn, EditBtn, FootLogo, PromptTemplate } from './massive-component'
+import { AppInfo, ChatBtn, EditBtn, PromptTemplate } from './massive-component'
 import type { SiteInfo } from '@/models/share'
 import type { PromptConfig } from '@/models/debug'
 import { ToastContext } from '@/app/components/base/toast'
@@ -350,10 +350,6 @@ const Welcome: FC<IWelcomeProps> = ({
               </div>
               : <div>
               </div>}
-            {plan === 'basic' && <a className='flex items-center pr-3 space-x-3' href="/" target="_blank">
-              <span className='uppercase'>{t('share.chat.powerBy')}</span>
-              <FootLogo />
-            </a>}
           </div>
         )}
       </div>
