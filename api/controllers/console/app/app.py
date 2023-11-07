@@ -42,10 +42,13 @@ class AppListApi(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('page', type=inputs.int_range(1, 99999), required=False, default=1, location='args')
         parser.add_argument('limit', type=inputs.int_range(1, 100), required=False, default=20, location='args')
+        parser.add_argument('is_current_user', type=inputs.boolean, required=False, default=False, location='args')
         args = parser.parse_args()
 
+        # [Hekaiji 2023-10-13]: 新增参数 "is_current_user" 控制是否只返回当前用户创建的 app
         app_models = db.paginate(
             db.select(App).where(App.tenant_id == current_user.current_tenant_id,
+                                 not args['is_current_user'] or App.account_id == current_user.id,
                                  App.is_universal == False).order_by(App.created_at.desc()),
             page=args['page'],
             per_page=args['limit'],
@@ -149,6 +152,7 @@ class AppListApi(Resource):
         app.icon = args['icon']
         app.icon_background = args['icon_background']
         app.tenant_id = current_user.current_tenant_id
+        app.account_id = current_user.id
 
         db.session.add(app)
         db.session.flush()
@@ -325,6 +329,7 @@ class AppCopy(Resource):
             icon=app.icon,
             icon_background=app.icon_background,
             tenant_id=app.tenant_id,
+            account_id=app.account_id,
             mode=app.mode,
             app_model_config_id=app.app_model_config_id,
             enable_site=app.enable_site,

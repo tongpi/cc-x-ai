@@ -7,7 +7,7 @@ import Modal from '@/app/components/base/modal'
 import Button from '@/app/components/base/button'
 import Toast from '@/app/components/base/toast'
 import AppIcon from '@/app/components/base/app-icon'
-import EmojiPicker from '@/app/components/base/emoji-picker'
+import AppIconPicker, { defaultIcon } from '@/app/components/base/app-icon-picker'
 
 export type CreateAppModalProps = {
   appName: string
@@ -31,7 +31,7 @@ const CreateAppModal = ({
   const [name, setName] = React.useState('')
 
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
-  const [emoji, setEmoji] = useState({ icon: '🤖', icon_background: '#FFEAD5' })
+  const [emoji, setEmoji] = useState(defaultIcon)
 
   const submit = () => {
     if (!name.trim()) {
@@ -70,14 +70,15 @@ const CreateAppModal = ({
           <Button className='w-24' onClick={onHide}>{t('common.operation.cancel')}</Button>
         </div>
       </Modal>
-      {showEmojiPicker && <EmojiPicker
+      {/* [Hekaiji 2023-10-27]: 将 emoji 选择框改为图标选择框  */}
+      {showEmojiPicker && <AppIconPicker
         onSelect={(icon, icon_background) => {
           console.log(icon, icon_background)
           setEmoji({ icon, icon_background })
           setShowEmojiPicker(false)
         }}
         onClose={() => {
-          setEmoji({ icon: '🤖', icon_background: '#FFEAD5' })
+          setEmoji(defaultIcon)
           setShowEmojiPicker(false)
         }}
       />}

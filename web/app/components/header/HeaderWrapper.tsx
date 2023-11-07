@@ -14,12 +14,15 @@ const HeaderWrapper = ({
   const pathname = usePathname()
   const { langeniusVersionInfo } = useAppContext()
   const isBordered = ['/apps', '/datasets'].includes(pathname)
+  const isHome = pathname === '/home'
 
   return (
+    // [Hekaiji 2023-10-23]: 调整导航栏选中的样式
     <div className={classNames(
-      'sticky top-0 left-0 right-0 z-20 flex bg-gray-100 grow-0 shrink-0 basis-auto h-14',
+      'sticky top-0 left-0 right-0 z-20 flex grow-0 shrink-0 basis-auto h-14',
       s.header,
       isBordered ? 'border-b border-gray-200' : '',
+      isHome ? '' : 'bg-white',
     )}
     >
       <div className={classNames(

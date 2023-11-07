@@ -4,6 +4,9 @@ import { createRef, useCallback, useEffect, useMemo, useRef, useState } from 're
 import useSWR from 'swr'
 import { createContext, useContext, useContextSelector } from 'use-context-selector'
 import type { FC, ReactNode } from 'react'
+import { useSelectedLayoutSegment } from 'next/navigation'
+import classNames from 'classnames'
+import s from './style.module.css'
 import { fetchAppList } from '@/service/apps'
 import Loading from '@/app/components/base/loading'
 import { fetchCurrentWorkspace, fetchLanggeniusVersion, fetchUserProfile } from '@/service/common'
@@ -73,6 +76,9 @@ export type AppContextProviderProps = {
 }
 
 export const AppContextProvider: FC<AppContextProviderProps> = ({ children }) => {
+  const selectedSegment = useSelectedLayoutSegment()
+  const isHome = selectedSegment === 'home'
+
   const pageContainerRef = useRef<HTMLDivElement>(null)
 
   const { data: appList, mutate: mutateApps } = useSWR({ url: '/apps', params: { page: 1 } }, fetchAppList)
@@ -122,7 +128,10 @@ export const AppContextProvider: FC<AppContextProviderProps> = ({ children }) =>
     }}>
       <div className='flex flex-col h-full'>
         {globalThis.document?.body?.getAttribute('data-public-maintenance-notice') && <MaintenanceNotice />}
-        <div ref={pageContainerRef} className='grow relative flex flex-col overflow-auto bg-gray-100'>
+        <div ref={pageContainerRef}
+        // [Hekaiji 2023-10-23]: 当路由到首页 "/home" 时, 增加背景图片, 否则只展示背景色
+          className={classNames('grow relative flex flex-col overflow-auto ', isHome ? s.home_bg : 'bg-gray-100')}
+        >
           {children}
         </div>
       </div>
