@@ -57,6 +57,7 @@ DEFAULTS = {
     'CLEAN_DAY_SETTING': 30,
     'UPLOAD_FILE_SIZE_LIMIT': 15,
     'UPLOAD_FILE_BATCH_LIMIT': 5,
+    'OUTPUT_MODERATION_BUFFER_SIZE': 300
 }
 
 
@@ -92,7 +93,7 @@ class Config:
         self.CONSOLE_URL = get_env('CONSOLE_URL')
         self.API_URL = get_env('API_URL')
         self.APP_URL = get_env('APP_URL')
-        self.CURRENT_VERSION = "0.3.28"
+        self.CURRENT_VERSION = "0.3.29"
         self.COMMIT_SHA = get_env('COMMIT_SHA')
         self.EDITION = "SELF_HOSTED"
         self.DEPLOY_ENV = get_env('DEPLOY_ENV')
@@ -228,6 +229,10 @@ class Config:
         self.UPLOAD_FILE_SIZE_LIMIT = int(get_env('UPLOAD_FILE_SIZE_LIMIT'))
         self.UPLOAD_FILE_BATCH_LIMIT = int(get_env('UPLOAD_FILE_BATCH_LIMIT'))
 
+
+        # moderation settings
+        self.OUTPUT_MODERATION_BUFFER_SIZE = int(get_env('OUTPUT_MODERATION_BUFFER_SIZE'))
+
         # [Hekaiji]{2023/10/08:集成CAS登录, 提取配置项}
         self.CAS_CLIENT_ID = get_env('CAS_CLIENT_ID')
         self.CAS_CLIENT_SECRET = get_env('CAS_CLIENT_SECRET')
@@ -236,6 +241,7 @@ class Config:
 
         self.DEFAULT_TENANT_ID = get_env('DEFAULT_TENANT_ID')
         self.DEFAULT_TENANT_NAME = get_env('DEFAULT_TENANT_NAME')
+
 
 
 class CloudEditionConfig(Config):
