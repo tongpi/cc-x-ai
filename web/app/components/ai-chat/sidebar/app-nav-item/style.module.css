@@ -1,0 +1,12 @@
+/* .item:hover, */
+.item {
+  border-left: 4px solid transparent;
+}
+
+.item.active {
+  border-left: 4px solid #1A2FF6;
+  color: #1C64F2;
+  font-weight: 500;
+  background-color: #E4EDFE;
+  font-weight: 600;
+}

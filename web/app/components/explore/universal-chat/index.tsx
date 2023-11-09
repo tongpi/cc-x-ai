@@ -86,7 +86,7 @@ const Main: FC<IMainProps> = () => {
   }
 
   useEffect(() => {
-    document.title = `${t('explore.sidebar.chat')} -  Dify`
+    document.title = `${t('explore.sidebar.chat')}`
   }, [])
   /*
   * app info

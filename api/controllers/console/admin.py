@@ -40,7 +40,7 @@ def admin_required(view):
 
 
 class InsertExploreAppListApi(Resource):
-    @only_edition_cloud
+    # @only_edition_cloud
     @admin_required
     def post(self):
         parser = reqparse.RequestParser()
@@ -68,7 +68,7 @@ class InsertExploreAppListApi(Resource):
             copy_right = site.copyright if site.copyright else \
                 args['copyright'] if args['copyright'] else ''
             privacy_policy = site.privacy_policy if site.privacy_policy else \
-                args['privacy_policy'] if args['privacy_policy']  else ''
+                args['privacy_policy'] if args['privacy_policy'] else ''
 
         recommended_app = RecommendedApp.query.filter(RecommendedApp.app_id == args['app_id']).first()
 
@@ -105,7 +105,7 @@ class InsertExploreAppListApi(Resource):
 
 
 class InsertExploreAppApi(Resource):
-    @only_edition_cloud
+    # @only_edition_cloud
     @admin_required
     def delete(self, app_id):
         recommended_app = RecommendedApp.query.filter(RecommendedApp.app_id == str(app_id)).first()
