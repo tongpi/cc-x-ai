@@ -11,7 +11,7 @@ import AppIcon from '@/app/components/base/app-icon'
 import { SimpleSelect } from '@/app/components/base/select'
 import type { AppDetailResponse } from '@/models/app'
 import type { Language } from '@/types/app'
-import EmojiPicker from '@/app/components/base/emoji-picker'
+import AppIconPicker from '@/app/components/base/app-icon-picker'
 
 export type ISettingsModalProps = {
   appInfo: AppDetailResponse
@@ -163,7 +163,8 @@ const SettingsModal: FC<ISettingsModalProps> = ({
           <Button className='mr-2 flex-shrink-0' onClick={onHide}>{t('common.operation.cancel')}</Button>
           <Button type='primary' className='flex-shrink-0' onClick={onClickSave} loading={saveLoading}>{t('common.operation.save')}</Button>
         </div>
-        {showEmojiPicker && <EmojiPicker
+        {/* [Hekaiji 2023-10-27]: 将 emoji 选择框改为图标选择框 */}
+        {showEmojiPicker && <AppIconPicker
           onSelect={(icon, icon_background) => {
             setEmoji({ icon, icon_background })
             setShowEmojiPicker(false)

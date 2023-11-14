@@ -2,20 +2,21 @@
 import { useTranslation } from 'react-i18next'
 import { Fragment, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useContext } from 'use-context-selector'
+// import { useContext } from 'use-context-selector'
 import classNames from 'classnames'
-import Link from 'next/link'
+// import Link from 'next/link'
 import { Menu, Transition } from '@headlessui/react'
 import Indicator from '../indicator'
 import AccountAbout from '../account-about'
 import WorkplaceSelector from './workplace-selector'
-import I18n from '@/context/i18n'
+// import I18n from '@/context/i18n'
 import Avatar from '@/app/components/base/avatar'
-import { logout } from '@/service/common'
+import { fetchAccountIntegrates, logout } from '@/service/common'
 import { useAppContext } from '@/context/app-context'
-import { ArrowUpRight, ChevronDown } from '@/app/components/base/icons/src/vender/line/arrows'
+import { ChevronDown } from '@/app/components/base/icons/src/vender/line/arrows'
 import { LogOut01 } from '@/app/components/base/icons/src/vender/line/general'
 import { useModalContext } from '@/context/modal-context'
+import { CAS_SERVER_URL } from '@/config'
 
 export default function AppSelector() {
   const itemClassName = `
@@ -25,17 +26,26 @@ export default function AppSelector() {
   const router = useRouter()
   const [aboutVisible, setAboutVisible] = useState(false)
 
-  const { locale } = useContext(I18n)
+  // const { locale } = useContext(I18n)
   const { t } = useTranslation()
-  const { userProfile, langeniusVersionInfo } = useAppContext()
+
+  const { userProfile, langeniusVersionInfo, isCurrentWorkspaceManager } = useAppContext()
   const { setShowAccountSettingModal } = useModalContext()
 
   const handleLogout = async () => {
+    const integrates = await fetchAccountIntegrates({
+      url: '/account/integrates',
+      params: {},
+    })
     await logout({
       url: '/logout',
       params: {},
     })
-    router.push('/signin')
+    // 如果有绑定的第三方账号, 则跳转到CAS登出页面
+    // 否则调整到原登录页面
+    integrates?.data?.find(integrate => integrate.is_bound)
+      ? router.push(`${CAS_SERVER_URL}/logout?service=${window.location.origin}/signin`)
+      : router.push('/signin/admin')
   }
 
   return (
@@ -83,17 +93,18 @@ export default function AppSelector() {
                       </div>
                     </div>
                   </Menu.Item>
-                  <div className='px-1 py-1'>
+                  {/* [Hekaiji 2023-10-16]: 对非空间管理员的普通用户, 屏蔽所在空间信息展示 */}
+                  {isCurrentWorkspaceManager && (<div className='px-1 py-1'>
                     <div className='mt-2 px-3 text-xs font-medium text-gray-500'>{t('common.userProfile.workspace')}</div>
                     <WorkplaceSelector />
-                  </div>
+                  </div>)}
                   <div className="px-1 py-1">
                     <Menu.Item>
                       <div className={itemClassName} onClick={() => setShowAccountSettingModal({ payload: 'account' })}>
                         <div>{t('common.userProfile.settings')}</div>
                       </div>
                     </Menu.Item>
-                    <Menu.Item>
+                    {/* <Menu.Item>
                       <Link
                         className={classNames(itemClassName, 'group justify-between')}
                         href={
@@ -103,7 +114,7 @@ export default function AppSelector() {
                         <div>{t('common.userProfile.helpCenter')}</div>
                         <ArrowUpRight className='hidden w-[14px] h-[14px] text-gray-500 group-hover:flex' />
                       </Link>
-                    </Menu.Item>
+                    </Menu.Item> */}
                     {
                       document?.body?.getAttribute('data-public-site-about') !== 'hide' && (
                         <Menu.Item>
