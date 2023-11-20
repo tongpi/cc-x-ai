@@ -142,4 +142,10 @@ export const appDefaultIconBackground = '#D5F5F6'
 
 export const NEED_REFRESH_APP_LIST_KEY = 'needRefreshAppList'
 
+export const DATASET_DEFAULT = {
+  top_k: 2,
+  score_threshold: 0.5,
+}
+
 export const CAS_SERVER_URL = process.env.NEXT_PUBLIC_CAS_SERVER_URL || globalThis.document?.body?.getAttribute('data-public-cas-server-url')
+

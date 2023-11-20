@@ -226,6 +226,8 @@ const translation = {
     },
   },
   modelProvider: {
+    systemModelSettings: 'System Model Settings',
+    systemModelSettingsLink: 'Why is it necessary to set up a system model?',
     selectModel: 'Select your model',
     setupModelFirst: 'Please set up your model first',
     systemReasoningModel: {
@@ -240,6 +242,10 @@ const translation = {
       key: 'Speech-to-Text Model',
       tip: 'Set the default model for speech-to-text input in conversation.',
     },
+    rerankModel: {
+      key: 'Rerank Model',
+      tip: 'Rerank model will reorder the candidate document list based on the semantic match with  user query, improving the results of semantic ranking',
+    },
     quota: 'Quota',
     searchModel: 'Search model',
     noModelFound: 'No model found for {{model}}',
@@ -247,6 +253,8 @@ const translation = {
     showMoreModelProvider: 'Show more model provider',
     selector: {
       tip: 'This model has been removed. Please add a model or select another model.',
+      emptyTip: 'No available models',
+      emptySetting: 'Please go to settings to configure',
     },
     card: {
       quota: 'QUOTA',
@@ -354,7 +362,7 @@ const translation = {
   },
   datasetMenus: {
     documents: 'Documents',
-    hitTesting: 'Hit Testing',
+    hitTesting: 'Retrieval Testing',
     settings: 'Settings',
     emptyTip: 'The data set has not been associated, please go to the application or plug-in to complete the association.',
     viewDoc: 'View documentation',
@@ -385,9 +393,9 @@ const translation = {
       title: 'CITATIONS',
       linkToDataset: 'Link to dataset',
       characters: 'Characters:',
-      hitCount: 'Hit count:',
+      hitCount: 'Retrieval count:',
       vectorHash: 'Vector hash:',
-      hitScore: 'Hit Score:',
+      hitScore: 'Retrieval Score:',
     },
   },
   promptEditor: {
@@ -441,6 +449,7 @@ const translation = {
     pasteImageLink: 'Paste image link',
     pasteImageLinkInputPlaceholder: 'Paste image link here',
     pasteImageLinkInvalid: 'Invalid image link',
+    imageUpload: 'Image Upload',
   },
 }
 
