@@ -63,13 +63,13 @@ const InstallForm = () => {
         password,
       },
     })
-    router.push('/signin')
+    router.push('/signin/admin')
   }
 
   useEffect(() => {
     fetchSetupStatus().then((res: SetupStatusResponse) => {
       if (res.step === 'finished')
-        window.location.href = '/signin'
+        window.location.href = '/signin/admin'
       else
         setLoading(false)
     })

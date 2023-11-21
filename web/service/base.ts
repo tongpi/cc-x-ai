@@ -254,9 +254,10 @@ const baseFetch = <T>(
                     }
                     else {
                       if (location.pathname === '/signin') {
-                        bodyJson.then((data: ResponseError) => {
-                          Toast.notify({ type: 'error', message: data.message })
-                        })
+                        // [Hekaiji]{2023/10/09: 将CAS设置为默认登录方式后屏蔽原本登录页面的错误提示}
+                        // bodyJson.then((data: ResponseError) => {
+                        //   Toast.notify({ type: 'error', message: data.message })
+                        // })
                       }
                       else {
                         globalThis.location.href = loginUrl
