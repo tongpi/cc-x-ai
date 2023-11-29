@@ -3,6 +3,7 @@ import classNames from 'classnames'
 
 import data from '@emoji-mart/data'
 import { init } from 'emoji-mart'
+import { Icon } from '@iconify/react'
 import style from './style.module.css'
 
 init({ data })
@@ -17,10 +18,17 @@ export type AppIconProps = {
   onClick?: () => void
 }
 
+const svgSizeMap = {
+  tiny: '1.125rem',
+  small: '1.5rem',
+  medium: '1.75rem',
+  large: '2rem',
+}
+
 const AppIcon: FC<AppIconProps> = ({
   size = 'medium',
   rounded = false,
-  icon,
+  icon = 'fluent-emoji-flat:robot',
   background,
   className,
   innerIcon,
@@ -39,7 +47,11 @@ const AppIcon: FC<AppIconProps> = ({
       }}
       onClick={onClick}
     >
-      {innerIcon || ((icon && icon !== '') ? <em-emoji id={icon} /> : <em-emoji id='🤖' />)}
+      {/* {innerIcon || ((icon && icon !== '') ? <em-emoji id={icon} /> : <em-emoji id='🤖' />)} */}
+      {/* [Hekaiji 2023-10-27]: 将 emoji 表情展示组件改为图标展示 */}
+      {innerIcon || (icon?.includes(':')
+        ? <Icon width={svgSizeMap[size]} height={svgSizeMap[size]} className={`${style[size]}`} icon={icon}/>
+        : <em-emoji id={icon} />)}
     </span>
   )
 }

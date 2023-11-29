@@ -25,7 +25,7 @@ const translation = {
     callTimes: '调用次数',
     usedToken: '使用 Tokens',
     setAPIBtn: '设置模型提供商',
-    tryCloud: '或者尝试使用 Dify 的云版本并使用试用配额',
+    tryCloud: '或者尝试使用 CC-Bots 的云版本并使用试用配额',
   },
   overview: {
     title: '概览',
@@ -49,7 +49,7 @@ const translation = {
           copyRightPlaceholder: '请输入作者或组织名称',
           privacyPolicy: '隐私政策',
           privacyPolicyPlaceholder: '请输入隐私政策链接',
-          privacyPolicyTip: '帮助访问者了解该应用收集的数据，可参考 Dify 的<privacyPolicyLink>隐私政策</privacyPolicyLink>。',
+          privacyPolicyTip: '帮助访问者了解该应用收集的数据，可参考 CC-Bots 的<privacyPolicyLink>隐私政策</privacyPolicyLink>。',
         },
       },
       embedded: {
@@ -76,7 +76,7 @@ const translation = {
           name: 'Fork 客户端代码修改后部署到 Vercel（推荐）',
           step1: 'Fork 客户端代码并修改',
           step1Tip: '点击此处 Fork 源码到你的 GitHub 中，然后修改代码',
-          step1Operation: 'Dify-WebClient',
+          step1Operation: 'CC-Bots-WebClient',
           step2: '部署到 Vercel 中',
           step2Tip: '点击此处将仓库导入到 Vercel 中部署',
           step2Operation: '导入仓库',

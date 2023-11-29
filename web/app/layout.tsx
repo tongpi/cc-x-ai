@@ -3,6 +3,8 @@ import BrowerInitor from './components/browser-initor'
 import SentryInitor from './components/sentry-initor'
 import { getLocaleOnServer } from '@/i18n/server'
 
+import './plugins/iconify'
+
 import './styles/globals.css'
 import './styles/markdown.scss'
 
@@ -33,6 +35,7 @@ const LocaleLayout = ({
         data-public-edition={process.env.NEXT_PUBLIC_EDITION}
         data-public-sentry-dsn={process.env.NEXT_PUBLIC_SENTRY_DSN}
         data-public-maintenance-notice={process.env.NEXT_PUBLIC_MAINTENANCE_NOTICE}
+        data-public-cas-server-url={process.env.NEXT_PUBLIC_CAS_SERVER_URL}
         data-public-site-about={process.env.NEXT_PUBLIC_SITE_ABOUT}
       >
         <BrowerInitor>
