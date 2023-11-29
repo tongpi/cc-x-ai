@@ -2,7 +2,6 @@
 import classNames from 'classnames'
 import { usePathname } from 'next/navigation'
 import s from './index.module.css'
-import { useAppContext } from '@/context/app-context'
 
 type HeaderWrapperProps = {
   children: React.ReactNode
@@ -12,7 +11,6 @@ const HeaderWrapper = ({
   children,
 }: HeaderWrapperProps) => {
   const pathname = usePathname()
-  const { langeniusVersionInfo } = useAppContext()
   const isBordered = ['/apps', '/datasets'].includes(pathname)
   const isHome = pathname === '/home'
 
@@ -25,12 +23,7 @@ const HeaderWrapper = ({
       isHome ? '' : 'bg-white',
     )}
     >
-      <div className={classNames(
-        s[`header-${langeniusVersionInfo.current_env}`],
-        'flex flex-1 items-center justify-between px-4',
-      )}>
-        {children}
-      </div>
+      {children}
     </div>
   )
 }

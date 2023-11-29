@@ -126,8 +126,7 @@ export const AppContextProvider: FC<AppContextProviderProps> = ({ children }) =>
       isCurrentWorkspaceManager,
       mutateCurrentWorkspace,
     }}>
-      <div className='flex flex-col h-full'>
-        {globalThis.document?.body?.getAttribute('data-public-maintenance-notice') && <MaintenanceNotice />}
+      <div className='flex flex-col h-full overflow-y-auto'>
         <div ref={pageContainerRef}
         // [Hekaiji 2023-10-23]: 当路由到首页 "/home" 时, 增加背景图片, 否则只展示背景色
           className={classNames('grow relative flex flex-col overflow-auto ', isHome ? s.home_bg : 'bg-gray-100')}
