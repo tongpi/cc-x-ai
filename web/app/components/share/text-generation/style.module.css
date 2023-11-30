@@ -10,3 +10,6 @@
   background: url(./icons/star.svg) center center no-repeat;
   background-size: contain;
 }
+.h_auto>div{
+  height: auto!important;
+}

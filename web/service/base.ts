@@ -249,12 +249,7 @@ const baseFetch = <T>(
                   else if (location.pathname !== '/signin' || !IS_CE_EDITION)
                     globalThis.location.href = loginUrl
                   else
-                    if (location.pathname === '/signin') {
-                      // [Hekaiji]{2023/10/09: 将CAS设置为默认登录方式后屏蔽原本登录页面的错误提示}
-                      // Toast.notify({ type: 'error', message: data.message })
-                    } else {
-                      Toast.notify({ type: 'error', message: data.message })
-                    }
+                    Toast.notify({ type: 'error', message: data.message })
                 }).catch(() => {
                   // Handle any other errors
                   globalThis.location.href = loginUrl

@@ -11,7 +11,6 @@ import AppNav from './app-nav'
 import DatasetNav from './dataset-nav'
 import EnvNav from './env-nav'
 import s from './index.module.css'
-import ExploreNav from './explore-nav'
 import HomeNav from './home-nav'
 import AIChatNav from './chat-nav'
 // import PluginNav from './plugin-nav'
@@ -44,33 +43,35 @@ const Header = () => {
         s[`header-${langeniusVersionInfo.current_env}`],
         'flex flex-1 items-center justify-between px-4',
       )}>
-        <div className='flex items-center'>
-          {isMobile && <div
-            className='flex items-center justify-center h-8 w-8 cursor-pointer'
-            onClick={toggle}
-          >
-            <Bars3Icon className="h-4 w-4 text-gray-500" />
-          </div>}
-          {!isMobile && <>
-            <Link href="/apps" className='flex items-center mr-4'>
-              <LogoSite />
-            </Link>
-          </>}
-        </div>
-        {isMobile && (
+        {/* [Hekaiji 2023-11-30]: 优化移动设备样式判定逻辑, 将相同判断提取到一起 */}
+        {isMobile && <>
+          <div className='flex items-center'>
+            <div
+              className='flex items-center justify-center h-8 w-8 cursor-pointer'
+              onClick={toggle}
+            >
+              <Bars3Icon className="h-4 w-4 text-gray-500" />
+            </div>
+          </div>
           <div className='flex'>
             <Link href="/apps" className='flex items-center mr-4'>
               <LogoSite />
             </Link>
           </div>
-        )}
-        {!isMobile && (
+        </>}
+        {!isMobile && (<>
           <div className='flex items-center'>
-            <ExploreNav className={navClassName} />
-            <AppNav />
+            <Link href="/apps" className='flex items-center mr-4'>
+              <LogoSite />
+            </Link>
+          </div>
+          <div className='flex items-center'>
+            <HomeNav className={navClassName} />
+            <AIChatNav className={navClassName} />
+            {isCurrentWorkspaceManager && <AppNav />}
             {isCurrentWorkspaceManager && <DatasetNav />}
           </div>
-        )}
+        </>)}
         <div className='flex items-center flex-shrink-0'>
           <EnvNav />
           <WorkspaceProvider>
@@ -80,8 +81,9 @@ const Header = () => {
       </div>
       {(isMobile && isShowNavMenu) && (
         <div className='w-full flex flex-col p-2 gap-y-1'>
-          <ExploreNav className={navClassName} />
-          <AppNav />
+          <HomeNav className={navClassName} />
+          <AIChatNav className={navClassName} />
+          {isCurrentWorkspaceManager && <AppNav />}
           {isCurrentWorkspaceManager && <DatasetNav />}
         </div>
       )}

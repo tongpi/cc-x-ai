@@ -15,6 +15,7 @@ import AIChatContext from '@/context/ai-chat-context'
 import aiChatI18n from '@/i18n/lang/ai-chat.en'
 import type { AppCategory, AppCategoryDetail } from '@/models/ai-chat'
 // import NewAppDialog from '@/app/(commonLayout)/apps/NewAppDialog'
+import useBreakpoints, { MediaType } from '@/hooks/use-breakpoints'
 
 const SelectedChatIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,6 +41,8 @@ const SideBar: FC<{
   const { setInstalledApps, categoryDetails, setCategoryDetails, setApps } = useContext(AIChatContext)
   const [myAppList, setMyAppList] = React.useState<any[]>([])
   const router = useRouter()
+  const media = useBreakpoints()
+  const isMobile = media === MediaType.mobile
 
   const fetchInstalledAppList = async () => {
     const { installed_apps }: any = await doFetchInstalledAppList()
@@ -48,7 +51,7 @@ const SideBar: FC<{
 
   const allAppCategory: AppCategoryDetail = {
     key: 'All',
-    name: t('aiChat.category.All') || '',
+    name: t('ai-chat.category.All') || '',
   }
 
   const categoryI18n = aiChatI18n.category
@@ -57,7 +60,7 @@ const SideBar: FC<{
     const categoryDetails = categories.map((category: AppCategory) => {
       return {
         key: category,
-        name: categoryI18n[category] ? t(`aiChat.category.${category}`) : category,
+        name: categoryI18n[category] ? t(`ai-chat.category.${category}`) : category,
       }
     })
     setCategoryDetails(categoryDetails)
@@ -85,21 +88,24 @@ const SideBar: FC<{
     fetchAppList()
   }, [controlUpdateInstalledApps])
 
+  const groupTitleClassName = `${isMobile ? 'text-center' : 'pl-4'} text-xs text-gray-500 font-medium uppercase`
+
   return (
-    <div className='w-[216px] shrink-0 border-gray-200 bg-white relative'>
-      <div className='absolute pt-6 top-0 bottom-0 left-0 right-0 overflow-auto'>
+    <div className='w-fit sm:w-[216px] shrink-0 border-gray-200 bg-white relative'>
+      <div className={`mt-6 ${isMobile && 'px-2'}`}>
         <div>
           <NavItem
             isSelected = {isChatSelected}
             icon = {isChatSelected ? <SelectedChatIcon/> : <ChatIcon />}
-            label = {t('aiChat.sidebar.chat') as string}
+            label = {t('ai-chat.sidebar.chat') as string}
+            isMobile = {isMobile}
             onClick = {() => router.push('/ai-chat/chat')}
           />
         </div>
         <div className='overflow-auto '>
           {categoryDetails.length > 0 && (
             <div className='mt-10'>
-              <div className='pl-4 text-xs text-gray-500 font-medium uppercase'>{t('aiChat.sidebar.category')}</div>
+              <div className={groupTitleClassName}>{t('ai-chat.sidebar.category')}</div>
               <div className={cn('mt-3 space-y-1 overflow-y-auto overflow-x-hidden')}>
                 {[allAppCategory, ...categoryDetails].map((categoryDetail, index) => (
                   <NavItem
@@ -109,6 +115,7 @@ const SideBar: FC<{
                     icon_background='#e1effe'
                     icon_rounded={true}
                     label={categoryDetail.name}
+                    isMobile = {isMobile}
                     onClick = {() => router.push(`/ai-chat/category/${categoryDetail.key}`)}
                   />
                 ))}
@@ -117,7 +124,7 @@ const SideBar: FC<{
           )}
           {myAppList.length > 0 && (
             <div className='mt-10'>
-              <div className='pl-4 text-xs text-gray-500 font-medium uppercase'>{t('aiChat.sidebar.myApp')}</div>
+              <div className={groupTitleClassName}>{t('ai-chat.sidebar.myApp')}</div>
               <div className='mt-3 space-y-1 overflow-y-auto overflow-x-hidden'>
                 {myAppList.map((app, index) => {
                   return (
@@ -127,6 +134,7 @@ const SideBar: FC<{
                       icon={app.icon}
                       icon_background={app.icon_background}
                       label = {app.name}
+                      isMobile = {isMobile}
                       onClick = {() => router.push(`/ai-chat/app/${app.id}`)}
                     />
                   )
@@ -135,7 +143,7 @@ const SideBar: FC<{
                 {/* <div className='flex items-center justify-between px-2 rounded-lg '>
               <Button type='primary' className='grow flex items-center !h-7' onClick={() => setShowNewAppDialog(true)}>
                 <PlusIcon className='w-4 h-4 mr-1' />
-                <span className='text-xs'>{t('aiChat.sidebar.createApp')}</span>
+                <span className='text-xs'>{t('ai-chat.sidebar.createApp')}</span>
               </Button>
             </div>
             <NewAppDialog show={showNewAppDialog} onClose={() => setShowNewAppDialog(false)}/> */}
