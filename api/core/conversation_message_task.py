@@ -104,7 +104,7 @@ class ConversationMessageTask:
                 model_id=self.model_name,
                 override_model_configs=json.dumps(override_model_configs) if override_model_configs else None,
                 mode=self.mode,
-                name='New conversation',
+                name='新的对话',
                 inputs=self.inputs,
                 introduction=introduction,
                 system_instruction=system_instruction,
