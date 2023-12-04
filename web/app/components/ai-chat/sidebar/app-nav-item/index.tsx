@@ -10,6 +10,7 @@ export type IAppNavItemProps = {
   icon?: string | React.ReactNode
   icon_background?: string
   icon_rounded?: boolean
+  isMobile?: boolean
   label?: string
 }
 
@@ -20,6 +21,7 @@ export default function AppNavItem({
   icon_background = 'transparent',
   icon_rounded = false,
   label = '',
+  isMobile = false,
 }: IAppNavItemProps) {
   const ref = useRef(null)
 
@@ -28,19 +30,19 @@ export default function AppNavItem({
       ref={ref}
       className={cn(
         style.item,
-        isSelected ? style.active : 'hover:bg-gray-200',
+        isMobile && 'border-l-0',
+        isSelected ? (isMobile ? style.active_mobile : style.active) : 'hover:bg-gray-200',
         'flex h-8 items-center justify-between px-2 text-sm font-normal cursor-pointer',
       )}
       onClick={onClick}
     >
-      <div className='flex items-center space-x-2 w-0 grow'>
+      <div className={`flex space-x-2 ${isMobile ? style.item_mobile : 'pl-2 grow'}`}>
         <AppIcon size='tiny'
           icon={typeof icon === 'string' ? icon : undefined}
           innerIcon={typeof icon === 'string' ? undefined : icon}
           background={icon_background}
-          rounded={icon_rounded}
-          className='ml-2'/>
-        <div className='overflow-hidden text-ellipsis whitespace-nowrap'>{label}</div>
+          rounded={icon_rounded}/>
+        {!isMobile && <div className='overflow-hidden text-ellipsis whitespace-nowrap'>{label}</div>}
       </div>
     </div>
   )

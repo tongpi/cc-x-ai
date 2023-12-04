@@ -474,6 +474,7 @@ const TextGeneration: FC<IMainProps> = ({
       )}>
         {/* Left */}
         <div className={cn(
+          s.h_auto,
           isPC ? 'w-[600px] max-w-[50%] p-8' : 'p-4',
           isInstalledApp && 'rounded-l-2xl',
           'shrink-0 relative flex flex-col pb-10 h-full border-r border-gray-100 bg-white',

@@ -34,7 +34,7 @@ const CategoryApps = ({
 
   const currCategoryDetail = (() => {
     if (isAllCategory)
-      return { key: 'All', name: t('aiChat.category.All') }
+      return { key: 'All', name: t('ai-chat.category.All') }
 
     return categoryDetails.find(item => item.key === category)
   })()
