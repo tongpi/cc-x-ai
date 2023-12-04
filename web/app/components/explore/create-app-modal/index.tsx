@@ -7,6 +7,9 @@ import Modal from '@/app/components/base/modal'
 import Button from '@/app/components/base/button'
 import Toast from '@/app/components/base/toast'
 import AppIcon from '@/app/components/base/app-icon'
+import EmojiPicker from '@/app/components/base/emoji-picker'
+import { useProviderContext } from '@/context/provider-context'
+import AppsFull from '@/app/components/billing/apps-full-in-dialog'
 import AppIconPicker, { defaultIcon } from '@/app/components/base/app-icon-picker'
 
 export type CreateAppModalProps = {
@@ -32,6 +35,9 @@ const CreateAppModal = ({
 
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
   const [emoji, setEmoji] = useState(defaultIcon)
+
+  const { plan, enableBilling } = useProviderContext()
+  const isAppsFull = (enableBilling && plan.usage.buildApps >= plan.total.buildApps)
 
   const submit = () => {
     if (!name.trim()) {
@@ -64,9 +70,10 @@ const CreateAppModal = ({
               className='h-10 px-3 text-sm font-normal bg-gray-100 rounded-lg grow'
             />
           </div>
+          {isAppsFull && <AppsFull />}
         </div>
         <div className='flex flex-row-reverse'>
-          <Button className='w-24 ml-2' type='primary' onClick={submit}>{t('common.operation.create')}</Button>
+          <Button disabled={isAppsFull} className='w-24 ml-2' type='primary' onClick={submit}>{t('common.operation.create')}</Button>
           <Button className='w-24' onClick={onHide}>{t('common.operation.cancel')}</Button>
         </div>
       </Modal>
