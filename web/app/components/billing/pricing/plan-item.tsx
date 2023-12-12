@@ -141,7 +141,7 @@ const PlanItem: FC<Props> = ({
     setLoading(true)
     try {
       const res = await fetchSubscriptionUrls(plan, isYear ? 'year' : 'month')
-
+      // Adb Block additional tracking block the gtag, so we need to redirect directly
       window.location.href = res.url
     }
     finally {

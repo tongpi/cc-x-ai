@@ -217,7 +217,7 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
             </>
           )}
       </div>
-      {isAppsFull && <AppsFull />}
+      {isAppsFull && <AppsFull loc='app-create' />}
     </Dialog>
   </>
 }
