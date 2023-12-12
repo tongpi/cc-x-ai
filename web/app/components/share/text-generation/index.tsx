@@ -365,7 +365,7 @@ const TextGeneration: FC<IMainProps> = ({
   // Can Use metadata(https://beta.nextjs.org/docs/api-reference/metadata) to set title. But it only works in server side client.
   useEffect(() => {
     if (siteInfo?.title)
-      document.title = `${siteInfo.title} - Powered by Dify`
+      document.title = `${siteInfo.title}`
   }, [siteInfo?.title])
 
   const [isShowResSidebar, { setTrue: showResSidebar, setFalse: hideResSidebar }] = useBoolean(false)
@@ -474,6 +474,7 @@ const TextGeneration: FC<IMainProps> = ({
       )}>
         {/* Left */}
         <div className={cn(
+          s.h_auto,
           isPC ? 'w-[600px] max-w-[50%] p-8' : 'p-4',
           isInstalledApp && 'rounded-l-2xl',
           'shrink-0 relative flex flex-col pb-10 h-full border-r border-gray-100 bg-white',

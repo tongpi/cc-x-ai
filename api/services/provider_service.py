@@ -13,7 +13,7 @@ from core.model_providers.model_provider_factory import ModelProviderFactory
 from core.model_providers.models.entity.model_params import ModelType, ModelKwargsRules
 from models.provider import Provider, ProviderModel, TenantPreferredModelProvider, ProviderType, ProviderQuotaType, \
     TenantDefaultModel
-
+from core.model_providers.models.entity.provider import ModelFeature
 
 class ProviderService:
 
@@ -484,7 +484,7 @@ class ProviderService:
                         "provider_name": provider.provider_name,
                         "provider_type": provider.provider_type
                     },
-                    'features': []
+                    'features': [ModelFeature.AGENT_THOUGHT.value]
                 }
 
                 if 'mode' in model:

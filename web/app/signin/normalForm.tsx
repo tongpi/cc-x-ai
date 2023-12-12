@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/navigation'
 import classNames from 'classnames'
 import useSWR from 'swr'
-import Link from 'next/link'
+// import Link from 'next/link'
 import { useContext } from 'use-context-selector'
 import Toast from '../components/base/toast'
 import style from './page.module.css'
@@ -98,7 +98,7 @@ const NormalForm = () => {
         },
       })
       localStorage.setItem('console_token', res.data)
-      router.replace('/apps')
+      router.replace('/home')
     }
     finally {
       setIsLoading(false)
@@ -135,7 +135,7 @@ const NormalForm = () => {
       dispatch({ type: 'google_login_failed' })
     if (google)
       window.location.href = google.redirect_url
-  }, [google, google])
+  }, [google, google_error])
 
   return (
     <>
@@ -276,7 +276,8 @@ const NormalForm = () => {
             </>
           }
           {/*  agree to our Terms and Privacy Policy. */}
-          <div className="w-hull text-center block mt-2 text-xs text-gray-600">
+          {/* [Hekaiji 2023-10-17]: 屏蔽登录页底部 "使用协议" 和 "隐私政策" */}
+          {/* <div className="w-hull text-center block mt-2 text-xs text-gray-600">
             {t('login.tosDesc')}
             &nbsp;
             <Link
@@ -290,7 +291,7 @@ const NormalForm = () => {
               target={'_blank'}
               href={locale === 'en' ? 'https://docs.dify.ai/user-agreement/privacy-policy' : 'https://docs.dify.ai/v/zh-hans/user-agreement/privacy-policy'}
             >{t('login.pp')}</Link>
-          </div>
+          </div> */}
 
         </div>
       </div>

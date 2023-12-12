@@ -66,7 +66,7 @@ const AutoHeightTextarea = forwardRef(
         <textarea
           ref={ref}
           autoFocus={autoFocus}
-          className={cn(className, 'absolute inset-0 resize-none overflow-auto')}
+          className={cn(className, 'absolute inset-0 resize-none overflow-auto border-primary-600')}
           style={{
             paddingRight: (value && value.trim().length > 10000) ? 140 : 130,
           }}
@@ -80,6 +80,7 @@ const AutoHeightTextarea = forwardRef(
     )
   },
 )
+AutoHeightTextarea.displayName = 'AutoHeightTextarea'
 
 AutoHeightTextarea.displayName = 'AutoHeightTextarea'
 

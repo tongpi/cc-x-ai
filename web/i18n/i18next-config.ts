@@ -35,21 +35,31 @@ import exploreEn from './lang/explore.en'
 import exploreZh from './lang/explore.zh'
 import billingEn from './lang/billing.en'
 import billingZh from './lang/billing.zh'
+import aiChatEn from './lang/ai-chat.en'
+import aiChatZh from './lang/ai-chat.zh'
 
 const resources = {
   'en': {
     translation: {
-      common: commonEn,
-      layout: layoutEn, // page layout
-      login: loginEn,
-      register: registerEn,
+      'common': commonEn,
+      'layout': layoutEn, // page layout
+      'login': loginEn,
+      'register': registerEn,
       // app
-      app: appEn,
-      appOverview: appOverviewEn,
-      appDebug: appDebugEn,
-      appApi: appApiEn,
-      appLog: appLogEn,
+      'app': appEn,
+      'appOverview': appOverviewEn,
+      'appDebug': appDebugEn,
+      'appApi': appApiEn,
+      'appLog': appLogEn,
       // share
+      'share': shareEn,
+      'dataset': datasetEn,
+      'datasetDocuments': datasetDocumentsEn,
+      'datasetHitTesting': datasetHitTestingEn,
+      'datasetSettings': datasetSettingsEn,
+      'datasetCreation': datasetCreationEn,
+      'explore': exploreEn,
+      'ai-chat': aiChatEn,
       share: shareEn,
       dataset: datasetEn,
       datasetDocuments: datasetDocumentsEn,
@@ -59,21 +69,30 @@ const resources = {
       explore: exploreEn,
       // billing
       billing: billingEn,
+      'ai-chat': aiChatEn,
     },
   },
   'zh-Hans': {
     translation: {
-      common: commonZh,
-      layout: layoutZh,
-      login: loginZh,
-      register: registerZh,
+      'common': commonZh,
+      'layout': layoutZh,
+      'login': loginZh,
+      'register': registerZh,
       // app
-      app: appZh,
-      appOverview: appOverviewZh,
-      appDebug: appDebugZh,
-      appApi: appApiZh,
-      appLog: appLogZh,
+      'app': appZh,
+      'appOverview': appOverviewZh,
+      'appDebug': appDebugZh,
+      'appApi': appApiZh,
+      'appLog': appLogZh,
       // share
+      'share': shareZh,
+      'dataset': datasetZh,
+      'datasetDocuments': datasetDocumentsZh,
+      'datasetHitTesting': datasetHitTestingZh,
+      'datasetSettings': datasetSettingsZh,
+      'datasetCreation': datasetCreationZh,
+      'explore': exploreZh,
+      'ai-chat': aiChatZh,
       share: shareZh,
       dataset: datasetZh,
       datasetDocuments: datasetDocumentsZh,
@@ -82,6 +101,7 @@ const resources = {
       datasetCreation: datasetCreationZh,
       explore: exploreZh,
       billing: billingZh,
+      'ai-chat': aiChatZh,
     },
   },
 }
