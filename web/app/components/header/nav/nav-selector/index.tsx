@@ -46,10 +46,11 @@ const NavSelector = ({ curNav, navs, createText, onCreate, onLoadmore }: INavSel
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button
+          // [Hekaiji 2023-10-23]: 调整导航栏选中的样式
             className="
               inline-flex items-center w-full h-7 justify-center
               rounded-[10px] pl-2 pr-2.5 text-[14px] font-semibold
-              text-[#1C64F2] hover:bg-[#EBF5FF]
+              text-white hover:bg-primary-400
             "
           >
             <div className='max-w-[180px] truncate' title={curNav?.name}>{curNav?.name}</div>

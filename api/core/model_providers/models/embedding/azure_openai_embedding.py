@@ -12,6 +12,9 @@ from core.model_providers.providers.base import BaseModelProvider
 
 AZURE_OPENAI_API_VERSION = '2023-07-01-preview'
 
+import os
+tiktoken_cache_dir = os.path.join(os.getcwd(),"tiktoken_cache")
+os.environ["TIKTOKEN_CACHE_DIR"] = tiktoken_cache_dir
 
 class AzureOpenAIEmbedding(BaseEmbedding):
     def __init__(self, model_provider: BaseModelProvider, name: str):

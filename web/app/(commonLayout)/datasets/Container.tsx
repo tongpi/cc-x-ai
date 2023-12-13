@@ -7,7 +7,7 @@ import useSWR from 'swr'
 
 // Components
 import Datasets from './Datasets'
-import DatasetFooter from './DatasetFooter'
+// import DatasetFooter from './DatasetFooter'
 import ApiServer from './ApiServer'
 import Doc from './Doc'
 import TabSlider from '@/app/components/base/tab-slider'
@@ -41,7 +41,8 @@ const Container = () => {
       {activeTab === 'dataset' && (
         <>
           <Datasets containerRef={containerRef} />
-          <DatasetFooter />
+          {/* [Hekaiji 2023-10-17]: 屏蔽数据集页底部 "参与社区" 部分 */}
+          {/* <DatasetFooter /> */}
         </>
       )}
 
