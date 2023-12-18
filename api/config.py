@@ -276,6 +276,14 @@ class Config:
         self.HOSTED_MODERATION_ENABLED = get_bool_env('HOSTED_MODERATION_ENABLED')
         self.HOSTED_MODERATION_PROVIDERS = get_env('HOSTED_MODERATION_PROVIDERS')
 
+        # [Hekaiji]{2023/10/08:集成CAS登录, 提取配置项}
+        self.CAS_CLIENT_ID = get_env('CAS_CLIENT_ID')
+        self.CAS_CLIENT_SECRET = get_env('CAS_CLIENT_SECRET')
+        self.CAS_SERVER_URL = get_env('CAS_SERVER_URL')
+        self.CAS_EMAIL_DOMAIN = get_env('CAS_EMAIL_DOMAIN')
+
+        self.DEFAULT_TENANT_ID = get_env('DEFAULT_TENANT_ID')
+        self.DEFAULT_TENANT_NAME = get_env('DEFAULT_TENANT_NAME')
 
 class CloudEditionConfig(Config):
 
@@ -284,8 +292,15 @@ class CloudEditionConfig(Config):
 
         self.EDITION = "CLOUD"
 
+        # [Hekaiji]{2023/10/08:集成CAS登录, 提取配置项}
+        self.CAS_CLIENT_ID = get_env('CAS_CLIENT_ID')
+        self.CAS_CLIENT_SECRET = get_env('CAS_CLIENT_SECRET')
+        self.CAS_SERVER_URL = get_env('CAS_SERVER_URL')
+        self.CAS_EMAIL_DOMAIN = get_env('CAS_EMAIL_DOMAIN')
         self.GITHUB_CLIENT_ID = get_env('GITHUB_CLIENT_ID')
         self.GITHUB_CLIENT_SECRET = get_env('GITHUB_CLIENT_SECRET')
         self.GOOGLE_CLIENT_ID = get_env('GOOGLE_CLIENT_ID')
         self.GOOGLE_CLIENT_SECRET = get_env('GOOGLE_CLIENT_SECRET')
         self.OAUTH_REDIRECT_PATH = get_env('OAUTH_REDIRECT_PATH')
+        self.DEFAULT_TENANT_ID = get_env('DEFAULT_TENANT_ID')
+        self.DEFAULT_TENANT_NAME = get_env('DEFAULT_TENANT_NAME')

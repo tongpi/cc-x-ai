@@ -31,6 +31,10 @@ from models.dataset import Dataset, DocumentSegment, DatasetProcessRule
 from models.model import UploadFile
 from models.source import DataSourceBinding
 
+import os
+
+tiktoken_cache_dir = os.path.join(os.getcwd(),"tiktoken_cache")
+os.environ["TIKTOKEN_CACHE_DIR"] = tiktoken_cache_dir
 
 class IndexingRunner:
 

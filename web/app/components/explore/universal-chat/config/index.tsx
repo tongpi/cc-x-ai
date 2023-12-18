@@ -3,9 +3,10 @@ import type { FC } from 'react'
 import React from 'react'
 import ModelConfig from './model-config'
 import DataConfig from './data-config'
-import PluginConfig from './plugins-config'
+// import PluginConfig from './plugins-config'
 import type { ProviderEnum } from '@/app/components/header/account-setting/model-page/declarations'
 import type { DataSet } from '@/models/datasets'
+import { useAppContext } from '@/context/app-context'
 
 export type IConfigProps = {
   className?: string
@@ -25,11 +26,12 @@ const Config: FC<IConfigProps> = ({
   modelId,
   providerName,
   onModelChange,
-  plugins,
-  onPluginChange,
+  // plugins,
+  // onPluginChange,
   dataSets,
   onDataSetsChange,
 }) => {
+  const { isCurrentWorkspaceManager } = useAppContext()
   return (
     <div className={className}>
       <ModelConfig
@@ -38,12 +40,13 @@ const Config: FC<IConfigProps> = ({
         providerName={providerName}
         onChange={onModelChange}
       />
-      <PluginConfig
+      {/* [Hekaiji 2023-10-16]: 屏蔽智聊组件中的 "插件" 功能, 为数据集增加权限控制(仅空间管理员可查看) */}
+      {/* <PluginConfig
         readonly={readonly}
         config={plugins}
         onChange={onPluginChange}
-      />
-      {(!readonly || (readonly && dataSets.length > 0)) && (
+      /> */}
+      {isCurrentWorkspaceManager && (!readonly || (readonly && dataSets.length > 0)) && (
         <DataConfig
           readonly={readonly}
           dataSets={dataSets}

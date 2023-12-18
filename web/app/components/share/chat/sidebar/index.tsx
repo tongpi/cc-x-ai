@@ -107,7 +107,9 @@ const Sidebar: FC<ISidebarProps> = ({
       <div className="flex flex-shrink-0 p-4 !pb-0">
         <Button
           onClick={() => onStartChat({})}
-          className="group block w-full flex-shrink-0 !justify-start !h-9 text-primary-600 items-center text-sm">
+          // [Hekaiji 2023-10-23]: 调整导航栏选中的样式
+          type="primary"
+          className="group block w-full flex-shrink-0 !justify-start !h-9 items-center text-sm">
           <PencilSquareIcon className="mr-2 h-4 w-4" /> {t('share.chat.newChat')}
         </Button>
       </div>

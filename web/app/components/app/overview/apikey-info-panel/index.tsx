@@ -13,6 +13,7 @@ import { formatNumber } from '@/utils/format'
 import I18n from '@/context/i18n'
 import ProviderConfig from '@/app/components/header/account-setting/model-page/configs'
 import { useModalContext } from '@/context/modal-context'
+import AppIcon from '@/app/components/base/app-icon'
 
 const APIKeyInfoPanel: FC = () => {
   const isCloud = !IS_CE_EDITION
@@ -71,7 +72,7 @@ const APIKeyInfoPanel: FC = () => {
   return (
     <div className={cn(exhausted ? 'bg-[#FEF3F2] border-[#FEE4E2]' : 'bg-[#EFF4FF] border-[#D1E0FF]', 'mb-6 relative  rounded-2xl shadow-md border  p-8 ')}>
       <div className={cn('text-[24px] text-gray-800 font-semibold', isCloud ? 'flex items-center h-8 space-x-1' : 'leading-8 mb-6')}>
-        {isCloud && <em-emoji id={exhausted ? '🤔' : '😀'} />}
+        {isCloud && <AppIcon background='transparent' icon={exhausted ? 'fluent-emoji-flat:thinking-face' : 'fluent-emoji-flat:grinning-face'}/>}
         {isCloud
           ? (
             <div>{t(`appOverview.apiKeyInfo.cloud.${exhausted ? 'exhausted' : 'trial'}.title`, { providerName: (ProviderConfig as any)[providerName as string]?.selector?.name[locale] || providerName })}</div>
