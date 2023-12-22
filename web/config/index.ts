@@ -152,3 +152,5 @@ export const APP_PAGE_LIMIT = 10
 export const ANNOTATION_DEFAULT = {
   score_threshold: 0.9,
 }
+
+export const CAS_SERVER_URL = process.env.NEXT_PUBLIC_CAS_SERVER_URL || globalThis.document?.body?.getAttribute('data-public-cas-server-url')

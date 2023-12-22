@@ -6,9 +6,9 @@ import { GoldCoin } from '../../base/icons/src/vender/solid/FinanceAndECommerce'
 import { GoldCoin as GoldCoinOutLine } from '../../base/icons/src/vender/line/financeAndECommerce'
 import AccountPage from './account-page'
 import MembersPage from './members-page'
-import IntegrationsPage from './Integrations-page'
+// import IntegrationsPage from './Integrations-page'
 import LanguagePage from './language-page'
-import PluginPage from './plugin-page'
+// import PluginPage from './plugin-page'
 import ApiBasedExtensionPage from './api-based-extension-page'
 import DataSourcePage from './data-source-page'
 import ModelPage from './model-page'
@@ -18,19 +18,20 @@ import CustomPage from '@/app/components/custom/custom-page'
 import Modal from '@/app/components/base/modal'
 import {
   Database03,
-  PuzzlePiece01,
+  /* PuzzlePiece01, */
   Webhooks,
 } from '@/app/components/base/icons/src/vender/line/development'
-import { Database03 as Database03Solid, PuzzlePiece01 as PuzzlePiece01Solid } from '@/app/components/base/icons/src/vender/solid/development'
+import { Database03 as Database03Solid /* , PuzzlePiece01 as PuzzlePiece01Solid */ } from '@/app/components/base/icons/src/vender/solid/development'
 import { User01, Users01 } from '@/app/components/base/icons/src/vender/line/users'
 import { User01 as User01Solid, Users01 as Users01Solid } from '@/app/components/base/icons/src/vender/solid/users'
 import { Globe01 } from '@/app/components/base/icons/src/vender/line/mapsAndTravel'
-import { AtSign, XClose } from '@/app/components/base/icons/src/vender/line/general'
+import { /* AtSign, */ XClose } from '@/app/components/base/icons/src/vender/line/general'
 import { CubeOutline } from '@/app/components/base/icons/src/vender/line/shapes'
 import { Colors } from '@/app/components/base/icons/src/vender/line/editor'
 import { Colors as ColorsSolid } from '@/app/components/base/icons/src/vender/solid/editor'
 import useBreakpoints, { MediaType } from '@/hooks/use-breakpoints'
 import { useProviderContext } from '@/context/provider-context'
+import { useAppContext } from '@/context/app-context'
 
 const iconClassName = `
   w-4 h-4 ml-3 mr-2
@@ -57,6 +58,7 @@ export default function AccountSetting({
   activeTab = 'account',
 }: IAccountSettingProps) {
   const [activeMenu, setActiveMenu] = useState(activeTab)
+  const { isCurrentWorkspaceManager } = useAppContext()
   const { t } = useTranslation()
   const { enableBilling, enableReplaceWebAppLogo } = useProviderContext()
 
@@ -87,12 +89,12 @@ export default function AccountSetting({
         icon: <Database03 className={iconClassName} />,
         activeIcon: <Database03Solid className={iconClassName} />,
       },
-      {
-        key: 'plugin',
-        name: t('common.settings.plugin'),
-        icon: <PuzzlePiece01 className={iconClassName} />,
-        activeIcon: <PuzzlePiece01Solid className={iconClassName} />,
-      },
+      // {
+      //   key: 'plugin',
+      //   name: t('common.settings.plugin'),
+      //   icon: <PuzzlePiece01 className={iconClassName} />,
+      //   activeIcon: <PuzzlePiece01Solid className={iconClassName} />,
+      // },
       {
         key: 'api-based-extension',
         name: t('common.settings.apiBasedExtension'),
@@ -127,12 +129,13 @@ export default function AccountSetting({
           icon: <User01 className={iconClassName} />,
           activeIcon: <User01Solid className={iconClassName} />,
         },
-        {
-          key: 'integrations',
-          name: t('common.settings.integrations'),
-          icon: <AtSign className={iconClassName} />,
-          activeIcon: <AtSign className={iconClassName} />,
-        },
+        // [Hekaiji]{2023/10/09: 屏蔽 "设置>集成" 功能}
+        // {
+        //   key: 'integrations',
+        //   name: t('common.settings.integrations'),
+        //   icon: <AtSign className={iconClassName} />,
+        //   activeIcon: <AtSign className={iconClassName} />,
+        // },
         {
           key: 'language',
           name: t('common.settings.language'),
@@ -141,7 +144,8 @@ export default function AccountSetting({
         },
       ],
     },
-  ]
+    // [Hekaiji 2023-10-16]: 为 "设置>工作空间" 分组增加权限控制(仅空间管理员可查看) | 屏蔽 "工作空间" 项中的 "插件" 设置项
+  ].filter(menuItem => (menuItem.key === 'workspace-group' ? isCurrentWorkspaceManager : true))
   const scrollRef = useRef<HTMLDivElement>(null)
   const [scrolled, setScrolled] = useState(false)
   const scrollHandle = (e: Event) => {
@@ -200,7 +204,8 @@ export default function AccountSetting({
         </div>
         <div ref={scrollRef} className='relative w-[824px] h-[720px] pb-4 overflow-y-auto'>
           <div className={cn('sticky top-0 px-6 py-4 flex items-center justify-between h-14 mb-4 bg-white text-base font-medium text-gray-900 z-20', scrolled && scrolledClassName)}>
-            {[...menuItems[0].items, ...menuItems[1].items].find(item => item.key === activeMenu)?.name}
+            {/* [Hekaiji 2023-10-16]: 优化此处代码, 防止 "menuItems" 长度改变后直接访问下标导致数组越界 */}
+            {menuItems.reduce((pre: any, cur) => cur.items.concat(pre), []).find((item: { key: string }) => item.key === activeMenu)?.name}
             <div className='flex items-center justify-center -mr-4 w-6 h-6 cursor-pointer' onClick={onCancel}>
               <XClose className='w-4 h-4 text-gray-500' />
             </div>
@@ -209,11 +214,11 @@ export default function AccountSetting({
             {activeMenu === 'account' && <AccountPage />}
             {activeMenu === 'members' && <MembersPage />}
             {activeMenu === 'billing' && <BillingPage />}
-            {activeMenu === 'integrations' && <IntegrationsPage />}
+            {/* {activeMenu === 'integrations' && <IntegrationsPage />} */}
             {activeMenu === 'language' && <LanguagePage />}
             {activeMenu === 'provider' && <ModelPage />}
             {activeMenu === 'data-source' && <DataSourcePage />}
-            {activeMenu === 'plugin' && <PluginPage />}
+            {/* {activeMenu === 'plugin' && <PluginPage />} */}
             {activeMenu === 'api-based-extension' && <ApiBasedExtensionPage /> }
             {activeMenu === 'custom' && <CustomPage /> }
           </div>

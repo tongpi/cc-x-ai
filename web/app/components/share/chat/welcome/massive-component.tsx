@@ -10,11 +10,12 @@ import s from './style.module.css'
 import type { SiteInfo } from '@/models/share'
 import Button from '@/app/components/base/button'
 import LogoSite from '@/app/components/base/logo/logo-site'
+import AppIcon from '@/app/components/base/app-icon'
 
 export const AppInfo: FC<{ siteInfo: SiteInfo }> = ({ siteInfo }) => {
   return (
     <div>
-      <div className='flex items-center py-2 text-xl font-medium text-gray-700 rounded-md'>{siteInfo.icon && <span className='mr-2'><em-emoji id={siteInfo.icon} /></span>}{siteInfo.title}</div>
+      <div className='flex items-center py-2 text-xl font-medium text-gray-700 rounded-md'>{siteInfo.icon && <span className='mr-2'><AppIcon icon={siteInfo.icon} background='transparent'/></span>}{siteInfo.title}</div>
       <p className='text-sm text-gray-500'>{siteInfo.description}</p>
     </div>
   )
