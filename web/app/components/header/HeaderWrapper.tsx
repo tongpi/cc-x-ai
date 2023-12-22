@@ -20,7 +20,7 @@ const HeaderWrapper = ({
       'sticky top-0 left-0 right-0 z-20 flex flex-col grow-0 shrink-0 basis-auto min-h-[56px]',
       s.header,
       isBordered ? 'border-b border-gray-200' : '',
-      isHome ? '' : 'bg-gray-100',
+      isHome ? '' : 'bg-white',
     )}
     >
       {children}
