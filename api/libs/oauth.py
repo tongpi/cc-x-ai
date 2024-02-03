@@ -140,3 +140,65 @@ class GoogleOAuth(OAuth):
         )
 
 
+class GdsCasOAuth(OAuth):
+    # [Hekaiji]{2023/10/08:集成CAS登录}
+    _URL_ORIGIN = 'https://cas.gds.mtn'
+    _AUTH_URL_PATHNAME = '/oauth2.0/authorize'
+    _TOKEN_URL_PATHNAME = '/oauth2.0/accessToken'
+    _USER_INFO_URL_PATHNAME = '/oauth2.0/profile'
+
+    def set_extra_config(self, extra_config: dict = {}):
+        _url_origin = extra_config.get('url_origin', self._URL_ORIGIN).rstrip('/')
+        self.auth_url = _url_origin + self._AUTH_URL_PATHNAME
+        self.token_url = _url_origin + self._TOKEN_URL_PATHNAME
+        self.user_info_url = _url_origin + self._USER_INFO_URL_PATHNAME
+        self.email_domain = extra_config.get('email_domain', 'e-u.cn')
+        return self
+
+    def get_authorization_url(self):
+        params = {
+            'client_id': self.client_id,
+            'redirect_uri': self.redirect_uri,
+            'response_type': 'code'
+        }
+
+        return f"{self.auth_url}?{urllib.parse.urlencode(params)}"
+
+    def get_access_token(self, code: str):
+        data = {
+            'client_id': self.client_id,
+            'client_secret': self.client_secret,
+            'code': code,
+            'grant_type': 'authorization_code',
+            'redirect_uri': self.redirect_uri
+        }
+
+        headers = {'Accept': 'application/json'}
+        response = requests.post(
+            self.token_url, data=data, headers=headers, verify=False)
+
+        response_json = response.json()
+        access_token = response_json.get('access_token')
+
+        if not access_token:
+            raise ValueError(f"Error in CCtalk OAuth: {response_json}")
+
+        return access_token
+
+    def get_raw_user_info(self, token: str):
+        headers = {'accept': "application/json"}
+        response = requests.get(self.user_info_url,
+                                params={'access_token': token},
+                                headers=headers, verify=False)
+        response.raise_for_status()
+        user_info = response.json()
+
+        return {**user_info}
+
+    def _transform_user_info(self, raw_info: dict) -> OAuthUserInfo:
+        email = f"{raw_info['attributes']['userAccount']}@{self.email_domain}"
+        return OAuthUserInfo(
+            id=str(raw_info['attributes']['userAccount']),
+            name=raw_info['attributes']['realName'],
+            email=email
+        )
