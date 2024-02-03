@@ -33,7 +33,8 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/apps',
+        // [hekaiji]24/02/03:将重定向地址/apps换为/home;
+        destination: '/home',
         permanent: false,
       },
     ]

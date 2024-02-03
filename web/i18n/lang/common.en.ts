@@ -85,6 +85,7 @@ const translation = {
   },
   menus: {
     status: 'beta',
+    home: 'Home',
     explore: 'Explore',
     apps: 'Studio',
     plugins: 'Plugins',
