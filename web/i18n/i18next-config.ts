@@ -49,6 +49,8 @@ import datasetSettingsPt from './lang/dataset-settings.pt' // Portuguese import
 import datasetCreationEn from './lang/dataset-creation.en'
 import datasetCreationZh from './lang/dataset-creation.zh'
 import datasetCreationPt from './lang/dataset-creation.pt' // Portuguese import
+import chatEn from './lang/chat.en'
+import chatZh from './lang/chat.zh'
 import exploreEn from './lang/explore.en'
 import exploreZh from './lang/explore.zh'
 import explorePt from './lang/explore.pt' // Portuguese import
@@ -84,6 +86,7 @@ const resources = {
       datasetSettings: datasetSettingsEn,
       datasetCreation: datasetCreationEn,
       explore: exploreEn,
+      chat: chatEn,
       // billing
       billing: billingEn,
       custom: customEn,
@@ -114,6 +117,7 @@ const resources = {
       explore: exploreZh,
       billing: billingZh,
       custom: customZh,
+      chat: chatZh,
       // tools
       tools: toolsZh,
     },

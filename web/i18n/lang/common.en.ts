@@ -86,6 +86,7 @@ const translation = {
   menus: {
     status: 'beta',
     home: 'Home',
+    chat: '聊天',
     explore: 'Explore',
     apps: 'Studio',
     plugins: 'Plugins',

@@ -10,6 +10,7 @@ import AppNav from './app-nav'
 import DatasetNav from './dataset-nav'
 import EnvNav from './env-nav'
 import HomeNav from './home-nav'
+import ChatNav from './chat-nav'
 import ExploreNav from './explore-nav'
 import ToolsNav from './tools-nav'
 import GithubStar from './github-star'
@@ -71,6 +72,7 @@ const Header = () => {
       {!isMobile && (
         <div className='flex items-center'>
           <HomeNav className={navClassName} />
+          <ChatNav className={navClassName} />
           <ExploreNav className={navClassName} />
           <AppNav />
           {isCurrentWorkspaceManager && <DatasetNav />}
@@ -99,6 +101,7 @@ const Header = () => {
       {(isMobile && isShowNavMenu) && (
         <div className='w-full flex flex-col p-2 gap-y-1'>
           <HomeNav className={navClassName} />
+          <ChatNav className={navClassName} />
           <ExploreNav className={navClassName} />
           <AppNav />
           {isCurrentWorkspaceManager && <DatasetNav />}
