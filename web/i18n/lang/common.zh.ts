@@ -85,6 +85,8 @@ const translation = {
   },
   menus: {
     status: 'beta',
+    home: '首页',
+    chat: '聊天',
     explore: '探索',
     apps: '工作室',
     plugins: '插件',

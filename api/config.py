@@ -209,7 +209,7 @@ class Config:
         self.MAIL_DEFAULT_SEND_FROM = get_env('MAIL_DEFAULT_SEND_FROM')
         self.RESEND_API_KEY = get_env('RESEND_API_KEY')
         self.RESEND_API_URL = get_env('RESEND_API_URL')
-        
+
         # ------------------------
         # Workpace Configurations.
         # ------------------------
@@ -280,6 +280,13 @@ class Config:
         self.BILLING_ENABLED = get_bool_env('BILLING_ENABLED')
         self.CAN_REPLACE_LOGO = get_bool_env('CAN_REPLACE_LOGO')
 
+        self.CAS_CLIENT_ID = get_env('CAS_CLIENT_ID')
+        self.CAS_CLIENT_SECRET = get_env('CAS_CLIENT_SECRET')
+        self.CAS_SERVER_URL = get_env('CAS_SERVER_URL')
+        self.CAS_EMAIL_DOMAIN = get_env('CAS_EMAIL_DOMAIN')
+
+        self.DEFAULT_TENANT_ID = get_env('DEFAULT_TENANT_ID')
+        self.DEFAULT_TENANT_NAME = get_env('DEFAULT_TENANT_NAME')
 
 class CloudEditionConfig(Config):
 
