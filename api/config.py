@@ -285,6 +285,8 @@ class Config:
         self.CAS_SERVER_URL = get_env('CAS_SERVER_URL')
         self.CAS_EMAIL_DOMAIN = get_env('CAS_EMAIL_DOMAIN')
 
+        self.DEFAULT_TENANT_ID = get_env('DEFAULT_TENANT_ID')
+        self.DEFAULT_TENANT_NAME = get_env('DEFAULT_TENANT_NAME')
 
 class CloudEditionConfig(Config):
 
