@@ -140,9 +140,9 @@ class AccountService:
 
         account.interface_language = interface_language
         account.interface_theme = interface_theme
-        
+
         # Set timezone based on language
-        account.timezone = language_timezone_mapping.get(interface_language, 'UTC') 
+        account.timezone = language_timezone_mapping.get(interface_language, 'UTC')
 
         db.session.add(account)
         db.session.commit()
@@ -216,6 +216,7 @@ class TenantService:
         return tenant
 
     @staticmethod
+
     def create_owner_tenant_if_not_exist(account: Account):
         """Create owner tenant if not exist"""
         available_ta = TenantAccountJoin.query.filter_by(account_id=account.id) \
@@ -229,6 +230,28 @@ class TenantService:
         account.current_tenant = tenant
         db.session.commit()
         tenant_was_created.send(tenant)
+
+    def create_default_tenant(name: str) -> Tenant:
+        """ 根据配置文件创建一个默认团队, 所有普通用户自动加入该团队 """
+        tenant = Tenant(name=name)
+
+        # 设置默认团队的Id和名称
+        tenant_id = current_app.config.get('DEFAULT_TENANT_ID')
+        tenant_name = current_app.config.get('DEFAULT_TENANT_NAME')
+        if (tenant_name):
+            tenant.name = tenant_name
+
+        if (tenant_id):
+            tenant.id = tenant_id
+            if (db.session.query(Tenant).filter(Tenant.id == tenant_id).one_or_none() is not None):
+                return tenant
+
+        db.session.add(tenant)
+        db.session.commit()
+
+        tenant.encrypt_public_key = generate_key_pair(tenant.id)
+        db.session.commit()
+        return tenant
 
     @staticmethod
     def create_tenant_member(tenant: Tenant, account: Account, role: str = 'normal') -> TenantAccountJoin:
@@ -430,12 +453,14 @@ class RegisterService:
             account.status = AccountStatus.ACTIVE.value if not status else status.value
             account.initialized_at = datetime.utcnow()
 
+            tenant_role = TenantAccountJoinRole.OWNER.value
             if open_id is not None or provider is not None:
                 AccountService.link_account_integrate(provider, open_id, account)
+                tenant_role = TenantAccountJoinRole.NORMAL.value
 
-            tenant = TenantService.create_tenant(f"{account.name}'s Workspace")
+            tenant = TenantService.create_default_tenant(f"{account.name}'s Workspace")
 
-            TenantService.create_tenant_member(tenant, account, role='owner')
+            TenantService.create_tenant_member(tenant, account, role=tenant_role)
             account.current_tenant = tenant
 
             db.session.commit()
@@ -449,7 +474,7 @@ class RegisterService:
         return account
 
     @classmethod
-    def invite_new_member(cls, tenant: Tenant, email: str, language: str, role: str = 'normal', inviter: Account = None) -> str:    
+    def invite_new_member(cls, tenant: Tenant, email: str, language: str, role: str = 'normal', inviter: Account = None) -> str:
         """Invite new member"""
         account = Account.query.filter_by(email=email).first()
 
