@@ -26,6 +26,7 @@ const loadLangResources = (lang: string) => ({
     billing: require(`./${lang}/billing`).default,
     custom: require(`./${lang}/custom`).default,
     tools: require(`./${lang}/tools`).default,
+    chat: require(`./${lang}/chat`).default,
   },
 })
 
