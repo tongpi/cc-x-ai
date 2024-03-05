@@ -366,7 +366,8 @@ class IndexingRunner:
                     "notion_workspace_id": data_source_info['notion_workspace_id'],
                     "notion_obj_id": data_source_info['notion_page_id'],
                     "notion_page_type": data_source_info['type'],
-                    "document": dataset_document
+                    "document": dataset_document,
+                    "tenant_id": dataset_document.tenant_id
                 },
                 document_model=dataset_document.doc_form
             )
@@ -664,6 +665,7 @@ class IndexingRunner:
                 )
             # load index
             index_processor.load(dataset, chunk_documents)
+            db.session.add(dataset)
 
             document_ids = [document.metadata['doc_id'] for document in chunk_documents]
             db.session.query(DocumentSegment).filter(
