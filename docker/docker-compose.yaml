@@ -4,6 +4,7 @@ services:
   api:
     image: langgenius/dify-api:0.5.8
     restart: always
+    env_file: docker-compose-gds.env
     environment:
       # Startup mode, 'api' starts the API server.
       MODE: api
@@ -132,8 +133,8 @@ services:
     # ports:
     #   - "5001:5001"
 
-  # worker service
-  # The Celery worker for processing the queue.
+    # worker service
+    # The Celery worker for processing the queue.
   worker:
     image: langgenius/dify-api:0.5.8
     restart: always
@@ -208,6 +209,7 @@ services:
   web:
     image: langgenius/dify-web:0.5.8
     restart: always
+    env_file: docker-compose-gds.env
     environment:
       EDITION: SELF_HOSTED
       # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
@@ -224,7 +226,7 @@ services:
     # ports:
     #   - "3000:3000"
 
-  # The postgres database.
+    # The postgres database.
   db:
     image: postgres:15-alpine
     restart: always
@@ -262,7 +264,7 @@ services:
     # ports:
     #   - "6379:6379"
 
-  # The Weaviate vector store.
+    # The Weaviate vector store.
   weaviate:
     image: semitechnologies/weaviate:1.19.0
     restart: always
@@ -286,23 +288,23 @@ services:
     # ports:
     #  - "8080:8080"
 
-  # Qdrant vector store.
-  # uncomment to use qdrant as vector store.
-  # (if uncommented, you need to comment out the weaviate service above,
-  # and set VECTOR_STORE to qdrant in the api & worker service.)
-  # qdrant:
-  #   image: langgenius/qdrant:v1.7.3
-  #   restart: always
-  #   volumes:
-  #     - ./volumes/qdrant:/qdrant/storage
-  #   environment:
-  #     QDRANT__API_KEY: 'difyai123456'
-  #   # uncomment to expose qdrant port to host
-  #   # ports:
-  #   #  - "6333:6333"
+    # Qdrant vector store.
+    # uncomment to use qdrant as vector store.
+    # (if uncommented, you need to comment out the weaviate service above,
+    # and set VECTOR_STORE to qdrant in the api & worker service.)
+    # qdrant:
+    #   image: langgenius/qdrant:v1.7.3
+    #   restart: always
+    #   volumes:
+    #     - ./volumes/qdrant:/qdrant/storage
+    #   environment:
+    #     QDRANT__API_KEY: 'difyai123456'
+    #   # uncomment to expose qdrant port to host
+    #   # ports:
+    #   #  - "6333:6333"
 
-  # The nginx reverse proxy.
-  # used for reverse proxying the API service and Web service.
+    # The nginx reverse proxy.
+    # used for reverse proxying the API service and Web service.
   nginx:
     image: nginx:latest
     restart: always
