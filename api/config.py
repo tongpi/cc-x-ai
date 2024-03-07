@@ -292,6 +292,7 @@ class Config:
 
         self.BATCH_UPLOAD_LIMIT = get_env('BATCH_UPLOAD_LIMIT')
 
+        self.API_COMPRESSION_ENABLED = get_bool_env('API_COMPRESSION_ENABLED')
         self.CAS_CLIENT_ID = get_env('CAS_CLIENT_ID')
         self.CAS_CLIENT_SECRET = get_env('CAS_CLIENT_SECRET')
         self.CAS_SERVER_URL = get_env('CAS_SERVER_URL')

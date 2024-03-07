@@ -145,6 +145,10 @@ docker/volumes/db/data/*
 docker/volumes/redis/data/*
 docker/volumes/weaviate/*
 docker/volumes/qdrant/*
+docker/volumes/etcd/*
+docker/volumes/minio/*
+docker/volumes/milvus/*
+
 docker/docker-compose-gds.env
 
 sdks/python-client/build
