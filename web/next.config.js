@@ -33,7 +33,14 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/apps',
+        // [hekaiji]24/02/03:将重定向地址/apps换为/home;
+        destination: '/home',
+        permanent: false,
+      },
+      {
+        source: '/signin',
+        // [Hekaiji]24/02/03: 调整登录地址, 默认使用cas登录;
+        destination: '/signin/gdscas',
         permanent: false,
       },
     ]

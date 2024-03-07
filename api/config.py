@@ -91,6 +91,7 @@ class Config:
         # General Configurations.
         # ------------------------
         self.CURRENT_VERSION = "0.5.8"
+
         self.COMMIT_SHA = get_env('COMMIT_SHA')
         self.EDITION = "SELF_HOSTED"
         self.DEPLOY_ENV = get_env('DEPLOY_ENV')
@@ -186,7 +187,7 @@ class Config:
         # Currently, only support: qdrant, milvus, zilliz, weaviate
         # ------------------------
         self.VECTOR_STORE = get_env('VECTOR_STORE')
-        self.KEYWORD_STORE = get_env('KEYWORD_STORE')
+
         # qdrant settings
         self.QDRANT_URL = get_env('QDRANT_URL')
         self.QDRANT_API_KEY = get_env('QDRANT_API_KEY')
@@ -263,10 +264,8 @@ class Config:
         self.HOSTED_OPENAI_API_BASE = get_env('HOSTED_OPENAI_API_BASE')
         self.HOSTED_OPENAI_API_ORGANIZATION = get_env('HOSTED_OPENAI_API_ORGANIZATION')
         self.HOSTED_OPENAI_TRIAL_ENABLED = get_bool_env('HOSTED_OPENAI_TRIAL_ENABLED')
-        self.HOSTED_OPENAI_TRIAL_MODELS = get_env('HOSTED_OPENAI_TRIAL_MODELS')
         self.HOSTED_OPENAI_QUOTA_LIMIT = int(get_env('HOSTED_OPENAI_QUOTA_LIMIT'))
         self.HOSTED_OPENAI_PAID_ENABLED = get_bool_env('HOSTED_OPENAI_PAID_ENABLED')
-        self.HOSTED_OPENAI_PAID_MODELS = get_env('HOSTED_OPENAI_PAID_MODELS')
 
         self.HOSTED_AZURE_OPENAI_ENABLED = get_bool_env('HOSTED_AZURE_OPENAI_ENABLED')
         self.HOSTED_AZURE_OPENAI_API_KEY = get_env('HOSTED_AZURE_OPENAI_API_KEY')
@@ -294,7 +293,13 @@ class Config:
         self.BATCH_UPLOAD_LIMIT = get_env('BATCH_UPLOAD_LIMIT')
 
         self.API_COMPRESSION_ENABLED = get_bool_env('API_COMPRESSION_ENABLED')
+        self.CAS_CLIENT_ID = get_env('CAS_CLIENT_ID')
+        self.CAS_CLIENT_SECRET = get_env('CAS_CLIENT_SECRET')
+        self.CAS_SERVER_URL = get_env('CAS_SERVER_URL')
+        self.CAS_EMAIL_DOMAIN = get_env('CAS_EMAIL_DOMAIN')
 
+        self.DEFAULT_TENANT_ID = get_env('DEFAULT_TENANT_ID')
+        self.DEFAULT_TENANT_NAME = get_env('DEFAULT_TENANT_NAME')
 
 class CloudEditionConfig(Config):
 

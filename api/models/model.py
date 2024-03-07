@@ -28,7 +28,8 @@ class App(db.Model):
     __tablename__ = 'apps'
     __table_args__ = (
         db.PrimaryKeyConstraint('id', name='app_pkey'),
-        db.Index('app_tenant_id_idx', 'tenant_id')
+        db.Index('app_tenant_id_idx', 'tenant_id'),
+        db.Index('app_account_id_idx', 'account_id')
     )
 
     id = db.Column(UUID, server_default=db.text('uuid_generate_v4()'))
@@ -48,6 +49,8 @@ class App(db.Model):
     is_universal = db.Column(db.Boolean, nullable=False, server_default=db.text('false'))
     created_at = db.Column(db.DateTime, nullable=False, server_default=db.text('CURRENT_TIMESTAMP(0)'))
     updated_at = db.Column(db.DateTime, nullable=False, server_default=db.text('CURRENT_TIMESTAMP(0)'))
+
+    account_id = db.Column(UUID, nullable=False)
 
     @property
     def site(self):
@@ -69,7 +72,7 @@ class App(db.Model):
     def tenant(self):
         tenant = db.session.query(Tenant).filter(Tenant.id == self.tenant_id).first()
         return tenant
-    
+
     @property
     def is_agent(self) -> bool:
         app_model_config = self.app_model_config
@@ -78,10 +81,10 @@ class App(db.Model):
         if not app_model_config.agent_mode:
             return False
         if self.app_model_config.agent_mode_dict.get('enabled', False) \
-            and self.app_model_config.agent_mode_dict.get('strategy', '') in ['function_call', 'react']:
+                and self.app_model_config.agent_mode_dict.get('strategy', '') in ['function_call', 'react']:
             return True
         return False
-    
+
     @property
     def deleted_tools(self) -> list:
         # get agent mode tools
@@ -92,7 +95,7 @@ class App(db.Model):
             return []
         agent_mode = app_model_config.agent_mode_dict
         tools = agent_mode.get('tools', [])
-        
+
         provider_ids = []
 
         for tool in tools:
@@ -128,6 +131,7 @@ class App(db.Model):
                     deleted_tools.append(tool['tool_name'])
 
         return deleted_tools
+
 
 class AppModelConfig(db.Model):
     __tablename__ = 'app_model_configs'
@@ -414,6 +418,7 @@ class InstalledApp(db.Model):
         if not app:
             return False
         return app.is_agent
+
 
 class Conversation(db.Model):
     __tablename__ = 'conversations'
@@ -726,6 +731,7 @@ class MessageFile(db.Model):
     created_by = db.Column(UUID, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, server_default=db.text('CURRENT_TIMESTAMP(0)'))
 
+
 class MessageAnnotation(db.Model):
     __tablename__ = 'message_annotations'
     __table_args__ = (
@@ -1032,7 +1038,7 @@ class MessageAgentThought(db.Model):
             return json.loads(self.message_files)
         else:
             return []
-        
+
     @property
     def tool_labels(self) -> dict:
         try:
@@ -1042,6 +1048,7 @@ class MessageAgentThought(db.Model):
                 return {}
         except Exception as e:
             return {}
+
 
 class DatasetRetrieverResource(db.Model):
     __tablename__ = 'dataset_retriever_resources'

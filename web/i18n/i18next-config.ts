@@ -26,6 +26,7 @@ const loadLangResources = (lang: string) => ({
     billing: require(`./${lang}/billing`).default,
     custom: require(`./${lang}/custom`).default,
     tools: require(`./${lang}/tools`).default,
+    chat: require(`./${lang}/chat`).default,
   },
 })
 
@@ -36,9 +37,12 @@ const resources = LanguagesSupported.reduce((acc: any, lang: string) => {
 }, {})
 
 i18n.use(initReactI18next)
+  // init i18next
+  // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     lng: undefined,
     fallbackLng: 'en-US',
+    // debug: true,
     resources,
   })
 

@@ -49,11 +49,13 @@ class AppListApi(Resource):
         parser.add_argument('limit', type=inputs.int_range(1, 100), required=False, default=20, location='args')
         parser.add_argument('mode', type=str, choices=['chat', 'completion', 'all'], default='all', location='args', required=False)
         parser.add_argument('name', type=str, location='args', required=False)
+        parser.add_argument('is_current_user', type=inputs.boolean, required=False, default=False, location='args')
         args = parser.parse_args()
 
         filters = [
             App.tenant_id == current_user.current_tenant_id,
-            App.is_universal == False
+            App.is_universal == False,
+            not args['is_current_user'] or App.account_id == current_user.id
         ]
 
         if args['mode'] == 'completion':
@@ -181,6 +183,7 @@ class AppListApi(Resource):
         app.icon = args['icon']
         app.icon_background = args['icon_background']
         app.tenant_id = current_user.current_tenant_id
+        app.account_id = current_user.id
 
         db.session.add(app)
         db.session.flush()
@@ -207,7 +210,7 @@ class AppListApi(Resource):
         app_was_created.send(app)
 
         return app, 201
-    
+
 
 class AppTemplateApi(Resource):
 
@@ -357,6 +360,7 @@ class AppCopy(Resource):
             icon=app.icon,
             icon_background=app.icon_background,
             tenant_id=app.tenant_id,
+            account_id=app.account_id,
             mode=app.mode,
             app_model_config_id=app.app_model_config_id,
             enable_site=app.enable_site,

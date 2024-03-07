@@ -1,0 +1,8 @@
+.chat_content {
+  @apply h-full p-2
+}
+.chat_content>div,
+.chat_content>div>div,
+.chat_content>div>div>div{
+  height: 100%;
+}

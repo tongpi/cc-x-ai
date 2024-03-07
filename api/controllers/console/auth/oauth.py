@@ -8,7 +8,8 @@ from flask_restful import Resource
 
 from constants.languages import languages
 from extensions.ext_database import db
-from libs.oauth import GitHubOAuth, GoogleOAuth, OAuthUserInfo
+from libs.oauth import GitHubOAuth, GoogleOAuth, GdsCasOAuth, OAuthUserInfo
+
 from models.account import Account, AccountStatus
 from services.account_service import AccountService, RegisterService, TenantService
 
@@ -29,9 +30,19 @@ def get_oauth_providers():
                                    redirect_uri=current_app.config.get(
                                        'CONSOLE_API_URL') + '/console/api/oauth/authorize/google')
 
+        gdscas_oauth = GdsCasOAuth(client_id=current_app.config.get('CAS_CLIENT_ID'),
+                                   client_secret=current_app.config.get('CAS_CLIENT_SECRET'),
+                                   redirect_uri=current_app.config.get(
+                                       'CONSOLE_API_URL') + '/console/api/oauth/authorize/gdscas'
+                                   ).set_extra_config({
+                                       "url_origin": current_app.config.get('CAS_SERVER_URL'),
+                                       "email_domain": current_app.config.get('CAS_EMAIL_DOMAIN'),
+                                   })
+
         OAUTH_PROVIDERS = {
             'github': github_oauth,
-            'google': google_oauth
+            'google': google_oauth,
+            'gdscas': gdscas_oauth
         }
         return OAUTH_PROVIDERS
 

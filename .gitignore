@@ -149,6 +149,8 @@ docker/volumes/etcd/*
 docker/volumes/minio/*
 docker/volumes/milvus/*
 
+docker/docker-compose-gds.env
+
 sdks/python-client/build
 sdks/python-client/dist
 sdks/python-client/dify_client.egg-info

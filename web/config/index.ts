@@ -225,3 +225,5 @@ Question: {{query}}
 Thought: {{agent_scratchpad}}
   `,
 }
+
+export const CAS_SERVER_URL = process.env.NEXT_PUBLIC_CAS_SERVER_URL || globalThis.document?.body?.getAttribute('data-public-cas-server-url')
